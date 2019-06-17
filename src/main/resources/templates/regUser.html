@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Registration</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+<body>
+
+
+<div class="container-login100">
+    <div class="wrap-login100 p-l-55 p-r-55 p-t-80 p-b-30">
+			<span class="login100-form-title p-b-37" style="padding-left: 60px">
+					Sign Up as TOURIST:
+			</span>
+        <form class="login100-form validate-form" th:action="@{/regUser}" method="post" th:object="${user}" enctype="multipart/form-data">
+
+            <label th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"  class="validation-message"></label>
+            <div class="wrap-input100 validate-input m-b-20" id="tur3">
+                <input class="input100" type="text" th:field="*{firstName}" name="firstName" placeholder="First name">
+                <span class="focus-input100"></span>
+            </div>
+            <div id="tur2">
+                <div class="wrap-input100">
+                    <input class="input100" type="text" name="lastName" th:field="*{lastName}" placeholder="LastName">
+                    <span class="focus-input100"></span>
+                </div>
+            </div>
+            <div class="wrap-input100 validate-input m-b-25" id="tur1">
+                <input class="input100" type="text" name="contacts" th:field="*{contacts}" placeholder="Contacts">
+                <span class="focus-input100"></span>
+            </div>
+            <label th:if="${#fields.hasErrors('email')}" th:errors="*{email}"   class="validation-message"></label>
+            <div class="wrap-input100 validate-input m-b-25">
+                <input class="input100" type="text" name="email"  th:field="*{email}" placeholder="Email">
+                <span class="focus-input100"></span>
+            </div>
+            <label th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="validation-message"></label>
+            <div class="wrap-input100 validate-input m-b-25">
+                <input class="input100" type="password" name="password"   th:field="*{password}" placeholder="Password">
+                <span class="focus-input100"></span>
+            </div>
+
+            <div class="container-login100-form-btn">
+                <button class="login100-form-btn" type="submit">
+                    Sign Up
+                </button>
+            </div>
+            <div class="text-center">
+
+                <a th:href="@{/login}" class="txt2 hov1">
+                    Sign In
+                </a>
+            </div>
+        </form>
+
+
+    </div>
+
+</div>
+
+</body>
+</html>
