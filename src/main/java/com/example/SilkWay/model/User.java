@@ -54,6 +54,27 @@ public class User {
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
 
+    @Column(name = "img_name")
+    private String img_name;
+
+    private String emailId;
+
+    public String getEmailId() {
+        return emailId;
+    }
+
+    public void setEmailId(String emailId) {
+        this.emailId = emailId;
+    }
+
+    public String getImg_name() {
+        return "/images/" + img_name;
+    }
+
+    public void setImg_name(String img_name) {
+        this.img_name = img_name;
+    }
+
     public int getId() {
         return id;
     }

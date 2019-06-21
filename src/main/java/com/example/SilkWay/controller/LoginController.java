@@ -235,22 +235,6 @@ public class LoginController {
         return modelAndView;
     }
 
-    @RequestMapping(value="/regHotel", method = RequestMethod.GET)
-    public ModelAndView registrationHotel(){
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("regHotel");
-        return modelAndView;
-    }
-    @RequestMapping(value="/regHotel", method = RequestMethod.POST)
-    public ModelAndView saveNewHotel(@Valid Hotel hotel, BindingResult bindingResult) {
-        ModelAndView modelAndView = new ModelAndView();
-            hotelService.saveHotel(hotel);
-            modelAndView.addObject("hotel", new Hotel());
-            modelAndView.setViewName("homeAdmin");
-        return modelAndView;
-    }
-
-
     @RequestMapping("/confirm")
     public String confirm(@RequestParam("token") String token, Model model){
         User user=userService.findByToken(token);
@@ -275,5 +259,7 @@ public class LoginController {
     public Hotel createModel() {
         return new Hotel();
     }
+
+
 
 }

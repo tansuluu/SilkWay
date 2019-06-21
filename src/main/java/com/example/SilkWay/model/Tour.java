@@ -4,27 +4,22 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "hotel")
-public class Hotel {
+@Table(name = "tour")
+public class Tour {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "hotel_id")
+    @Column(name = "tour_id")
     private int id;
 
     @Column(name = "title")
     private String title;
 
-    @Column(name = "stars")
-    private Integer stars;
-
-    @Column(name = "price")
-    private Integer price;
+    @Column(name = "country")
+    private String country;
 
     @Column(name = "description")
     private String description;
-    @Column(name = "category")
-    private String category;
 
     private Date created;
     @PrePersist
@@ -34,17 +29,6 @@ public class Hotel {
 
     @Column(name = "img_name")
     private String img_name;
-
-    public String getImg_name() {
-        return "/images/" + img_name;
-    }
-
-    public void setImg_name(String img_name) {
-        this.img_name = img_name;
-    }
-
-    public Hotel() {
-    }
 
     public int getId() {
         return id;
@@ -62,20 +46,12 @@ public class Hotel {
         this.title = title;
     }
 
-    public Integer getStars() {
-        return stars;
+    public String getCountry() {
+        return country;
     }
 
-    public void setStars(Integer stars) {
-        this.stars = stars;
-    }
-
-    public Integer getPrice() {
-        return price;
-    }
-
-    public void setPrice(Integer price) {
-        this.price = price;
+    public void setCountry(String country) {
+        this.country = country;
     }
 
     public String getDescription() {
@@ -86,19 +62,19 @@ public class Hotel {
         this.description = description;
     }
 
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
     public Date getCreated() {
         return created;
     }
 
     public void setCreated(Date created) {
         this.created = created;
+    }
+
+    public String getImg_name() {
+        return img_name;
+    }
+
+    public void setImg_name(String img_name) {
+        this.img_name = img_name;
     }
 }
