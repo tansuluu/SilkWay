@@ -52,8 +52,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.
                 authorizeRequests()
                 .antMatchers("/", "/sources/**", "/jkc", "/fgrd").permitAll()
-                .antMatchers("/login").permitAll()
-                .antMatchers("/regUser").permitAll()
+                .antMatchers("/login", "/image", "/deleteTour/**","/hotelInfo/**", "/updateTour/**", "updateHotel/**", "/deleteHotel/**").permitAll()
+                .antMatchers("/regUser", "/filterTour").permitAll()
                 .antMatchers("/confirm").permitAll()
                 .antMatchers("/superAdmin").hasAuthority("SUPER_ADMIN")
                 .antMatchers("/homeAdmin","/regTour", "/regCompany").hasAnyAuthority("ADMIN, SUPER_ADMIN")

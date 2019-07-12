@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2>Hotels</h2>
+<table border="1">
+    <tr>
+        <th>title</th>
+        <th>description</th>
+        <th>stars</th>
+        <th>category</th>
+        <th>price</th>
+    </tr>
+    <tr th:each = "hotel: ${hotels}">
+        <td th:text="${hotel.title}">Title</td>
+        <td th:text="${hotel.description}">Description</td>
+        <td th:text="${hotel.stars}">Stars</td>
+        <td th:text="${hotel.category}">category</td>
+        <td th:text="${hotel.price}">price</td>
+        <td><a th:href="@{/hotelInfo/__${hotel.id}__}">get hotel</a></td>
+    </tr>
+</table>
+</body>
+</html>

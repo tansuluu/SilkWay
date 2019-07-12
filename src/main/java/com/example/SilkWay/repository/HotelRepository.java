@@ -10,7 +10,7 @@ import java.util.List;
 public interface HotelRepository extends JpaRepository<Hotel, Long> {
     List<Hotel> getAllByTitle(String title);
     Hotel findByTitle(String title);
-    List<Hotel> findAllByStars(Integer stars);
+    List<Hotel> findAllByStars(long stars);
     Hotel findAllByPrice(Integer pricce);
-    Hotel findById(int id);
+    Hotel findById(long id);
 }

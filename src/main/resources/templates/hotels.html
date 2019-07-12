@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2>hotel</h2>
+<table border="1">
+    <tr>
+        <th>title</th>
+        <th>description</th>
+        <th>stars</th>
+        <th>category</th>
+        <th>price</th>
+        <th>Delete</th>
+        <th>Update</th>
+        <th>img</th>
+    </tr>
+    <tr>
+        <td th:text="${hotel.title}">Title</td>
+        <td th:text="${hotel.description}">Description</td>
+        <td th:text="${hotel.stars}">Stars</td>
+        <td th:text="${hotel.category}">Category</td>
+        <td th:text="${hotel.price}">Price</td>
+        <td><a th:href="@{/deleteHotel/__${hotel.id}__}">Delete</a></td>
+        <td><a th:href="@{/updateHotel/__${hotel.id}__}">Update</a></td>
+        <img th:src="@{'/image/'+${hotel.img_name}}" style="width: 100px; height: 100px;"/>
+    </tr>
+</table>
+</body>
+</html>

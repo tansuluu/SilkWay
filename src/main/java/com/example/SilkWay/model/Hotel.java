@@ -8,15 +8,15 @@ import java.util.Date;
 public class Hotel {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "hotel_id")
-    private int id;
+    private long id;
 
     @Column(name = "title")
     private String title;
 
     @Column(name = "stars")
-    private Integer stars;
+    private long stars;
 
     @Column(name = "price")
     private Integer price;
@@ -36,7 +36,7 @@ public class Hotel {
     private String img_name;
 
     public String getImg_name() {
-        return "/images/" + img_name;
+        return img_name;
     }
 
     public void setImg_name(String img_name) {
@@ -46,11 +46,11 @@ public class Hotel {
     public Hotel() {
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -62,11 +62,11 @@ public class Hotel {
         this.title = title;
     }
 
-    public Integer getStars() {
+    public long getStars() {
         return stars;
     }
 
-    public void setStars(Integer stars) {
+    public void setStars(long stars) {
         this.stars = stars;
     }
 

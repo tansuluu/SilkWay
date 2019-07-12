@@ -15,10 +15,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -26,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
+import java.security.Principal;
 
 @Controller
 @Transactional
@@ -157,7 +155,7 @@ public class LoginController {
         return modelAndView;
     }
     @RequestMapping(value = "/regUser", method = RequestMethod.POST)
-    public ModelAndView saveNewUser(@Valid User user, BindingResult bindingResult) {
+    public ModelAndView saveNewUser(@Valid User user, BindingResult bindingResult, HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView();
         User userExists = userService.findUserByEmail(user.getEmail());
         if (userExists != null) {
@@ -170,10 +168,12 @@ public class LoginController {
         } else {
             user.setStatus("user");
             userService.saveUser(user, "USER");
+            userService.sendTokenToConfirm(user,request);
             modelAndView.addObject("user", new User());
             modelAndView.setViewName("login");
 
         }
+
         return modelAndView;
     }
 
@@ -236,11 +236,11 @@ public class LoginController {
     }
 
     @RequestMapping("/confirm")
-    public String confirm(@RequestParam("token") String token, Model model){
+    public String  confirm(@RequestParam("token") String token, Model model){
         User user=userService.findByToken(token);
-            user.setActive(1);
-            userService.save(user);
-            return "redirect:/login";
+        user.setActive(1);
+        userService.save(user);
+        return "redirect:/login";
     }
 
     private String getPrincipal(){
@@ -255,10 +255,35 @@ public class LoginController {
         return userName;
     }
 
-    @ModelAttribute("hotel")
-    public Hotel createModel() {
-        return new Hotel();
+    @RequestMapping("/deleteUser/{id}")
+    public String deleteUser(@PathVariable("id")int id){
+        User user=userService.findUserById(id);
+        if(user.getStatus().equals("admin")){
+            return "redirect:/admin";
+        }
+        userService.deleteUser(user);
+        return "redirect:/logout";
     }
+
+    @RequestMapping("/updateUser/{id}")
+    public String update(Model model, @PathVariable("id")int id){
+        model.addAttribute("user", userService.getUserById(id));
+        return "updateUser";
+    }
+
+    @RequestMapping(value = "/updateUser",method = RequestMethod.POST)
+    public String update(User user){
+        userService.updateUser(user);
+        return "redirect:/users";
+    }
+
+    @RequestMapping("/userInfo/{id}")
+    public String showUsers(Model model, @PathVariable("id")int id){
+        User user=userService.getUserById(id);
+        model.addAttribute("user", user);
+        return "users";
+    }
+
 
 
 

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2>Tour</h2>
+<table border="1">
+    <tr>
+        <th>title</th>
+        <th>description</th>
+        <th>country</th>
+        <th>Delete</th>
+        <th>Update</th>
+        <th>img</th>
+    </tr>
+    <tr>
+        <td th:text="${tour.title}">Title</td>
+        <td th:text="${tour.description}">Description</td>
+        <td th:text="${tour.country}">Country</td>
+        <td><a th:href="@{/deleteTour/__${tour.id}__}">Delete</a></td>
+        <td><a th:href="@{/updateTour/__${tour.id}__}">Update</a></td>
+        <img th:src="@{'/image/'+${tour.img_name}}" style="width: 100px; height: 100px;"/>
+    </tr>
+</table>
+</body>
+</html>

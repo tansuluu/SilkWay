@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Update hotel</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+</head>
+
+<body class="move">
+<form method="post" enctype="multipart/form-data" action="/updateHotel">
+    Title:<br>
+    <input type="hidden" name="id" th:value="${id}">
+    <input type="text" th:value="${title}" name="title"><br>
+    Stars:<br>
+    <input type="long" th:utext="${stars}" name="stars"><br>
+    Description:<br>
+    <input type="text" th:utext="${description}" name="description"><br>
+    Price:<br>
+    <input type="Integer" th:utext="${price}" name="price"><br>
+    Category:<br>
+    <input type="text" th:utext="${category}" name="category"><br>
+    <table>
+        <tr><td>File to upload:</td><td><input type="file" name="file" /></td></tr>
+    </table>
+    <button type="submit" value="Submit">Submit</button>
+    <a style="color: #ffffff; font-family: 'Times New Roman';font-size:30px;
+padding-left:12cm" th:href="@{/superAdmin}">BACK</a>
+</form>
+</body>
+</html>
