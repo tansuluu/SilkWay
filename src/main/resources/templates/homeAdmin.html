@@ -1,0 +1,41 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head>
+    <title>Welcome!</title>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<h1 th:inline="text">Hello !</h1>
+<p>
+    Welcome <span sec:authentication="principal.username">User</span>
+</p>
+
+<div>
+    Custom administrator page.
+</div>
+
+<div class="form-group">
+						<span>New HOTEL? <a href="/" th:href="@{/addHotel}">Register
+								here</a></span>
+</div>
+
+<div class="form-group">
+						<span>New Tour? <a href="/" th:href="@{/addTour}">Register
+								here</a></span>
+</div>
+
+<div class="form-group">
+						<span>New company? <a href="/" th:href="@{/regCompany}">Register
+								here</a></span>
+</div>
+
+
+<br/>
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Sign Out"/>
+</form>
+</body>
+</html>
