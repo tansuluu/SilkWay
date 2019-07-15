@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2>Users</h2>
+<table border="1">
+    <tr>
+        <th>First Name</th>
+        <th>Lats Name</th>
+        <th>Email</th>
+        <th>Contacts</th>
+        <th>get User</th>
+    </tr>
+    <tr th:each = "user: ${users}">
+        <td th:text="${user.firstName}">FirstName</td>
+        <td th:text="${user.lastName}">LastName</td>
+        <td th:text="${user.email}">Email</td>
+        <td th:text="${user.contacts}">Contacts</td>
+        <td><a th:href="@{/userInfo/__${user.id}__}">get User</a></td>
+    </tr>
+</table>
+</body>
+</html>

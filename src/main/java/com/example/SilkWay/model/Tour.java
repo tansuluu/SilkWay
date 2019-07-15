@@ -1,5 +1,7 @@
 package com.example.SilkWay.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -10,16 +12,27 @@ public class Tour {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "tour_id")
-    private int id;
+    private long id;
 
-    @Column(name = "title")
+    @Column(name = "title", columnDefinition = "default = null")
     private String title;
 
     @Column(name = "country")
     private String country;
 
+    @Column(name = "price")
+    private long price;
+
     @Column(name = "description")
     private String description;
+
+    @Column
+    @Temporal(TemporalType.DATE)
+    private Date dateFrom;
+
+    @Column
+    @Temporal(TemporalType.DATE)
+    private Date dateTo;
 
     private Date created;
     @PrePersist
@@ -30,11 +43,11 @@ public class Tour {
     @Column(name = "img_name")
     private String img_name;
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -76,5 +89,29 @@ public class Tour {
 
     public void setImg_name(String img_name) {
         this.img_name = img_name;
+    }
+
+    public Date getDateFrom() {
+        return dateFrom;
+    }
+
+    public void setDateFrom(Date dateFrom) {
+        this.dateFrom = dateFrom;
+    }
+
+    public Date getDateTo() {
+        return dateTo;
+    }
+
+    public void setDateTo(Date dateTo) {
+        this.dateTo = dateTo;
+    }
+
+    public long getPrice() {
+        return price;
+    }
+
+    public void setPrice(long price) {
+        this.price = price;
     }
 }
