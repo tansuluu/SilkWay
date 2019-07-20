@@ -73,7 +73,7 @@ public class HotelController {
         return "redirect:/findHotel="+hotel.getId();
     }
 
-    @RequestMapping("/findHotel")
+    @RequestMapping("/findHotels")
     public String findHotel(Model model){
         List<Hotel> list=hotelService.getAllHotels();
         model.addAttribute("hotels", list);
@@ -96,5 +96,20 @@ public class HotelController {
     @ModelAttribute("hotel")
     public Hotel createModel() {
         return new Hotel();
+    }
+
+    @RequestMapping(value = "/filterHotel", method = RequestMethod.POST)
+    public String filterTour(@RequestParam(name = "title") String title,
+                             @RequestParam(name = "category") String category,
+                             @RequestParam(name = "stars") long stars,
+                             Model model){
+        List<Hotel> hotels = hotelService.filterHotels(title, category, stars);
+        model.addAttribute("hotels", hotels);
+        return "filterHotels";
+    }
+
+    @RequestMapping("/findHotel")
+    public String findTour(){
+        return "findHotel";
     }
 }
