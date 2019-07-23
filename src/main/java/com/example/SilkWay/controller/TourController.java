@@ -25,14 +25,19 @@ import java.util.List;
 @Controller
 @Transactional
 public class TourController {
-    @Autowired
+    
     private StorageService storageService;
-
-    @Autowired
+    
     private UserService userService;
 
-    @Autowired
     private TourService tourService;
+
+    @Autowired
+    public TourController(StorageService storageService, UserService userService, TourService tourService) {
+        this.storageService = storageService;
+        this.userService = userService;
+        this.tourService = tourService;
+    }
 
     @RequestMapping("/addTour")
     public String addTour(){
@@ -61,9 +66,7 @@ public class TourController {
             System.out.println(e.getMessage());
             model.addAttribute("message", "FAIL to upload " + file.getOriginalFilename() + "!");
         }
-
-        //tour.setImg_name(file.getOriginalFilename());
-        //tourService.saveTour(tour);
+        
         return new RedirectView(request.getHeader("referer"));
     }
 

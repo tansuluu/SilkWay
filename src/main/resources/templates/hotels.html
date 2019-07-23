@@ -25,6 +25,7 @@
         <td th:text="${hotel.price}">Price</td>
         <td><a th:href="@{/deleteHotel/__${hotel.id}__}">Delete</a></td>
         <td><a th:href="@{/updateHotel/__${hotel.id}__}">Update</a></td>
+        <td><a th:href="@{/sendEmail/__${hotel.id}__}">Booking</a></td>
         <img th:src="@{'/image/'+${hotel.img_name}}" style="width: 100px; height: 100px;"/>
     </tr>
 </table>

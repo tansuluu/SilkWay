@@ -54,6 +54,7 @@ public class HotelService {
         newHotel.setImg_name(file.getOriginalFilename());
         newHotel.setCreated(hotel.getCreated());
         newHotel.setStars(hotel.getStars());
+        newHotel.setEmail(hotel.getEmail());
         newHotel.setDescription(hotel.getDescription());
         newHotel.setTitle(hotel.getTitle());
         newHotel.setCategory(hotel.getCategory());

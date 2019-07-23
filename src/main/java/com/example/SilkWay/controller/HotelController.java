@@ -24,15 +24,18 @@ import java.util.List;
 @Transactional
 public class HotelController {
 
-    @Autowired
     private StorageService storageService;
 
-    @Autowired
     private HotelService hotelService;
 
-    @Autowired
     private UserService userService;
-
+    
+    @Autowired
+    public HotelController(StorageService storageService, HotelService hotelService, UserService userService) {
+        this.storageService = storageService;
+        this.hotelService = hotelService;
+        this.userService = userService;
+    }
 
     @RequestMapping("/addHotel")
     public String addHotel()
