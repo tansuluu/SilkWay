@@ -1,12 +1,15 @@
 package com.example.SilkWay.service;
 
 import com.example.SilkWay.model.Tour;
+import com.example.SilkWay.model.User;
 import com.example.SilkWay.repository.TourRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.xml.ws.spi.http.HttpContext;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -17,6 +20,9 @@ public class TourService {
     @Qualifier("tourRepository")
     @Autowired
     private TourRepository tourRepository;
+
+    @Autowired
+    private UserService userService;
 
     public Tour saveTour(String title, long price, String country, String description, Date dateFrom, Date dateTo, MultipartFile file) {
         Tour tour = new Tour();
@@ -135,5 +141,21 @@ public class TourService {
             return finalLastSearch;
         }
         return finalSearch;
+    }
+
+    public String buyTour(Tour tour, HttpServletRequest request){
+        User user = userService.findUserByEmail(request.getUserPrincipal().getName());
+        List<Tour> tours = new ArrayList<>();
+        if (user.getTours().equals(null)){
+            tours.add(tour);
+            user.setTours(tours);
+        }
+        else {
+            tours = user.getTours();
+            tours.add(tour);
+            user.setTours(tours);
+        }
+
+        return "Tour bought successfully";
     }
 }

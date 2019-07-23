@@ -6,6 +6,7 @@ import com.example.SilkWay.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -103,6 +104,7 @@ public class LoginController {
     }
 
 
+    @PreAuthorize("hasRole('SUPER_ADMIN, ADMIN')")
     @RequestMapping(value="/homeAdmin", method = RequestMethod.GET)
     public ModelAndView adminHome(){
         ModelAndView modelAndView = new ModelAndView();
@@ -121,6 +123,7 @@ public class LoginController {
         return modelAndView;
     }
 
+    @PreAuthorize("hasRole('SUPER_ADMIN')")
     @RequestMapping(value="/superAdmin", method = RequestMethod.GET)
     public ModelAndView superAdmin(){
         ModelAndView modelAndView = new ModelAndView();
@@ -171,6 +174,7 @@ public class LoginController {
         return modelAndView;
     }
 
+    @PreAuthorize("hasRole('SUPER_ADMIN, ADMIN')")
     @RequestMapping(value="/regCompany", method = RequestMethod.GET)
     public ModelAndView registrationCompany(){
         ModelAndView modelAndView = new ModelAndView();
@@ -179,6 +183,8 @@ public class LoginController {
         modelAndView.setViewName("regCompany");
         return modelAndView;
     }
+
+    @PreAuthorize("hasRole('SUPER_ADMIN, ADMIN')")
     @RequestMapping(value = "/regCompany", method = RequestMethod.POST)
     public ModelAndView createNewCompany(@Valid User user, BindingResult bindingResult, HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView();
@@ -200,6 +206,7 @@ public class LoginController {
         return modelAndView;
     }
 
+    @PreAuthorize("hasRole('SUPER_ADMIN')")
     @RequestMapping(value="/regAdmin", method = RequestMethod.GET)
     public ModelAndView registrationAdmin(){
         ModelAndView modelAndView = new ModelAndView();
@@ -208,6 +215,7 @@ public class LoginController {
         modelAndView.setViewName("regAdmin");
         return modelAndView;
     }
+    @PreAuthorize("hasRole('SUPER_ADMIN')")
     @RequestMapping(value = "/regAdmin", method = RequestMethod.POST)
     public ModelAndView saveNewAdmin(@Valid User user, BindingResult bindingResult) {
         ModelAndView modelAndView = new ModelAndView();
@@ -249,6 +257,7 @@ public class LoginController {
         return userName;
     }
 
+    @PreAuthorize("hasRole('SUPER_ADMIN')")
     @RequestMapping("/deleteUser/{id}")
     public String deleteUser(@PathVariable("id")int id){
         User user=userService.findUserById(id);

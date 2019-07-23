@@ -7,11 +7,15 @@ import com.example.SilkWay.service.TourService;
 import com.example.SilkWay.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -25,9 +29,9 @@ import java.util.List;
 @Controller
 @Transactional
 public class TourController {
-    
+
     private StorageService storageService;
-    
+
     private UserService userService;
 
     private TourService tourService;
@@ -39,11 +43,13 @@ public class TourController {
         this.tourService = tourService;
     }
 
+    @PreAuthorize("hasRole('SUPER_ADMIN, ADMIN')")
     @RequestMapping("/addTour")
     public String addTour(){
         return "regTour";
     }
 
+    @PreAuthorize("hasRole('SUPER_ADMIN, ADMIN')")
     @RequestMapping(value="/regTour", method = RequestMethod.POST)
     public RedirectView saveNewTour(@RequestParam("file") MultipartFile file,
                                     Model model,
@@ -66,16 +72,18 @@ public class TourController {
             System.out.println(e.getMessage());
             model.addAttribute("message", "FAIL to upload " + file.getOriginalFilename() + "!");
         }
-        
+
         return new RedirectView(request.getHeader("referer"));
     }
 
+    @PreAuthorize("hasRole('SUPER_ADMIN, ADMIN')")
     @RequestMapping("/updateTour/{id}")
     public String update(Model model, @PathVariable("id")long id){
         model.addAttribute("tour", tourService.getTourById(id));
         return "updateTour";
     }
 
+    @PreAuthorize("hasRole('SUPER_ADMIN, ADMIN')")
     @RequestMapping(value = "/updateTour",method = RequestMethod.POST)
     public String update(@Valid Tour tour, MultipartFile file){
         storageService.store(file);
@@ -97,10 +105,24 @@ public class TourController {
         return "tours";
     }
 
+    @PreAuthorize("hasRole('SUPER_ADMIN, ADMIN')")
     @RequestMapping("/deleteTour/{id}")
     public String showApplications( @PathVariable("id")long id){
         tourService.deleteTour(tourService.getTourById(id));
         return "redirect:/findTours";
+    }
+
+    @RequestMapping("/buyTour/{id}")
+    public String buyTour( @PathVariable("id")long id, HttpServletRequest request){
+        tourService.buyTour(tourService.getTourById(id), request);
+        return "redirect:/myTours";
+    }
+
+    @RequestMapping("/myTours")
+    public String myTours(HttpServletRequest request, Model model){
+        List<Tour> list = userService.findUserByEmail(request.getUserPrincipal().getName()).getTours();
+        model.addAttribute("tours", list);
+        return "myTours";
     }
 
     @RequestMapping(value = "/filterTour", method = RequestMethod.POST)
