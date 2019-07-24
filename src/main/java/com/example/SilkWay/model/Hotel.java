@@ -1,8 +1,18 @@
 package com.example.SilkWay.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.Date;
 
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "hotel")
 public class Hotel {
@@ -35,70 +45,6 @@ public class Hotel {
     @Column(name = "img_name")
     private String img_name;
 
-    public String getImg_name() {
-        return img_name;
-    }
-
-    public void setImg_name(String img_name) {
-        this.img_name = img_name;
-    }
-
-    public Hotel() {
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public long getStars() {
-        return stars;
-    }
-
-    public void setStars(long stars) {
-        this.stars = stars;
-    }
-
-    public Integer getPrice() {
-        return price;
-    }
-
-    public void setPrice(Integer price) {
-        this.price = price;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
-    public Date getCreated() {
-        return created;
-    }
-
-    public void setCreated(Date created) {
-        this.created = created;
-    }
+    @NotBlank
+    private String email;
 }

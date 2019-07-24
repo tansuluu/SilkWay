@@ -1,36 +1,31 @@
 package com.example.SilkWay.controller;
 
-import com.example.SilkWay.model.Hotel;
 import com.example.SilkWay.model.Role;
 import com.example.SilkWay.model.User;
-import com.example.SilkWay.service.HotelService;
 import com.example.SilkWay.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
-import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
-import java.security.Principal;
 
 @Controller
 @Transactional
 public class LoginController {
-
-    @Autowired
-    private HotelService hotelService;
 
     @Autowired
     private UserService userService;
@@ -109,6 +104,7 @@ public class LoginController {
     }
 
 
+    @PreAuthorize("hasRole('SUPER_ADMIN, ADMIN')")
     @RequestMapping(value="/homeAdmin", method = RequestMethod.GET)
     public ModelAndView adminHome(){
         ModelAndView modelAndView = new ModelAndView();
@@ -127,6 +123,7 @@ public class LoginController {
         return modelAndView;
     }
 
+    @PreAuthorize("hasRole('SUPER_ADMIN')")
     @RequestMapping(value="/superAdmin", method = RequestMethod.GET)
     public ModelAndView superAdmin(){
         ModelAndView modelAndView = new ModelAndView();
@@ -177,6 +174,7 @@ public class LoginController {
         return modelAndView;
     }
 
+    @PreAuthorize("hasRole('SUPER_ADMIN, ADMIN')")
     @RequestMapping(value="/regCompany", method = RequestMethod.GET)
     public ModelAndView registrationCompany(){
         ModelAndView modelAndView = new ModelAndView();
@@ -185,6 +183,8 @@ public class LoginController {
         modelAndView.setViewName("regCompany");
         return modelAndView;
     }
+
+    @PreAuthorize("hasRole('SUPER_ADMIN, ADMIN')")
     @RequestMapping(value = "/regCompany", method = RequestMethod.POST)
     public ModelAndView createNewCompany(@Valid User user, BindingResult bindingResult, HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView();
@@ -206,6 +206,7 @@ public class LoginController {
         return modelAndView;
     }
 
+    @PreAuthorize("hasRole('SUPER_ADMIN')")
     @RequestMapping(value="/regAdmin", method = RequestMethod.GET)
     public ModelAndView registrationAdmin(){
         ModelAndView modelAndView = new ModelAndView();
@@ -214,6 +215,7 @@ public class LoginController {
         modelAndView.setViewName("regAdmin");
         return modelAndView;
     }
+    @PreAuthorize("hasRole('SUPER_ADMIN')")
     @RequestMapping(value = "/regAdmin", method = RequestMethod.POST)
     public ModelAndView saveNewAdmin(@Valid User user, BindingResult bindingResult) {
         ModelAndView modelAndView = new ModelAndView();
@@ -255,6 +257,7 @@ public class LoginController {
         return userName;
     }
 
+    @PreAuthorize("hasRole('SUPER_ADMIN')")
     @RequestMapping("/deleteUser/{id}")
     public String deleteUser(@PathVariable("id")int id){
         User user=userService.findUserById(id);

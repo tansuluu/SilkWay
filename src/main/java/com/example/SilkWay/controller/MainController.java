@@ -1,6 +1,5 @@
 package com.example.SilkWay.controller;
 
-import com.example.SilkWay.model.User;
 import com.example.SilkWay.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,29 +23,21 @@ public class MainController {
         return "login";
     }
     @RequestMapping(path = "/home")
-    public String homeUser(Model model){
-        model.addAttribute("home");
-
+    public String homeUser(){
         return "home";
     }
     @RequestMapping(path = "/homeCompany")
-    public String homeCompany(Model model){
-        model.addAttribute("homeCompany");
-
+    public String homeCompany(){
         return "homeCompany";
     }
 
     @RequestMapping(path = "/superAdmin")
-    public String superAdmin(Model model){
-        model.addAttribute("superAdmin");
-
+    public String superAdmin(){
         return "superAdmin";
     }
 
     @RequestMapping(path = "/homeAdmin")
-    public String homeAdmin(Model model){
-        model.addAttribute("homeAdmin");
-
+    public String homeAdmin(){
         return "homeAdmin";
     }
 

@@ -52,12 +52,20 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.
                 authorizeRequests()
                 .antMatchers("/", "/sources/**", "/jkc", "/fgrd").permitAll()
-                .antMatchers("/login", "/image", "/deleteTour/**","/hotelInfo/**", "/updateTour/**", "updateHotel/**", "/deleteHotel/**").permitAll()
+                .antMatchers("/login", "/image","/hotelInfo/**").permitAll()
                 .antMatchers("/regUser", "/filterTour").permitAll()
                 .antMatchers("/confirm").permitAll()
-                .antMatchers("/superAdmin").hasAuthority("SUPER_ADMIN")
-                .antMatchers("/homeAdmin","/regTour", "/regCompany").hasAnyAuthority("ADMIN, SUPER_ADMIN")
-                .antMatchers("/admin/**").hasAuthority("ADMIN").anyRequest()
+                .antMatchers("/superAdmin", "/regAdmin").hasAuthority("SUPER_ADMIN")
+            .antMatchers("/homeAdmin",
+                    "/regTour",
+                    "/regCompany",
+                    "/deleteUser/**",
+                    "/updateTour/**",
+                    "/regHotel",
+                    "/deleteTour/**",
+                    "/updateHotel/**",
+                    "/deleteHotel/**").hasAnyAuthority("ADMIN, SUPER_ADMIN")
+                .antMatchers("/admin/**").hasAuthority("SUPER_ADMIN").anyRequest()
                 .authenticated()
                 .and().csrf().disable()
                 .formLogin().successHandler(customizeAuthenticationSuccessHandler)

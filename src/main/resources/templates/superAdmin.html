@@ -13,49 +13,42 @@
     <div class="container">
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
+                <p>
+                    Welcome Page of SUPER_ADMIN
+                </p>
                 <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Logout</a></li>
             </ul>
         </div>
     </div>
 </nav>
 
-<br>
-<br>
 <div class="container">
     <div sec:authorize="hasRole('SUPER_ADMIN')">
         <h3>You will see this only if you are SUPER_ADMIN</h3>
     </div>
-    <h2>Hello</h2>
-
-    <p>
-        Welcome Page of SUPER_ADMIN
-    </p>
-</div>
-<div class="form-group">
-    <span>All users<a href="/" th:href="@{/adminUsers}">See all Users</a></span>
-</div>
-<div class="form-group">
-						<span>New ADMIN? <a href="/" th:href="@{/regAdmin}">Register
-								here</a></span>
 </div>
 
 <div class="form-group">
-						<span>New HOTEL? <a href="/" th:href="@{/addHotel}">Register
-								here</a></span>
+    <span>All users<a href="/" th:href="@{/allUsers}">See all Users</a></span>
+</div>
+<div class="form-group">
+    <span>New ADMIN? <a href="/" th:href="@{/regAdmin}">Register here</a></span>
 </div>
 
 <div class="form-group">
-						<span>New company? <a href="/" th:href="@{/regCompany}">Register
-								here</a></span>
+    <span>New HOTEL? <a href="/" th:href="@{/addHotel}">Register here</a></span>
 </div>
 
 <div class="form-group">
-						<span>New Tour? <a href="/" th:href="@{/addTour}">Register
-								here</a></span>
+    <span>New company? <a href="/" th:href="@{/regCompany}">Register here</a></span>
 </div>
 
 <div class="form-group">
-						<span>All tours<a href="/" th:href="@{/findTours}">See all tours</a></span>
+    <span>New Tour? <a href="/" th:href="@{/addTour}">Register here</a></span>
+</div>
+
+<div class="form-group">
+    <span>All tours<a href="/" th:href="@{/findTours}">See all tours</a></span>
 </div>
 
 <div class="form-group">
@@ -63,7 +56,11 @@
 </div>
 
 <div class="form-group">
-    <span>All hotels<a href="/" th:href="@{/findHotel}">See all Hotels</a></span>
+    <span>All hotels<a href="/" th:href="@{/findHotels}">See all Hotels</a></span>
+</div>
+
+<div class="form-group">
+    <span>Search hotels<a href="/" th:href="@{/findHotel}">Search all hotels</a></span>
 </div>
 
 </body>

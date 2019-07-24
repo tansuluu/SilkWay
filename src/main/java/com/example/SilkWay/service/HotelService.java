@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service("hotelService")
@@ -21,6 +22,15 @@ public class HotelService {
 
     public List<Hotel> getAllHotels(){
         return hotelRepository.findAll();
+    }
+
+    public List<Hotel> getAllHotelsByTitle(String title){
+        return hotelRepository.getAllByTitle(title);
+    }
+
+    public List<Hotel> getAllHotelsByCategory(String category){
+
+        return hotelRepository.findAllByCategory(category);
     }
 
     public Hotel getHotelById(long id){
@@ -44,6 +54,7 @@ public class HotelService {
         newHotel.setImg_name(file.getOriginalFilename());
         newHotel.setCreated(hotel.getCreated());
         newHotel.setStars(hotel.getStars());
+        newHotel.setEmail(hotel.getEmail());
         newHotel.setDescription(hotel.getDescription());
         newHotel.setTitle(hotel.getTitle());
         newHotel.setCategory(hotel.getCategory());
@@ -52,12 +63,29 @@ public class HotelService {
         return hotelRepository.save(newHotel);
     }
 
-//    public Hotel filter(Hotel hotel){
-//        if(hotel.getTitle()!=null){
-//            return hotelRepository.findByTitle(hotel.getTitle());
-//        }
-//        else if(hotel.getTitle()==null){
-//            if()
-//        }
-//    }
+    public List<Hotel> filterHotels(String title, String category, long stars){
+
+        List<Hotel> hotels;
+
+        if(!title.isEmpty()){
+            return getAllHotelsByTitle(title);
+        }
+        else if(title.isEmpty() && category.isEmpty()){
+            return getAllByStars(stars);
+        }
+        else if(title.isEmpty() && stars ==0){
+            return getAllHotelsByCategory(category);
+        }
+
+        else if(title.isEmpty() && !category.isEmpty() && stars != 0){
+            hotels = getAllHotelsByCategory(category);
+            for (Hotel hotel : hotels) {
+                if(hotel.getStars() != stars){
+                    hotels.remove(hotel);
+                }
+            }
+            return hotels;
+        }
+        return  getAllHotels();
+    }
 }

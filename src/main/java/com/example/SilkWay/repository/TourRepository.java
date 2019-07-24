@@ -11,9 +11,9 @@ import java.util.List;
 
 @Repository("tourRepository")
 public interface TourRepository extends JpaRepository<Tour, Long> {
-    List<Tour> getAllByTitle(String title);
+
     Tour findByTitle(String title);
-    Tour findAllByCountry(String country);
+
     Tour findById(long id);
 
     @Override
@@ -21,6 +21,4 @@ public interface TourRepository extends JpaRepository<Tour, Long> {
 
     List<Tour> getAllByCountry(String country);
 
-
-//    List<Tour> filterTour(Tour tour);
 }

@@ -1,14 +1,15 @@
 package com.example.SilkWay.service;
 
 import com.example.SilkWay.model.Tour;
+import com.example.SilkWay.model.User;
 import com.example.SilkWay.repository.TourRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.xml.ws.spi.http.HttpContext;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -19,6 +20,9 @@ public class TourService {
     @Qualifier("tourRepository")
     @Autowired
     private TourRepository tourRepository;
+
+    @Autowired
+    private UserService userService;
 
     public Tour saveTour(String title, long price, String country, String description, Date dateFrom, Date dateTo, MultipartFile file) {
         Tour tour = new Tour();
@@ -44,14 +48,6 @@ public class TourService {
         tourRepository.delete(tour);
     }
 
-    public Page<Tour> getAll(Pageable pageable) {
-        return tourRepository.findAll(pageable);
-    }
-
-    public Tour getByTitle(String title) {
-        return tourRepository.findByTitle(title);
-    }
-
 
     public Tour updateTour(Tour tour, MultipartFile file) {
         Tour newTour = tourRepository.findByTitle(tour.getTitle());
@@ -72,43 +68,43 @@ public class TourService {
         }
         else if (!country.isEmpty() & (priceMin == 0L & priceMax!=0L)) {
             searchArray = tourRepository.getAllByCountry(country);
-            for (int i = 0; i < searchArray.size(); i++) {
-                if (searchArray.get(i).getPrice() > priceMax) {
-                    searchArray.remove(i);
+            for (Tour tour : searchArray) {
+                if (tour.getPrice() > priceMax) {
+                    searchArray.remove(tour);
                 }
             }
             finalLastSearch = searchArray;
         }
         else if (!country.isEmpty() & (priceMax == 0L & priceMin!=0L)) {
             searchArray = tourRepository.getAllByCountry(country);
-            for (int i = 0; i < searchArray.size(); i++) {
-                if (searchArray.get(i).getPrice() < priceMin) {
-                    searchArray.remove(i);
+            for (Tour tour : searchArray) {
+                if (tour.getPrice() < priceMin) {
+                    searchArray.remove(tour);
                 }
             }
             finalLastSearch = searchArray;
         }
         else if (country.isEmpty() & (priceMax != 0L & priceMin!=0L)) {
             searchArray = getAllTours();
-            for (int i = 0; i < searchArray.size(); i++) {
-                if (searchArray.get(i).getPrice() < priceMax & searchArray.get(i).getPrice()>priceMin) {
-                    finalLastSearch.add(searchArray.get(i));
+            for (Tour tour : searchArray) {
+                if (tour.getPrice() < priceMax & tour.getPrice()>priceMin) {
+                    finalLastSearch.add(tour);
                 }
             }
         }
         else if (country.isEmpty() & (priceMax != 0L & priceMin==0L)) {
             searchArray = getAllTours();
-            for (int i = 0; i < searchArray.size(); i++) {
-                if (searchArray.get(i).getPrice() < priceMax) {
-                    finalLastSearch.add(searchArray.get(i));
+            for (Tour tour : searchArray) {
+                if (tour.getPrice() < priceMax) {
+                    finalLastSearch.add(tour);
                 }
             }
         }
         else if (country.isEmpty() & (priceMax == 0L & priceMin!=0L)) {
             searchArray = getAllTours();
-            for (int i = 0; i < searchArray.size(); i++) {
-                if (searchArray.get(i).getPrice()>priceMin) {
-                    finalLastSearch.add(searchArray.get(i));
+            for (Tour tour : searchArray) {
+                if (tour.getPrice()>priceMin) {
+                    finalLastSearch.add(tour);
                 }
             }
         }
@@ -117,27 +113,27 @@ public class TourService {
         }
 
         if (dateFrom != null & dateTo != null) {
-            for (int i = 0; i < finalLastSearch.size(); i++) {
-                Date date1 = finalLastSearch.get(i).getDateFrom();
-                Date date2 = finalLastSearch.get(i).getDateTo();
+            for (Tour tour : finalLastSearch) {
+                Date date1 = tour.getDateFrom();
+                Date date2 = tour.getDateTo();
                 if ((dateFrom.after(date1) || dateFrom.equals(date1)) & (dateTo.before(date2) || dateTo.equals(date2))) {
-                    finalSearch.add(finalLastSearch.get(i));
+                    finalSearch.add(tour);
                 }
             }
         }
         else if(dateFrom!=null & dateTo==null){
-            for (int i = 0; i < finalLastSearch.size(); i++) {
-                Date date1 = finalLastSearch.get(i).getDateFrom();
+            for (Tour tour : finalLastSearch) {
+                Date date1 = tour.getDateFrom();
                 if ((dateFrom.after(date1) || dateFrom.equals(date1))) {
-                    finalSearch.add(finalLastSearch.get(i));
+                    finalSearch.add(tour);
                 }
             }
         }
         else if(dateFrom==null & dateTo!=null){
-            for (int i = 0; i < finalLastSearch.size(); i++) {
-                Date date1 = finalLastSearch.get(i).getDateTo();
+            for (Tour tour : finalLastSearch) {
+                Date date1 = tour.getDateTo();
                 if ((dateTo.before(date1) || dateTo.equals(date1))) {
-                    finalSearch.add(finalLastSearch.get(i));
+                    finalSearch.add(tour);
                 }
             }
         }
@@ -145,5 +141,21 @@ public class TourService {
             return finalLastSearch;
         }
         return finalSearch;
+    }
+
+    public String buyTour(Tour tour, HttpServletRequest request){
+        User user = userService.findUserByEmail(request.getUserPrincipal().getName());
+        List<Tour> tours = new ArrayList<>();
+        if (user.getTours().equals(null)){
+            tours.add(tour);
+            user.setTours(tours);
+        }
+        else {
+            tours = user.getTours();
+            tours.add(tour);
+            user.setTours(tours);
+        }
+
+        return "Tour bought successfully";
     }
 }

@@ -20,20 +20,24 @@ import java.util.UUID;
 @Service("userService")
 public class UserService {
 
-    @Qualifier("userRepository")
-    @Autowired
     private UserRepository userRepository;
 
-    @Qualifier("roleRepository")
-    @Autowired
     private RoleRepository roleRepository;
 
-    @Autowired
     private EmailService emailService;
 
-    @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
+    @Autowired
+    public UserService(@Qualifier("userRepository") UserRepository userRepository,
+                       @Qualifier("roleRepository") RoleRepository roleRepository,
+                       EmailService emailService,
+                       BCryptPasswordEncoder bCryptPasswordEncoder) {
+        this.userRepository = userRepository;
+        this.roleRepository = roleRepository;
+        this.emailService = emailService;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+    }
 
     public User findUserByEmail(String email) {
         return userRepository.findByEmail(email);
@@ -50,19 +54,6 @@ public class UserService {
         Role userRole = roleRepository.findByRole(role);
         user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
         return userRepository.save(user);
-    }
-
-    public ArrayList<User> getAllByStatus(String status){
-        ArrayList<User> list=(ArrayList<User>)userRepository.getAllByStatus(status);
-        ArrayList<User> finalist=new ArrayList<User>();
-        if(!list.isEmpty() && list.size()>2){
-        finalist.add(list.get(0));
-        finalist.add(list.get(1));
-        finalist.add(list.get(2));
-        return finalist;
-        }
-
-        return list;
     }
 
     public void sendTokenToConfirm(User user, HttpServletRequest request){
@@ -89,10 +80,6 @@ public class UserService {
         return (ArrayList) userRepository.findAll();
     }
 
-    public ArrayList<User> findByFirstName(String name){
-        return (ArrayList<User>) userRepository.findAllByFirstName(name);
-    }
-
     public User findByToken(String token){
         return userRepository.findByToken(token);
     }
@@ -107,10 +94,6 @@ public class UserService {
         user1.setLastName(user.getLastName());
         user1.setContacts(user.getContacts());
         save(user1);
-    }
-
-    public String getImagePhoto(String name){
-        return findUserByEmail(name).getImg_name();
     }
 
     public void deleteUser(User user){
