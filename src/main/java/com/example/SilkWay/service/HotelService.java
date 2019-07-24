@@ -4,6 +4,9 @@ import com.example.SilkWay.model.Hotel;
 import com.example.SilkWay.repository.HotelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -20,8 +23,10 @@ public class HotelService {
         return hotelRepository.save(hotel);
     }
 
-    public List<Hotel> getAllHotels(){
-        return hotelRepository.findAll();
+    public List<Hotel> getAllHotels(int page, int limit){
+        Pageable pageableRequest = PageRequest.of(page, limit);
+        Page<Hotel> allTours = hotelRepository.findAll(pageableRequest);
+        return allTours.getContent();
     }
 
     public List<Hotel> getAllHotelsByTitle(String title){
@@ -63,7 +68,7 @@ public class HotelService {
         return hotelRepository.save(newHotel);
     }
 
-    public List<Hotel> filterHotels(String title, String category, long stars){
+    public List<Hotel> filterHotels(String title, String category, long stars, int page, int limit){
 
         List<Hotel> hotels;
 
@@ -86,6 +91,6 @@ public class HotelService {
             }
             return hotels;
         }
-        return  getAllHotels();
+        return  getAllHotels(page, limit);
     }
 }
