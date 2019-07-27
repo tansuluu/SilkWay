@@ -49,12 +49,13 @@
 						<input class="input100" type="text" name="contacts" th:field="*{contacts}" placeholder="Contacts">
 						<span class="focus-input100" data-placeholder="&#xe82a;"></span>
 					</div>
-					<div th:if="${#fields.hasErrors('email')}" th:errors="*{email}"  class="wrap-input100 validate-input" data-validate = "Enter username">
+					<label th:if="${#fields.hasErrors('email')}" th:errors="*{email}"   class="validation-message"></label>
+					<div class="wrap-input100 validate-input" data-validate = "Enter username">
 						<input class="input100" placeholder="Email" type="email" name="email" required="required">
 						<span class="focus-input100" data-placeholder="&#xe82a;"></span>
 					</div>
-
-					<div th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="wrap-input100 validate-input" data-validate="Enter password">
+					<label th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="validation-message"></label>
+					<div class="wrap-input100 validate-input" data-validate="Enter password">
 						<input class="input100" type="password" placeholder="Password" name="password" required="required">
 						<span class="focus-input100" data-placeholder="&#xe80f;"></span>
 					</div>

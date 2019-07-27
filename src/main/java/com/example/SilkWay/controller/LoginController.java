@@ -148,7 +148,7 @@ public class LoginController {
         ModelAndView modelAndView = new ModelAndView();
         User user = new User();
         modelAndView.addObject("user", user);
-        modelAndView.setViewName("regUser");
+        modelAndView.setViewName("userRegistration");
         return modelAndView;
     }
     @RequestMapping(value = "/regUser", method = RequestMethod.POST)
