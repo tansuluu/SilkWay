@@ -22,7 +22,7 @@ public class Tour {
     @Column(name = "tour_id")
     private long id;
 
-    @Column(name = "title", columnDefinition = "default = null")
+    @Column(name = "title")
     private String title;
 
     @Column(name = "country")

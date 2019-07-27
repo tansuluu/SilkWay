@@ -32,7 +32,7 @@ public class LoginController {
 
     @RequestMapping(value={"/"}, method = RequestMethod.GET)
     public String homePage(){
-        return "register";
+        return "loginPage";
     }
 
 
@@ -49,7 +49,7 @@ public class LoginController {
             model.addObject("message", "Logged out from JournalDEV successfully.");
         }
 
-        model.setViewName("login");
+        model.setViewName("loginPage");
         //System.out.println("I am Login");
         return model;
     }
@@ -161,13 +161,13 @@ public class LoginController {
                             "*There is already a user registered with the email provided");
         }
         if (bindingResult.hasErrors()) {
-            modelAndView.setViewName("regUser");
+            modelAndView.setViewName("userRegistration");
         } else {
             user.setStatus("user");
             userService.saveUser(user, "USER");
             userService.sendTokenToConfirm(user,request);
             modelAndView.addObject("user", new User());
-            modelAndView.setViewName("login");
+            modelAndView.setViewName("loginPage");
 
         }
 
