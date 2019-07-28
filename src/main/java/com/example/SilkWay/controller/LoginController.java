@@ -42,7 +42,7 @@ public class LoginController {
 
         ModelAndView model = new ModelAndView();
         if (error != null) {
-            model.addObject("error", "Invalid Credentials provided.");
+            model.addObject("error", "Почта или параоль неверны");
         }
 
         if (logout != null) {
@@ -154,6 +154,7 @@ public class LoginController {
     @RequestMapping(value = "/regUser", method = RequestMethod.POST)
     public ModelAndView saveNewUser(@Valid User user, BindingResult bindingResult, HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView();
+        System.out.println(123);
         User userExists = userService.findUserByEmail(user.getEmail());
         if (userExists != null) {
             bindingResult
@@ -168,9 +169,8 @@ public class LoginController {
             userService.sendTokenToConfirm(user,request);
             modelAndView.addObject("user", new User());
             modelAndView.setViewName("loginPage");
-
+            modelAndView.addObject("error", "Ссылка на потверждение, отправлена на Вашу почту ");
         }
-
         return modelAndView;
     }
 
