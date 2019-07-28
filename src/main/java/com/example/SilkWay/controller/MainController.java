@@ -7,8 +7,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-
-
 @Controller
 @Transactional
 public class MainController {
@@ -16,31 +14,20 @@ public class MainController {
     @Autowired
     UserService userService;
 
-    @RequestMapping(path = "/")
-    public String index(Model model){
-        model.addAttribute("login");
-
-        return "login";
+    @RequestMapping("/tourPage")
+    public String showUsers(Model model){
+        return "tour-place";
     }
-    @RequestMapping(path = "/home")
-    public String homeUser(){
-        return "home";
+    @RequestMapping("/hotelPage")
+    public String hotel(Model model){
+        return "hotelsPage";
     }
-    @RequestMapping(path = "/homeCompany")
-    public String homeCompany(){
-        return "homeCompany";
+    @RequestMapping("/transportPage")
+    public String transportPage(Model model){
+        return "transport";
     }
-
-    @RequestMapping(path = "/superAdmin")
-    public String superAdmin(){
-        return "superAdmin";
+    @RequestMapping("/aboutUs")
+    public String aboutUs(Model model){
+        return "about";
     }
-
-    @RequestMapping(path = "/homeAdmin")
-    public String homeAdmin(){
-        return "homeAdmin";
-    }
-
-
-
 }

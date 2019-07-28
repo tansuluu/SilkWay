@@ -85,12 +85,12 @@
 								<li class="active"><a th:href="@{/}">Главная</a></li>
 								<li class="has-dropdown">
 									<a th:href="@{/tourPage}">Туры</a>
-									<ul class="dropdown">
-										<li><a href="#">Destination</a></li>
-										<li><a href="#">Cruises</a></li>
-										<li><a href="#">Hotels</a></li>
-										<li><a href="#">Booking</a></li>
-									</ul>
+									<!--<ul class="dropdown">-->
+										<!--<li><a href="#">Destination</a></li>-->
+										<!--<li><a href="#">Cruises</a></li>-->
+										<!--<li><a href="#">Hotels</a></li>-->
+										<!--<li><a href="#">Booking</a></li>-->
+									<!--</ul>-->
 								</li>
 								<li class="has-dropdown">
 									<a th:href="@{/hotelPage}">Отель</a>
@@ -104,8 +104,8 @@
 										<li><a href="#">Таджикистан</a></li>
 									</ul>
 								</li>
-								<li><a href="blog.html" > Транспорт</a></li>
-								<li><a href="about.html">О нас</a></li>
+								<li><a  th:href="@{/transportPage}"> Транспорт</a></li>
+								<li><a th:href="@{/aboutUs}">О нас</a></li>
 
 							<button th:if="${#request.userPrincipal !=null}" style="background-color: rgba(0, 0, 0, 0.1); color: white;  padding: 5px 10px;"> <span class="fas fa-user"></span><a  th:href="@{/logout}">Выйти</a></button>
 								<button th:if="${#request.userPrincipal == null}"  style="background-color: rgba(0, 0, 0, 0.1); color: white;  padding: 5px 10px;"> <span class="fas fa-user"></span><a th:href="@{/regUser}">Регистрация</a>  </button>

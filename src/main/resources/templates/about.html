@@ -1,0 +1,336 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>SilkAway Travel - Гланая</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="" />
+	<meta name="keywords" content="" />
+	<meta name="author" content="" />
+
+
+	
+	
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+  <!-- Facebook and Twitter integration -->
+	<meta property="og:title" content=""/>
+	<meta property="og:image" content=""/>
+	<meta property="og:url" content=""/>
+	<meta property="og:site_name" content=""/>
+	<meta property="og:description" content=""/>
+	<meta name="twitter:title" content="" />
+	<meta name="twitter:image" content="" />
+	<meta name="twitter:url" content="" />
+	<meta name="twitter:card" content="" />
+
+	<link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700" rel="stylesheet">
+	
+	<!-- Animate.css -->
+	<link rel="stylesheet" href="css/animate.css">
+	<!-- Icomoon Icon Fonts-->
+	<link rel="stylesheet" href="css/icomoon.css">
+	<!-- Bootstrap  -->
+	<link rel="stylesheet" href="css/bootstrap.css">
+
+	<!-- Magnific Popup -->
+	<link rel="stylesheet" href="css/magnific-popup.css">
+
+	<!-- Flexslider  -->
+	<link rel="stylesheet" href="css/flexslider.css">
+
+	<!-- Owl Carousel -->
+	<link rel="stylesheet" href="css/owl.carousel.min.css">
+	<link rel="stylesheet" href="css/owl.theme.default.min.css">
+	
+	<!-- Date Picker -->
+	<link rel="stylesheet" href="css/bootstrap-datepicker.css">
+	<!-- Flaticons  -->
+	<link rel="stylesheet" href="fonts/flaticon/font/flaticon.css">
+
+	<!-- Theme style  -->
+	<link rel="stylesheet" href="css/style.css">
+
+	<!-- Modernizr JS -->
+	<script src="js/modernizr-2.6.2.min.js"></script>
+	<!-- FOR IE9 below -->
+	<!--[if lt IE 9]>
+	<script src="js/respond.min.js"></script>
+	<![endif]-->
+
+	</head>
+	<body>
+		
+	<div class="colorlib-loader"></div>
+
+	<div id="page">
+		<nav class="colorlib-nav" role="navigation">
+			<div class="top-menu">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-xs-2">
+							<div id="colorlib-logo"><a href="index.html">SilkAway Travel</a></div>
+						</div>
+						<div class="col-xs-10 text-right menu-1">
+							<ul>
+								<li><a th:href="@{/}">Главная</a></li>
+								<li class="has-dropdown">
+									<a th:href="@{/tourPage}">Туры</a>
+									<!--<ul class="dropdown">-->
+									<!--<li><a href="#">Destination</a></li>-->
+									<!--<li><a href="#">Cruises</a></li>-->
+									<!--<li><a href="#">Hotels</a></li>-->
+									<!--<li><a href="#">Booking</a></li>-->
+									<!--</ul>-->
+								</li>
+								<li class="has-dropdown">
+									<a th:href="@{/hotelPage}">Отель</a>
+									<ul class="dropdown">
+										<li><a href="#">Кыргызстан</a></li>
+										<li><a href="#">Казахстан</a></li>
+										<li><a href="#">Узбекистан</a></li>
+										<li><a href="#">Армения</a></li>
+										<li><a href="#">Грузия</a></li>
+										<li><a href="#">Азербайджан</a></li>
+										<li><a href="#">Таджикистан</a></li>
+									</ul>
+								</li>
+								<li><a  th:href="@{/transportPage}"> Транспорт</a></li>
+								<li class="active"><a th:href="@{/aboutUs}">О нас</a></li>
+
+								<button th:if="${#request.userPrincipal !=null}" style="background-color: rgba(0, 0, 0, 0.1); color: white;  padding: 5px 10px;"> <span class="fas fa-user"></span><a  th:href="@{/logout}">Выйти</a></button>
+								<button th:if="${#request.userPrincipal == null}"  style="background-color: rgba(0, 0, 0, 0.1); color: white;  padding: 5px 10px;"> <span class="fas fa-user"></span><a th:href="@{/regUser}">Регистрация</a>  </button>
+								<button th:if="${#request.userPrincipal == null}" style="background-color: rgba(0, 0, 0, 0.1); color: white; padding: 5px 10px;"> <span class="fas fa-sign-in-alt"></span><a  th:href="@{/login}">Войти</a></button>
+								<button th:if="${#request.userPrincipal !=null}" style="background-color: rgba(0, 0, 0, 0.1); color: white; padding: 5px 10px;"> <span class="fas fa-sign-in-alt"></span><a  th:href="@{/userPage(username=${#request.userPrincipal.name})}"  th:text="${#request.userPrincipal.name}"></a></button>
+							</ul>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</nav>
+		<aside id="colorlib-hero">
+			<div class="flexslider">
+				<ul class="slides">
+			   	<li style="background-image: url(images/cover-img-5.jpg);">
+			   		<div class="overlay"></div>
+			   		<div class="container-fluid">
+			   			<div class="row">
+				   			<div class="col-md-6 col-md-offset-3 col-sm-12 col-xs-12 slider-text">
+				   				<div class="slider-text-inner text-center">
+				   					<h2></h2>
+				   					<h1>О нас</h1>
+				   				</div>
+				   			</div>
+				   		</div>
+			   		</div>
+			   	</li>
+			  	</ul>
+		  	</div>
+		</aside>
+
+		<div id="colorlib-about">
+			<div class="container">
+				<div class="row">
+					<div class="about-flex">
+						<div class="col-one-forth aside-stretch animate-box">
+							<div class="row">
+								<div class="col-md-12 about">
+									<h2>Информация </h2>
+
+									<ul>
+										<li><a href="#colorlib-history">Истории</a></li>
+										<li><a href="#colorlib-services">Наши услуги</a></li>
+										<li><a href="#colorlib-contact">Контакты</a></li>
+								
+									</ul>
+								</div>
+							</div>
+						</div>
+						<div class="col-three-forth animate-box" id="colorlib-history">
+							<h2>История</h2>
+							<div class="row">
+								<div class="col-md-12">
+									<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
+
+									<p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
+
+									<p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.</p>
+
+									<div class="row row-pb-sm">
+										<div class="col-md-6">
+											<img class="img-responsive" src="images/hotel-7.jpg" alt="">
+										</div>
+										<div class="col-md-6">
+											<p>The Big Oxmox advised her not to do so, because there were thousands of bad Commas, wild Question Marks and devious Semikoli, but the Little Blind Text didn’t listen. She packed her seven versalia, put her initial into the belt and made herself on the way.</p>
+											<p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of her own road, the Line Lane. Pityful a rethoric question ran over her cheek, then she continued her way.</p>
+										</div>
+									</div>
+
+
+									<p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of her own road, the Line Lane. Pityful a rethoric question ran over her cheek, then she continued her way.</p>
+
+									<p>On her way she met a copy. The copy warned the Little Blind Text, that where it came from it would have been rewritten a thousand times and everything that was left from its origin would be the word "and" and the Little Blind Text should turn around and return to its own, safe country.</p>
+
+									<p>But nothing the copy said could convince her and so it didn’t take long until a few insidious Copy Writers ambushed her, made her drunk with Longe and Parole and dragged her into their agency, where they abused her for their.</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<div id="colorlib-services">
+			<div class="container">
+				<div class="row">
+					<div class="thems"> <h1>Наши услуги</h1></div>
+					<div class="col-md-3 animate-box text-center">
+						<div class="services">
+							<span class="icon">
+								<i class="flaticon-around"></i>
+							</span>
+
+							<h3>Amazing Travel</h3>
+							<p>Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean. A small river named Duden flows by their place and supplies</p>
+						</div>
+					</div>
+					<div class="col-md-3 animate-box text-center">
+						<div class="services">
+							<span class="icon">
+								<i class="flaticon-boat"></i>
+							</span>
+							<h3>Our Cruises</h3>
+							<p>Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean. A small river named Duden flows by their place and supplies</p>
+						</div>
+					</div>
+					<div class="col-md-3 animate-box text-center">
+						<div class="services">
+							<span class="icon">
+								<i class="flaticon-car"></i>
+							</span>
+							<h3>Book Your Trip</h3>
+							<p>Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean. A small river named Duden flows by their place and supplies</p>
+						</div>
+					</div>
+					<div class="col-md-3 animate-box text-center">
+						<div class="services">
+							<span class="icon">
+								<i class="flaticon-postcard"></i>
+							</span>
+							<h3>Nice Support</h3>
+							<p>Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean. A small river named Duden flows by their place and supplies</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+
+		<div id="colorlib-contact" >
+			<div class="container">
+				<div class="row">
+					<div class="col-md-10 col-md-offset-1 animate-box">
+						<h3>Свяжитесь с нами </h3>
+						<form action="#">
+							<div class="row form-group">
+								<div class="col-md-6 padding-bottom">
+									<label for="fname">Имя</label>
+									<input type="text" id="fname" class="form-control" placeholder="Ваше имя">
+								</div>
+								<div class="col-md-6">
+									<label for="lname">Фамилия</label>
+									<input type="text" id="lname" class="form-control" placeholder="Ваша фамилия">
+								</div>
+							</div>
+
+							<div class="row form-group">
+								<div class="col-md-12">
+									<label for="email">Email</label>
+									<input type="text" id="email" class="form-control" placeholder="Ваш email">
+								</div>
+							</div>
+
+							<div class="row form-group">
+								<div class="col-md-12">
+									<label for="subject">Тема</label>
+									<input type="text" id="subject" class="form-control" placeholder="Тема вашего сообщение...">
+								</div>
+							</div>
+
+							<div class="row form-group">
+								<div class="col-md-12">
+									<label for="message">Сообщение</label>
+									<textarea name="message" id="message" cols="30" rows="10" class="form-control" placeholder=" Напшите свое сообщение здесь..."></textarea>
+								</div>
+							</div>
+							<div class="form-group text-center">
+								<input type="submit" value="Отправить" class="btn btn-primary">
+							</div>
+
+						</form>		
+					</div>
+					<div class="col-md-10 col-md-offset-1 animate-box">
+						<h3>Информация для связи</h3>
+						<div class="row contact-info-wrap">
+							<div class="col-md-3">
+								<p><span><i class="icon-location"></i></span> 198 West 21th Street, <br> Suite 721 New York NY 10016</p>
+							</div>
+							<div class="col-md-3">
+								<p><span><i class="icon-phone3"></i></span> <a href="tel://1234567920">+ 1235 2355 98</a></p>
+							</div>
+							<div class="col-md-3">
+								<p><span><i class="icon-paperplane"></i></span> <a href="mailto:info@yoursite.com">info@yoursite.com</a></p>
+							</div>
+							<div class="col-md-3">
+								<p><span><i class="icon-globe"></i></span> <a href="#">yoursite.com</a></p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+
+		
+	</div>
+
+	<div class="gototop js-top">
+		<a href="#" class="js-gotop"><i class="icon-arrow-up2"></i></a>
+	</div>
+
+	<!-- jQuery -->
+	<script src="js/jquery.min.js"></script>
+	<!-- jQuery Easing -->
+	<script src="js/jquery.easing.1.3.js"></script>
+	<!-- Bootstrap -->
+	<script src="js/bootstrap.min.js"></script>
+	<!-- Waypoints -->
+	<script src="js/jquery.waypoints.min.js"></script>
+	<!-- Flexslider -->
+	<script src="js/jquery.flexslider-min.js"></script>
+	<!-- Owl carousel -->
+	<script src="js/owl.carousel.min.js"></script>
+	<!-- Magnific Popup -->
+	<script src="js/jquery.magnific-popup.min.js"></script>
+	<script src="js/magnific-popup-options.js"></script>
+	<!-- Date Picker -->
+	<script src="js/bootstrap-datepicker.js"></script>
+	<!-- Stellar Parallax -->
+	<script src="js/jquery.stellar.min.js"></script>
+
+	<!-- Main -->
+	<script src="js/main.js"></script>
+
+	</body>
+</html>
+

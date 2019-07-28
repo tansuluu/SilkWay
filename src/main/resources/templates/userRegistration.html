@@ -6,7 +6,11 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-
+<style>
+	a:hover{
+		color: #1b6d85;
+	}
+</style>
 	<!--===============================================================================================-->
 	<link rel="icon" type="image/png" href="register/images/icons/favicon.ico"/>
 <!--===============================================================================================-->
@@ -51,12 +55,12 @@
 					</div>
 					<div  class="wrap-input100 validate-input" data-validate = "Напишите номер">
 						<input class="input100" type="text" name="contacts" th:field="*{contacts}" placeholder="Номер">
-						<span class="focus-input100" data-placeholder="&#xe82a;"></span>
+						<span class="focus-input100" data-placeholder="&#xe6ba;"></span>
 					</div>
 					<label th:if="${#fields.hasErrors('email')}" th:errors="*{email}"   class="validation-message"></label>
 					<div  class="wrap-input100 validate-input" data-validate = "Введите правильную почту">
 						<input class="input100" id="email" type="text" name="email" th:field="*{email}" placeholder="Почта">
-						<span class="focus-input100" data-placeholder="&#xe82a;"></span>
+						<span class="focus-input100" data-placeholder="&#xe6fe;"></span>
 					</div>
 					<label th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="validation-message"></label>
 					<div class="wrap-input100 validate-input" data-validate="Введите пароль">
@@ -69,8 +73,11 @@
 							Регистрация
 						</p>
 					</div>
-                    <div class="form-group">
-						<span>Уже зарегистрированы? <a href="/" th:href="@{/login}">Войти</a></span>
+                    <div align="center" >
+						<span>Уже зарегистрированы? <a th:href="@{/login}">Войти</a></span>
+                    </div>
+					<div align="center" >
+						<span><a th:href="@{/}">Назад</a></span>
                     </div>
 
 				</form>

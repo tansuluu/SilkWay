@@ -56,10 +56,12 @@
                     <div align="center" th:if="${error!=null}">
                         <p th:text="${error}">Почта или пароль неверны</p>
                     </div>
-                    <div class="form-group">
+                    <div align="center" >
 						<span>Новый пользователь? <a href="/" th:href="@{/regUser}">Регистрация</a></span>
                     </div>
-
+					<div align="center" >
+						<span><a th:href="@{/}">Назад</a></span>
+					</div>
 				</form>
 			</div>
 		</div>

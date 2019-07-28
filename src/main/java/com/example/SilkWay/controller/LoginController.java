@@ -293,12 +293,5 @@ public class LoginController {
         model.addAttribute("user", user);
         return "home";
     }
-    @RequestMapping("/tourPage")
-    public String showUsers(Model model){
-        return "tour-place";
-    }
-    @RequestMapping("/hotelPage")
-    public String hotel(Model model){
-        return "hotelsPage";
-    }
+
 }
