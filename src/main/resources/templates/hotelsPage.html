@@ -1,0 +1,513 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>SilkAway Travel - Отель</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="" />
+	<meta name="keywords" content="" />
+	<meta name="author" content="" />
+
+
+
+
+
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+
+
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+  <!-- Facebook and Twitter integration -->
+	<meta property="og:title" content=""/>
+	<meta property="og:image" content=""/>
+	<meta property="og:url" content=""/>
+	<meta property="og:site_name" content=""/>
+	<meta property="og:description" content=""/>
+	<meta name="twitter:title" content="" />
+	<meta name="twitter:image" content="" />
+	<meta name="twitter:url" content="" />
+	<meta name="twitter:card" content="" />
+
+	<link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700" rel="stylesheet">
+	
+	<!-- Animate.css -->
+	<link rel="stylesheet" href="css/animate.css">
+	<!-- Icomoon Icon Fonts-->
+	<link rel="stylesheet" href="css/icomoon.css">
+	<!-- Bootstrap  -->
+	<link rel="stylesheet" href="css/bootstrap.css">
+	<link rel="stylesheet" href="css/bootstrapform.css">
+
+	<!-- Magnific Popup -->
+	<link rel="stylesheet" href="css/magnific-popup.css">
+
+	<!-- Flexslider  -->
+	<link rel="stylesheet" href="css/flexslider.css">
+
+	<!-- Owl Carousel -->
+	<link rel="stylesheet" href="css/owl.carousel.min.css">
+	<link rel="stylesheet" href="css/owl.theme.default.min.css">
+	
+	<!-- Date Picker -->
+	<link rel="stylesheet" href="css/bootstrap-datepicker.css">
+	<!-- Flaticons  -->
+	<link rel="stylesheet" href="fonts/flaticon/font/flaticon.css">
+
+	<!-- Theme style  -->
+	<link rel="stylesheet" href="css/style.css">
+
+	<!-- Modernizr JS -->
+	<script src="js/modernizr-2.6.2.min.js"></script>
+	<!-- FOR IE9 below -->
+	<!--[if lt IE 9]>
+	<script src="js/respond.min.js"></script>
+	<![endif]-->
+
+	</head>
+	<body>
+		
+	<div class="colorlib-loader"></div>
+
+	<div id="page">
+		<nav class="colorlib-nav" role="navigation">
+			<div class="top-menu">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-xs-2">
+							<div id="colorlib-logo"><a href="index.html">SilkAway Travel</a></div>
+						</div>
+						<div class="col-xs-10 text-right menu-1">
+							<ul>
+								<li><a th:href="@{/}">Главная</a></li>
+								<li class="has-dropdown">
+									<a th:href="@{/tourPage}">Туры</a>
+									<ul class="dropdown">
+										<li><a href="#">Destination</a></li>
+										<li><a href="#">Cruises</a></li>
+										<li><a href="#">Hotels</a></li>
+										<li><a href="#">Booking</a></li>
+									</ul>
+								</li>
+								<li  class="has-dropdown active">
+									<a th:href="@{/hotelPage}">Отель</a>
+									<ul class="dropdown">
+										<li><a href="#">Кыргызстан</a></li>
+										<li><a href="#">Казахстан</a></li>
+										<li><a href="#">Узбекистан</a></li>
+										<li><a href="#">Армения</a></li>
+										<li><a href="#">Грузия</a></li>
+										<li><a href="#">Азербайджан</a></li>
+										<li><a href="#">Таджикистан</a></li>
+									</ul>
+								</li>
+								
+								
+								<li><a href="blog.html">Транспорт</a></li>
+								<li><a href="about.html">О нас</a></li>
+								<button style="background-color: rgba(0, 0, 0, 0.1); color: white;  padding: 5px 10px;"> <span class="fas fa-user"></span>  Регистрация </button>
+								<button style="background-color: rgba(0, 0, 0, 0.1); color: white; padding: 5px 10px;"> <span class="fas fa-sign-in-alt"></span>Войти</button>
+							</ul>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</nav>
+		<aside id="colorlib-hero">
+			<div class="flexslider">
+				<ul class="slides">
+			   	<li style="background-image: url(images/cover-img-4.jpg);">
+			   		<div class="overlay"></div>
+			   		<div class="container-fluid">
+			   			<div class="row">
+				   			<div class="col-md-6 col-md-offset-3 col-sm-12 col-xs-12 slider-text">
+				   				<div class="slider-text-inner text-center">
+				   					<h2></h2>
+				   					<h1>Найти отель</h1>
+				   				</div>
+				   			</div>
+				   		</div>
+			   		</div>
+			   	</li>
+			  	</ul>
+		  	</div>
+		</aside>
+
+		<div class="colorlib-wrap">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-9">
+						<div class="row">
+							<div class="wrap-division">
+								<div class="col-md-6 col-sm-6 animate-box">
+									<div class="hotel-entry">
+										<a href="#" class="hotel-img" style="background-image: url(images/hotel-1.jpg);">
+											<p class="price"><span>$120</span><small> /Сутки</small></p>
+										</a>
+										<div class="desc">
+											<p class="star"><span><i class="icon-star-full"></i><i class="icon-star-full"></i><i class="icon-star-full"></i><i class="icon-star-full"></i><i class="icon-star-full"></i></span> 545 Reviews</p>
+											<h3><a href="hotel-room.html">Hotel Edison</a></h3>
+											<span class="place">New York, USA</span>
+											<p>A small river named Duden flows by their place and supplies it with the necessary regelialia.<a href="hotel-room.html" class="book">Узнать больше</a></p>													
+
+										</div>
+									</div>
+								</div>
+
+								<div class="col-md-6 col-sm-6 animate-box">
+									<div class="hotel-entry">
+										<a href="#detail2" class="hotel-img" style="background-image: url(images/hotel-2.jpg);">
+											<p class="price"><span>$120</span><small> /Сутки</small></p>
+										</a>
+										<div class="desc">
+											<p class="star"><span><i class="icon-star-full"></i><i class="icon-star-full"></i><i class="icon-star-full"></i><i class="icon-star-full"></i><i class="icon-star-full"></i></span> 545 Reviews</p>
+											<h3><a href="hotel-room.html">Hotel Edison</a></h3>
+											<span class="place">New York, USA</span>
+											<p>A small river named Duden flows by their place and supplies it with the necessary regelialia.<a href="hotel-room.html" class="book">Узнать больше</a></p>
+										</div>
+									</div>
+								</div>
+
+								<div class="col-md-6 col-sm-6 animate-box">
+									<div class="hotel-entry">
+										<a href="hotel-room.html" class="hotel-img" style="background-image: url(images/hotel-3.jpg);">
+											<p class="price"><span>$120</span><small> /Сутки</small></p>
+										</a>
+										<div class="desc">
+											<p class="star"><span><i class="icon-star-full"></i><i class="icon-star-full"></i><i class="icon-star-full"></i><i class="icon-star-full"></i><i class="icon-star-full"></i></span> 545 Reviews</p>
+											<h3><a href="hotel-room.html">Hotel Edison</a></h3>
+											<span class="place">New York, USA</span>
+											<p>A small river named Duden flows by their place and supplies it with the necessary regelialia.<a href="hotel-room.html" class="book">Узнать больше</a></p>
+										</div>
+									</div>
+								</div>
+
+								<div class="col-md-6 col-sm-6 animate-box">
+									<div class="hotel-entry">
+										<a href="hotel-room.html" class="hotel-img" style="background-image: url(images/hotel-4.jpg);">
+											<p class="price"><span>$120</span><small> /Сутки</small></p>
+										</a>
+										<div class="desc">
+											<p class="star"><span><i class="icon-star-full"></i><i class="icon-star-full"></i><i class="icon-star-full"></i><i class="icon-star-full"></i><i class="icon-star-full"></i></span> 545 Reviews</p>
+											<h3><a href="hotel-room.html">Hotel Edison</a></h3>
+											<span class="place">New York, USA</span>
+											<p>A small river named Duden flows by their place and supplies it with the necessary regelialia.<a href="hotel-room.html" class="book">Узнать больше</a></p>
+										</div>
+									</div>
+								</div>
+
+								<div class="col-md-6 col-sm-6 animate-box">
+									<div class="hotel-entry">
+										<a href="hotel-room.html" class="hotel-img" style="background-image: url(images/hotel-5.jpg);">
+											<p class="price"><span>$120</span><small> /Сутки</small></p>
+										</a>
+										<div class="desc">
+											<p class="star"><span><i class="icon-star-full"></i><i class="icon-star-full"></i><i class="icon-star-full"></i><i class="icon-star-full"></i><i class="icon-star-full"></i></span> 545 Reviews</p>
+											<h3><a href="hotel-room.html">Hotel Edison</a></h3>
+											<span class="place">New York, USA</span>
+											<p>A small river named Duden flows by their place and supplies it with the necessary regelialia.<a href="hotel-room.html" class="book">Узнать больше</a></p>
+										</div>
+									</div>
+								</div>
+
+								<div class="col-md-6 col-sm-6 animate-box">
+									<div class="hotel-entry">
+										<a href="hotel-room.html" class="hotel-img" style="background-image: url(images/hotel-6.jpg);">
+											<p class="price"><span>$120</span><small> /Сутки</small></p>
+										</a>
+										<div class="desc">
+											<p class="star"><span><i class="icon-star-full"></i><i class="icon-star-full"></i><i class="icon-star-full"></i><i class="icon-star-full"></i><i class="icon-star-full"></i></span> 545 Reviews</p>
+											<h3><a href="hotel-room.html">Hotel Edison</a></h3>
+											<span class="place">New York, USA</span>
+											<p>A small river named Duden flows by their place and supplies it with the necessary regelialia.<a href="hotel-room.html" class="book">Узнать больше</a></p>
+										</div>
+									</div>
+								</div>
+
+								<div class="col-md-6 col-sm-6 animate-box">
+									<div class="hotel-entry">
+										<a href="hotel-room.html" class="hotel-img" style="background-image: url(images/hotel-7.jpg);">
+											<p class="price"><span>$120</span><small> /Сутки</small></p>
+										</a>
+										<div class="desc">
+											<p class="star"><span><i class="icon-star-full"></i><i class="icon-star-full"></i><i class="icon-star-full"></i><i class="icon-star-full"></i><i class="icon-star-full"></i></span> 545 Reviews</p>
+											<h3><a href="hotel-room.html">Hotel Edison</a></h3>
+											<span class="place">New York, USA</span>
+											<p>A small river named Duden flows by their place and supplies it with the necessary regelialia.<a href="hotel-room.html" class="book">Узнать больше</a></p>
+										</div>
+									</div>
+								</div>
+
+								<div class="col-md-6 col-sm-6 animate-box">
+									<div class="hotel-entry">
+										<a href="hotel-room.html" class="hotel-img" style="background-image: url(images/hotel-8.jpg);">
+											<p class="price"><span>$120</span><small> /Сутки</small></p>
+										</a>
+										<div class="desc">
+											<p class="star"><span><i class="icon-star-full"></i><i class="icon-star-full"></i><i class="icon-star-full"></i><i class="icon-star-full"></i><i class="icon-star-full"></i></span> 545 Reviews</p>
+											<h3><a href="hotel-room.html">Hotel Edison</a></h3>
+											<span class="place">New York, USA</span>
+											<p>A small river named Duden flows by their place and supplies it with the necessary regelialia.<a href="hotel-room.html" class="book">Узнать больше</a> </p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<--<div class="row">
+							<div class="col-md-12 text-center">
+								<ul class="pagination">
+									<li class="disabled"><a href="#">&laquo;</a></li>
+									<li class="active"><a href="#">1</a></li>
+									<li><a href="#">2</a></li>
+									<li><a href="#">3</a></li>
+									<li><a href="#">4</a></li>
+									<li><a href="#">&raquo;</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+
+					<!-- SIDEBAR-->
+					<div class="col-md-3">
+
+				                <div class="col-md-12" style="  display: inline-block; width: 110%; height: 30px; margin-left: -14px !important;">
+				              <!-- Modal -->
+<div class="modal fade" id="darkModalForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog form-dark" role="document">
+    <!--Content-->
+    <div class="modal-content card card-image" style="background-image:url(iages/hotell.jpg);">
+      <div class="text-white rgba-stylish-strong py-5 px-5 z-depth-4">
+        <!--Header-->
+        <div class="modal-header text-center pb-4">
+          <h3 class="modal-title w-100 white-text font-weight-bold" id="myModalLabel"><strong>ДОБАВИТЬ</strong> <a
+              class="green-text font-weight-bold"><strong> ОТЕЛЬ</strong></a></h3>
+          <button type="button" class="close white-text" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <!--Body-->
+        <div class="modal-body">
+          <!--Body-->
+          <div class="col-md-4">
+				              	 	<div class="form-group">
+				                    <label for="date">Место:</label>
+				                    <div class="form-field">
+				                      <input type="text" id="location" class="form-control" placeholder="поиск">
+				                    </div>
+				                  </div>
+				              	 </div>
+           <div class="md-form mb-5">
+            <input type="email" id="Form-email5" class="form-control validate white-text">
+            <label data-error="wrong" data-success="right" for="Form-email5">Название</label>
+          </div>
+
+          <div class="md-form pb-3">
+            <input type="password" id="Form-pass5" class="form-control validate white-text">
+            <label data-error="wrong" data-success="right" for="Form-pass5">Местоположение</label>
+            <div class="form-group mt-4">
+              <input class="form-check-input" type="checkbox" id="checkbox624">
+              <label for="checkbox624" class="white-text form-check-label">Accept the<a href="#" class="green-text font-weight-bold">
+                  Terms and Conditions</a></label>
+            </div>
+          </div>
+
+          <!--Grid row-->
+          <div class="row d-flex align-items-center mb-4">
+
+            <!--Grid column-->
+            <div class="text-center mb-3 col-md-12">
+              <button type="button" class="btn btn-success btn-block btn-rounded z-depth-1">Добавить</button>
+            </div>
+            <!--Grid column-->
+
+          </div>
+          <!--Grid row-->
+
+          <!--Grid row-->
+          <div class="row">
+
+            <!--Grid column-->
+            <div class="col-md-12">
+              <p class="font-small white-text d-flex justify-content-end">Have an account? <a href="#" class="green-text ml-1 font-weight-bold">
+                  Log in</a></p>
+            </div>
+            <!--Grid column-->
+
+          </div>
+          <!--Grid row-->
+
+        </div>
+      </div>
+    </div>
+    <!--/.Content-->
+  </div>
+</div>
+<!-- Modal -->
+
+<div class="text-centers">
+  <a href="" class="btn btn-default btn-rounded" data-toggle="modal" data-target="#darkModalForm">Добавить отель</a>
+</div>
+				                 
+				                </div>
+				                
+
+				      		<div class="sidebar-wrap">
+							<div class="side search-wrap animate-box">
+								<h3 class="sidebar-heading">Поиск отеля</h3>
+								<form method="post" class="colorlib-form">
+				              	<div class="row">
+				                 <div class="col-md-12">
+				                  <div class="form-group">
+				                    <label for="guests">Страна</label>
+				                    <div class="form-field">
+				                      <i class="icon icon-arrow-down3"></i>
+				                      <select name="people"  class="form-control">
+				                        <option value="#">Кыргызстан</option>
+				                        <option value="#">Казахстан</option>
+				                        <option value="#">Узбекистан</option>
+				                        <option value="#">Таджикистан</option>
+				                        <option value="#">Армения</option>
+				                      </select>
+				                    </div>
+				                  </div>
+				                </div>
+				               <div class="col-md-12">
+				                  <div class="form-group">
+				                    <label for="guests">Категория</label>
+				                    <div class="form-field">
+				                      <i class="icon icon-arrow-down3"></i>
+				                      <select name="people"  class="form-control">
+				                        <option value="#">Жконом</option>
+				                        <option value="#">Казахстан</option>
+				                        <option value="#">Узбекистан</option>
+				                        <option value="#">Таджикистан</option>
+				                        <option value="#">Армения</option>
+				                      </select>
+				                    </div>
+				                  </div>
+				                </div>
+				                <div class="col-md-12">
+				                  <div class="form-group">
+				                    <label for="guests">Guest</label>
+				                    <div class="form-field">
+				                      <i class="icon icon-arrow-down3"></i>
+				                      <select name="people"  class="form-control">
+				                        <option value="#">1</option>
+				                        <option value="#">2</option>
+				                        <option value="#">3</option>
+				                        <option value="#">4</option>
+				                        <option value="#">5+</option>
+				                      </select>
+				                    </div>
+				                  </div>
+				                </div>
+				                <div class="side animate-box">
+								<div class="row">
+									<div class="col-md-12">	
+									<h3 class="sidebar-heading2">Цена:</h3>							
+										<form method="post" class="colorlib-form-2">
+						              	<div class="row" style="margin-left: -20% !important;">
+						                <div class="col-md-6">
+						                  <div class="form-group">
+						                    <label for="guests">От:</label>
+						                    <div class="form-field">
+						                      <i class="icon icon-arrow-down3"></i>
+						                      <select name="people"  class="form-control">
+						                        <option value="#">1</option>
+						                        <option value="#">200</option>
+						                        <option value="#">300</option>
+						                        <option value="#">400</option>
+						                        <option value="#">1000</option>
+						                      </select>
+						                    </div>
+						                  </div>
+						                </div>
+						                <div class="col-md-6">
+						                  <div class="form-group">
+						                    <label for="guests">До:</label>
+						                    <div class="form-field">
+						                      <i class="icon icon-arrow-down3"></i>
+						                      <select name="people"  class="form-control">
+						                        <option value="#">2000</option>
+						                        <option value="#">4000</option>
+						                        <option value="#">6000</option>
+						                        <option value="#">8000</option>
+						                        <option value="#">10000</option>
+						                      </select>
+						                    </div>
+						                  </div>
+						                </div>
+						              </div>
+						            </form>
+					            </div>
+								</div>
+							</div>
+				                <div class="col-md-12" style=" margin-top: -20%;">
+				                  <input type="submit" name="submit" id="submit" value="Поиск" class="btn btn-primary btn-block">
+				                </div>
+				              </div>
+				            </form>
+
+							</div>
+						</div>
+
+					</div>
+							
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	
+		
+
+	
+	</div>
+
+	<div class="gototop js-top">
+		<a href="#" class="js-gotop"><i class="icon-arrow-up2"></i></a>
+	</div>
+
+	<!-- jQuery -->
+	<script src="js/jquery.min.js"></script>
+	<!-- jQuery Easing -->
+	<script src="js/jquery.easing.1.3.js"></script>
+	<!-- Bootstrap -->
+	<script src="js/bootstrap.min.js"></script>
+	<!-- Waypoints -->
+	<script src="js/jquery.waypoints.min.js"></script>
+	<!-- Flexslider -->
+	<script src="js/jquery.flexslider-min.js"></script>
+	<!-- Owl carousel -->
+	<script src="js/owl.carousel.min.js"></script>
+	<!-- Magnific Popup -->
+	<script src="js/jquery.magnific-popup.min.js"></script>
+	<script src="js/magnific-popup-options.js"></script>
+	<!-- Date Picker -->
+	<script src="js/bootstrap-datepicker.js"></script>
+	<!-- Stellar Parallax -->
+	<script src="js/jquery.stellar.min.js"></script>
+
+	<!-- Main -->
+	<script src="js/main.js"></script>
+
+	</body>
+</html>
+

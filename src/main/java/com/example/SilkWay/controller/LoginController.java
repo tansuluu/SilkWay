@@ -32,7 +32,7 @@ public class LoginController {
 
     @RequestMapping(value={"/"}, method = RequestMethod.GET)
     public String homePage(){
-        return "loginPage";
+        return "index";
     }
 
 
@@ -71,7 +71,7 @@ public class LoginController {
             System.out.println(role.getRole());
             if(role.getRole().equals("USER")){
                 //System.out.println("geldi");
-                modelAndView.setViewName("home");
+                modelAndView.setViewName("index");
                 return modelAndView;
             }
         }
@@ -287,7 +287,18 @@ public class LoginController {
         return "users";
     }
 
-
-
-
+    @RequestMapping("/userPage")
+    public String showUsers(Model model, @RequestParam("username") String username){
+        User user=userService.findUserByEmail(username);
+        model.addAttribute("user", user);
+        return "home";
+    }
+    @RequestMapping("/tourPage")
+    public String showUsers(Model model){
+        return "tour-place";
+    }
+    @RequestMapping("/hotelPage")
+    public String hotel(Model model){
+        return "hotelsPage";
+    }
 }
