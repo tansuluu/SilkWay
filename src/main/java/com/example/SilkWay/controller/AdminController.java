@@ -29,6 +29,7 @@ public class AdminController {
     @RequestMapping("/adminPage")
     public String adminPage(Model model){
         model.addAttribute("users",userService.getAllUser());
+        model.addAttribute("user", new User());
         return "adminIndex";
     }
 

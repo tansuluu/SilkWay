@@ -66,9 +66,7 @@ public class RegistrationController {
 
     @PreAuthorize("hasRole('SUPER_ADMIN, ADMIN')")
     @RequestMapping(value = "/regCompany", method = RequestMethod.POST)
-    public ModelAndView createNewCompany(@Valid User user,
-                                         BindingResult bindingResult) {
-        ModelAndView modelAndView = new ModelAndView();
+    public String createNewCompany(@Valid User user, BindingResult bindingResult,Model model) {
         User userExists = userService.findUserByEmail(user.getEmail());
         if (userExists != null) {
             bindingResult
@@ -76,15 +74,13 @@ public class RegistrationController {
                             "*There is already a company registered with the email provided");
         }
         if (bindingResult.hasErrors()) {
-            modelAndView.setViewName("regCompany");
+            model.addAttribute("errorCompany", 1);
+            return "adminIndex";
         } else {
             user.setStatus("company");
-            userService.saveUser(user, "COMPANY");
-            modelAndView.addObject("user", new User());
-            modelAndView.setViewName("login");
-
+            userService.saveAdmin(user, "COMPANY");
+            return "redirect:/adminPage";
         }
-        return modelAndView;
     }
 
     @PreAuthorize("hasRole('SUPER_ADMIN')")
@@ -98,8 +94,7 @@ public class RegistrationController {
     }
     @PreAuthorize("hasRole('SUPER_ADMIN')")
     @RequestMapping(value = "/regAdmin", method = RequestMethod.POST)
-    public ModelAndView saveNewAdmin(@Valid User user, BindingResult bindingResult) {
-        ModelAndView modelAndView = new ModelAndView();
+    public String saveNewAdmin(@Valid User user, BindingResult bindingResult, Model model) {
         User userExists = userService.findUserByEmail(user.getEmail());
         if (userExists != null) {
             bindingResult
@@ -107,15 +102,14 @@ public class RegistrationController {
                             "*There is already a user registered with the email provided");
         }
         if (bindingResult.hasErrors()) {
-            modelAndView.setViewName("regAdmin");
+            model.addAttribute("error", 1);
+            return "adminIndex";
+
         } else {
             user.setStatus("admin");
             userService.saveAdmin(user, "ADMIN");
-            modelAndView.addObject("user", new User());
-            modelAndView.setViewName("superAdmin");
-
+            return "redirect:/adminPage";
         }
-        return modelAndView;
     }
 
     @RequestMapping("/confirm")

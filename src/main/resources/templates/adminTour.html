@@ -101,11 +101,15 @@
                         </li>
                         <li>
                             <a th:href="@{/adminPage}">
+                                <i class="fas fa-building"></i>Компании</a>
+                        </li>
+                        <li>
+                            <a th:href="@{/adminPage}">
                             <i class="fas fa-plane"></i>Туры</a>
                         </li>
                         <li>
                             <a th:href="@{/adminPage}">
-                            <i class="far fa-hotel"></i>Отели</a>
+                                <i class="fas fa-plane"></i>Отели</a>
                         </li>
                     </ul>
                 </nav>
@@ -122,9 +126,12 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="overview-wrap">
-                                    <h2 class="title-1">overview</h2>
-                                    <button class="au-btn au-btn-icon au-btn--blue">
-                                        <i class="zmdi zmdi-plus"></i>add item</button>
+                                    <button type="button" class="au-btn au-btn-icon au-btn--blue" data-toggle="modal" data-target="#basicExampleModal" style="line-height: 30px; font-size: 12px">
+                                        <i class="zmdi zmdi-plus"></i> Добавить админа
+                                    </button>
+                                    <button type="button" class="au-btn au-btn-icon au-btn--blue" data-toggle="modal" data-target="#company" style="line-height: 30px; font-size: 12px">
+                                        <i class="zmdi zmdi-plus"></i> Добавить компанию
+                                    </button>
                                 </div>
                                 <div class="table-responsive table--no-card m-b-30">
 
@@ -161,8 +168,105 @@
         </div>
 
     </div>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="basicExampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Новый админ</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form class="login100-form validate-form" th:action="@{/regAdmin}" method="post" th:object="${user}" enctype="multipart/form-data">
+                        <input th:value="${error}" id="error" hidden="hidden">
+                        <div class="form-group">
+                            <label class="control-label mb-1">Имя</label>
+                            <input  type="text" class="form-control" required="required" th:field="*{firstName}">
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label mb-1">Фамилия</label>
+                            <input  type="text" class="form-control" required="required" th:field="*{lastName}">
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label mb-1">Контакты</label>
+                            <input  type="text" class="form-control" required="required" th:field="*{contacts}">
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label mb-1">Почта</label>
+                            <label th:if="${#fields.hasErrors('email')}" th:errors="*{email}"   class="validation-message"></label>
+                            <input  type="email" class="form-control" required="required" th:field="*{email}">
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label mb-1">Пароль</label>
+                            <label th:if="${#fields.hasErrors('password')}" th:errors="*{password}"   class="validation-message"></label>
+                            <input  type="password" class="form-control" required="required" th:field="*{password}">
+                        </div>
+
+                    <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                            <button type="submit" class="btn btn-primary">Сохранить</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="company" tabindex="-1" role="dialog" aria-labelledby="exampleModal"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModal">Новая компания</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form class="login100-form validate-form" th:action="@{/regCompany}" method="post" th:object="${user}" enctype="multipart/form-data">
+                        <input th:value="${errorCompany}" id="errorCompany" hidden="hidden">
+                        <div class="form-group">
+                            <label class="control-label mb-1">Название</label>
+                            <input  type="text" class="form-control" required="required" th:field="*{title}">
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label mb-1">Бренд</label>
+                            <input  type="text" class="form-control" required="required" th:field="*{brand}">
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label mb-1">Почта</label>
+                            <label th:if="${#fields.hasErrors('email')}" th:errors="*{email}"   class="validation-message"></label>
+                            <input  type="email" class="form-control" required="required" th:field="*{email}">
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label mb-1">Пароль</label>
+                            <label th:if="${#fields.hasErrors('password')}" th:errors="*{password}"   class="validation-message"></label>
+                            <input  type="password" class="form-control" required="required" th:field="*{password}">
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                            <button type="submit" class="btn btn-primary">Сохранить</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
     <script>
         $(document).ready(function () {
+            if($("#error").val()==1){
+                $('#basicExampleModal').modal('show');
+            }
+            if($("#errorCompany").val()==1){
+                $('#company').modal('show');
+            }
             $("#example").DataTable({
                 "scrollX":"500px",
                 "scrollCollapse": true,
@@ -176,26 +280,27 @@
     <script src="folderforadmin/vendor/jquery-3.2.1.min.js"></script>
     <!--&lt;!&ndash; Bootstrap JS&ndash;&gt;-->
     <script src="folderforadmin/vendor/bootstrap-4.1/popper.min.js"></script>
-    <script src="folderforadmin/vendor/bootstrap-4.1/bootstrap.min.js"></script>
     <!--&lt;!&ndash; Vendor JS       &ndash;&gt;-->
     <script src="folderforadmin/vendor/slick/slick.min.js">
     </script>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+
     <!--<script src="folderforadmin/vendor/wow/wow.min.js"></script>-->
     <script src="folderforadmin/vendor/animsition/animsition.min.js"></script>
     <script src="folderforadmin/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js">
     </script>
-    <!--<script src="folderforadmin/vendor/counter-up/jquery.waypoints.min.js"></script>-->
-    <!--<script src="folderforadmin/vendor/counter-up/jquery.counterup.min.js">-->
-    <!--</script>-->
-    <!--<script src="folderforadmin/vendor/circle-progress/circle-progress.min.js"></script>-->
-    <!--<script src="folderforadmin/vendor/perfect-scrollbar/perfect-scrollbar.js"></script>-->
-    <!--<script src="folderforadmin/vendor/chartjs/Chart.bundle.min.js"></script>-->
-    <!--<script src="folderforadmin/vendor/select2/select2.min.js">-->
-    <!--</script>-->
+    <script src="folderforadmin/vendor/counter-up/jquery.waypoints.min.js"></script>
+    <script src="folderforadmin/vendor/counter-up/jquery.counterup.min.js">
+    </script>
+    <script src="folderforadmin/vendor/circle-progress/circle-progress.min.js"></script>
+    <script src="folderforadmin/vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script src="folderforadmin/vendor/chartjs/Chart.bundle.min.js"></script>
+    <script src="folderforadmin/vendor/select2/select2.min.js">
+    </script>
 
     <!--&lt;!&ndash; Main JS&ndash;&gt;-->
     <script src="folderforadmin/js/main.js"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="folderforadmin/vendor/bootstrap-4.1/bootstrap.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 
 </body>
