@@ -5,6 +5,9 @@ import com.example.SilkWay.model.User;
 import com.example.SilkWay.repository.TourRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -40,8 +43,11 @@ public class TourService {
         return tourRepository.findById(id);
     }
 
-    public List<Tour> getAllTours() {
-        return tourRepository.findAll();
+    public List<Tour> getAllTours(int page, int limit) {
+
+        Pageable pageableRequest = PageRequest.of(page, limit);
+        Page<Tour> allTours = tourRepository.findAll(pageableRequest);
+        return allTours.getContent();
     }
 
     public void deleteTour(Tour tour) {
@@ -59,7 +65,7 @@ public class TourService {
         return tourRepository.save(newTour);
     }
 
-    public List<Tour> filterTour(String country, long priceMin, long priceMax, Date dateFrom, Date dateTo) {
+    public List<Tour> filterTour(String country, long priceMin, long priceMax, Date dateFrom, Date dateTo, int page, int limit) {
         List<Tour> searchArray;
         List<Tour> finalSearch = new ArrayList<>();
         List<Tour> finalLastSearch = new ArrayList<>();
@@ -85,7 +91,7 @@ public class TourService {
             finalLastSearch = searchArray;
         }
         else if (country.isEmpty() & (priceMax != 0L & priceMin!=0L)) {
-            searchArray = getAllTours();
+            searchArray = getAllTours(page, limit);
             for (Tour tour : searchArray) {
                 if (tour.getPrice() < priceMax & tour.getPrice()>priceMin) {
                     finalLastSearch.add(tour);
@@ -93,7 +99,7 @@ public class TourService {
             }
         }
         else if (country.isEmpty() & (priceMax != 0L & priceMin==0L)) {
-            searchArray = getAllTours();
+            searchArray = getAllTours(page, limit);
             for (Tour tour : searchArray) {
                 if (tour.getPrice() < priceMax) {
                     finalLastSearch.add(tour);
@@ -101,7 +107,7 @@ public class TourService {
             }
         }
         else if (country.isEmpty() & (priceMax == 0L & priceMin!=0L)) {
-            searchArray = getAllTours();
+            searchArray = getAllTours(page, limit);
             for (Tour tour : searchArray) {
                 if (tour.getPrice()>priceMin) {
                     finalLastSearch.add(tour);
@@ -109,7 +115,7 @@ public class TourService {
             }
         }
         else {
-            finalLastSearch = getAllTours();
+            finalLastSearch = getAllTours(page, limit);
         }
 
         if (dateFrom != null & dateTo != null) {

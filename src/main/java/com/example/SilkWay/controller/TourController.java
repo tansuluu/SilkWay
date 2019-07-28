@@ -60,8 +60,6 @@ public class TourController {
                                     @RequestParam(name = "dateFrom") @DateTimeFormat(pattern="yyyy-MM-dd") Date dateFrom,
                                     @RequestParam(name = "dateTo") @DateTimeFormat(pattern="yyyy-MM-dd") Date dateTo,
                                     HttpServletRequest request) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        User user = userService.findUserByEmail(auth.getName());
         try {
             storageService.store(file);
             model.addAttribute("message", "You successfully uploaded " + file.getOriginalFilename() + "!");
@@ -92,14 +90,16 @@ public class TourController {
     }
 
     @RequestMapping("/findTours")
-    public String find(Model model){
-        List<Tour> list=tourService.getAllTours();
+    public String find(Model model,
+                       @RequestParam(value = "page", defaultValue = "0") int page,
+                       @RequestParam(value = "limit", defaultValue = "15") int limit){
+        List<Tour> list=tourService.getAllTours(page, limit);
         model.addAttribute("tours", list);
         return "allTours";
     }
 
     @RequestMapping("/tourInfo/{id}")
-    public String showApplications(Model model, @PathVariable("id")long id, Principal principal){
+    public String showApplications(Model model, @PathVariable("id")long id){
         Tour popular=tourService.getTourById(id);
         model.addAttribute("tour", popular);
         return "tours";
@@ -125,14 +125,16 @@ public class TourController {
         return "myTours";
     }
 
-    @RequestMapping(value = "/filterTour", method = RequestMethod.POST)
-    public String filterTour(@RequestParam(name = "country") String country,
+    @RequestMapping(value = "/filterTour", method = RequestMethod.GET)
+    public String filterTour(@RequestParam(value = "page", defaultValue = "0") int page,
+                             @RequestParam(value = "limit", defaultValue = "15") int limit,
+                             @RequestParam(name = "country") String country,
                              @RequestParam(name = "priceMin") long priceMin,
                              @RequestParam(name = "priceMax") long priceMax,
                              @RequestParam(name = "dateFrom") @DateTimeFormat(pattern="yyyy-MM-dd") Date dateFrom,
                              @RequestParam(name = "dateTo") @DateTimeFormat(pattern="yyyy-MM-dd") Date dateTo,
                              Model model){
-        List<Tour> list = tourService.filterTour(country, priceMin, priceMax, dateFrom, dateTo);
+        List<Tour> list = tourService.filterTour(country, priceMin, priceMax, dateFrom, dateTo, page, limit);
         model.addAttribute("tours", list);
         return "filterTours";
     }

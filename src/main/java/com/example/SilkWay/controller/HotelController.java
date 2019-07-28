@@ -28,14 +28,12 @@ public class HotelController {
     private StorageService storageService;
 
     private HotelService hotelService;
-
-    private UserService userService;
     
     @Autowired
-    public HotelController(StorageService storageService, HotelService hotelService, UserService userService) {
+    public HotelController(StorageService storageService,
+                           HotelService hotelService) {
         this.storageService = storageService;
         this.hotelService = hotelService;
-        this.userService = userService;
     }
 
     @PreAuthorize("hasRole('SUPER_ADMIN, ADMIN')")
@@ -47,21 +45,21 @@ public class HotelController {
 
     @PreAuthorize("hasRole('SUPER_ADMIN, ADMIN')")
     @RequestMapping(value="/regHotel", method = RequestMethod.POST)
-    public RedirectView saveNewHotel(@RequestParam("file") MultipartFile file, Model model, Hotel hotel, HttpServletRequest request) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        User user = userService.findUserByEmail(auth.getName());
+    public RedirectView saveNewHotel(@RequestParam("file") MultipartFile file,
+                                     Model model, Hotel hotel,
+                                     HttpServletRequest request) {
         try {
             storageService.store(file);
-            model.addAttribute("message", "You successfully uploaded " + file.getOriginalFilename() + "!");
+            model.addAttribute("message", "You successfully uploaded " +
+                    file.getOriginalFilename() + "!");
             hotel.setImg_name(file.getOriginalFilename());
 
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            model.addAttribute("message", "FAIL to upload " + file.getOriginalFilename() + "!");
+            model.addAttribute("message", "FAIL to upload " +
+                    file.getOriginalFilename() + "!");
         }
-
-        //hotel.setImg_name(file.getOriginalFilename());
         hotelService.saveHotel(hotel);
         return new RedirectView(request.getHeader("referer"));
     }
@@ -82,14 +80,16 @@ public class HotelController {
     }
 
     @RequestMapping("/findHotels")
-    public String findHotel(Model model){
-        List<Hotel> list=hotelService.getAllHotels();
+    public String findHotel(Model model,
+                            @RequestParam(value = "page", defaultValue = "0") int page,
+                            @RequestParam(value = "limit", defaultValue = "15") int limit){
+        List<Hotel> list=hotelService.getAllHotels(page, limit);
         model.addAttribute("hotels", list);
         return "allHotels";
     }
 
     @RequestMapping("/hotelInfo/{id}")
-    public String showHotel(Model model, @PathVariable("id")long id, Principal principal){
+    public String showHotel(Model model, @PathVariable("id")long id){
         Hotel popular=hotelService.getHotelById(id);
         model.addAttribute("hotel", popular);
         return "hotels";
@@ -107,12 +107,14 @@ public class HotelController {
         return new Hotel();
     }
 
-    @RequestMapping(value = "/filterHotel", method = RequestMethod.POST)
+    @RequestMapping(value = "/filterHotel", method = RequestMethod.GET)
     public String filterTour(@RequestParam(name = "title") String title,
                              @RequestParam(name = "category") String category,
                              @RequestParam(name = "stars") long stars,
+                             @RequestParam(value = "page", defaultValue = "0") int page,
+                             @RequestParam(value = "limit", defaultValue = "15") int limit,
                              Model model){
-        List<Hotel> hotels = hotelService.filterHotels(title, category, stars);
+        List<Hotel> hotels = hotelService.filterHotels(title, category, stars, page, limit);
         model.addAttribute("hotels", hotels);
         return "filterHotels";
     }
