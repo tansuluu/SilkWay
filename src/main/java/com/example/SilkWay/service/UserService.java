@@ -56,6 +56,14 @@ public class UserService {
         return userRepository.save(user);
     }
 
+    public User saveAdmin(User user,String role) {
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        user.setActive(1);
+        Role userRole = roleRepository.findByRole(role);
+        user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
+        return userRepository.save(user);
+    }
+
     public void sendTokenToConfirm(User user, HttpServletRequest request){
         user.setToken(UUID.randomUUID().toString());
 
