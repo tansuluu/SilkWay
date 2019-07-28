@@ -85,26 +85,14 @@ public class UserService {
 
     public ArrayList<User> getAllUser()
     {
-        ArrayList<User> userList = (ArrayList<User>) userRepository.findAll();
-        ArrayList<User> newList = new ArrayList<>();
-        for (int i=0; i<userList.size(); i++) {
-            if(userList.get(i).getFirstName() != null){
-                newList.add(userList.get(i));
-            }
-        }
-        return newList;
+        ArrayList<User> users = (ArrayList<User>) userRepository.getAllByStatus("user");
+        users.addAll(userRepository.getAllByStatus("admin"));
+        return users;
     }
 
     public ArrayList<User> getAllCompany()
     {
-        ArrayList<User> userList = (ArrayList<User>) userRepository.findAll();
-        ArrayList<User> newList = new ArrayList<>();
-        for (int i=0; i<userList.size(); i++) {
-            if(userList.get(i).getBrand() != null){
-                newList.add(userList.get(i));
-            }
-        }
-        return newList;
+        return (ArrayList<User>) userRepository.getAllByStatus("company");
     }
 
     public User findByToken(String token){
