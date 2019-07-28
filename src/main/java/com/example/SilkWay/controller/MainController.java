@@ -30,9 +30,4 @@ public class MainController {
     public String aboutUs(Model model){
         return "about";
     }
-    @RequestMapping("/adminPage")
-    public String adminPage(Model model){
-        model.addAttribute("users",userService.getAll());
-        return "adminPage";
-    }
 }

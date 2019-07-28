@@ -123,25 +123,6 @@ public class LoginController {
         return modelAndView;
     }
 
-    @PreAuthorize("hasRole('SUPER_ADMIN')")
-    @RequestMapping(value="/superAdmin", method = RequestMethod.GET)
-    public ModelAndView superAdmin(){
-        ModelAndView modelAndView = new ModelAndView();
-
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        User user = userService.findUserByEmail(auth.getName());
-        System.out.println(user.getRoles());
-        for (Role role:user.getRoles()) {
-            System.out.println(role.getRole());
-            if(role.getRole().equals("SUPER_ADMIN")){
-                //System.out.println("geldi");
-                modelAndView.setViewName("superAdmin");
-                return modelAndView;
-            }
-        }
-        modelAndView.setViewName("superAdmin");
-        return modelAndView;
-    }
 
     @RequestMapping(value="/regUser", method = RequestMethod.GET)
     public ModelAndView registrationUser(){
