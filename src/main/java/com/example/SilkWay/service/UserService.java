@@ -4,6 +4,7 @@ import com.example.SilkWay.model.Role;
 import com.example.SilkWay.model.User;
 import com.example.SilkWay.repository.RoleRepository;
 import com.example.SilkWay.repository.UserRepository;
+import jdk.internal.dynalink.linker.LinkerServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.mail.SimpleMailMessage;
@@ -11,10 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.UUID;
+import java.util.*;
 
 
 @Service("userService")
@@ -83,9 +81,28 @@ public class UserService {
         emailService.sendEmail(registrationEmail);
     }
 
-    public ArrayList<User> getAll()
+    public ArrayList<User> getAllUser()
     {
-        return (ArrayList) userRepository.findAll();
+        ArrayList<User> userList = (ArrayList<User>) userRepository.findAll();
+        ArrayList<User> newList = new ArrayList<>();
+        for (int i=0; i<userList.size(); i++) {
+            if(userList.get(i).getFirstName() != null){
+                newList.add(userList.get(i));
+            }
+        }
+        return newList;
+    }
+
+    public ArrayList<User> getAllCompany()
+    {
+        ArrayList<User> userList = (ArrayList<User>) userRepository.findAll();
+        ArrayList<User> newList = new ArrayList<>();
+        for (int i=0; i<userList.size(); i++) {
+            if(userList.get(i).getBrand() != null){
+                newList.add(userList.get(i));
+            }
+        }
+        return newList;
     }
 
     public User findByToken(String token){
@@ -101,6 +118,13 @@ public class UserService {
         user1.setFirstName(user.getFirstName());
         user1.setLastName(user.getLastName());
         user1.setContacts(user.getContacts());
+        save(user1);
+    }
+
+    public void updateCompany(User user){
+        User user1=findUserById(user.getId());
+        user1.setTitle(user.getTitle());
+        user1.setBrand(user.getBrand());
         save(user1);
     }
 

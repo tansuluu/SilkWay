@@ -66,7 +66,8 @@ public class RegistrationController {
 
     @PreAuthorize("hasRole('SUPER_ADMIN, ADMIN')")
     @RequestMapping(value = "/regCompany", method = RequestMethod.POST)
-    public ModelAndView createNewCompany(@Valid User user, BindingResult bindingResult, HttpServletRequest request) {
+    public ModelAndView createNewCompany(@Valid User user,
+                                         BindingResult bindingResult) {
         ModelAndView modelAndView = new ModelAndView();
         User userExists = userService.findUserByEmail(user.getEmail());
         if (userExists != null) {

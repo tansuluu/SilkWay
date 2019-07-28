@@ -19,16 +19,16 @@ public class AdminController {
     @Autowired
     private UserService userService;
 
-//    @RequestMapping("/allUsers")
-//    @PreAuthorize("hasRole('SUPER_ADMIN')")
-//    public String admin(Model model){
-//        model.addAttribute("users",userService.getAll());
-//        return "allUsers";
-//    }
+    @RequestMapping("/allCompanies")
+    @PreAuthorize("hasRole('SUPER_ADMIN')")
+    public String admin(Model model){
+        model.addAttribute("companies",userService.getAllCompany());
+        return "allCompanies";
+    }
 
     @RequestMapping("/adminPage")
     public String adminPage(Model model){
-        model.addAttribute("users",userService.getAll());
+        model.addAttribute("users",userService.getAllUser());
         return "adminIndex";
     }
 

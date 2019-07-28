@@ -32,7 +32,7 @@ public class UserController {
     }
 
     @RequestMapping("/updateUser/{id}")
-    public String update(Model model, @PathVariable("id")int id){
+    public String updateUser(Model model, @PathVariable("id")int id){
         model.addAttribute("user", userService.getUserById(id));
         return "updateUser";
     }
@@ -48,6 +48,36 @@ public class UserController {
         User user=userService.getUserById(id);
         model.addAttribute("user", user);
         return "users";
+    }
+
+    @PreAuthorize("hasRole('SUPER_ADMIN')")
+    @RequestMapping("/deleteCompany/{id}")
+    public String deleteCompany(@PathVariable("id")int id){
+        User user=userService.findUserById(id);
+        if(user.getStatus().equals("admin")){
+            return "redirect:/admin";
+        }
+        userService.deleteUser(user);
+        return "redirect:/logout";
+    }
+
+    @RequestMapping("/updateCompany/{id}")
+    public String updateCompany(Model model, @PathVariable("id")int id){
+        model.addAttribute("user", userService.getUserById(id));
+        return "updateCompany";
+    }
+
+    @RequestMapping(value = "/updateCompany",method = RequestMethod.POST)
+    public String updateCompany(User user){
+        userService.updateCompany(user);
+        return "redirect:/companies";
+    }
+
+    @RequestMapping("/companyInfo/{id}")
+    public String showCompanies(Model model, @PathVariable("id")int id){
+        User user=userService.getUserById(id);
+        model.addAttribute("user", user);
+        return "companies";
     }
 
     @RequestMapping("/userPage")
