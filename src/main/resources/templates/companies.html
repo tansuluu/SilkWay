@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2>Company</h2>
+<table border="1">
+    <tr>
+        <th>Title</th>
+        <th>Brand</th>
+        <th>Email</th>
+        <th>Delete</th>
+        <th>Update</th>
+    </tr>
+    <tr>
+        <td th:text="${user.title}">Title</td>
+        <td th:text="${user.brand}">Brand</td>
+        <td th:text="${user.email}">Email</td>
+        <td><a th:href="@{/deleteCompany/__${user.id}__}">Delete</a></td>
+        <td><a th:href="@{/updateCompany/__${user.id}__}">Update</a></td>
+    </tr>
+</table>
+</body>
+</html>

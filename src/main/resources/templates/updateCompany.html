@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Update Company</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+</head>
+
+<body class="move">
+<form method="post" enctype="multipart/form-data" action="/updateCompany">
+    Title:<br>
+    <input type="hidden" name="id" th:value="${id}">
+    <input type="text" th:value="${title}" name="title"><br>
+    Brand:<br>
+    <input type="text" th:utext="${brand}" name="brand"><br>
+    <button type="submit" value="Submit">Submit</button>
+</form>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2>Companies</h2>
+<table border="1">
+    <tr>
+        <th>Title</th>
+        <th>Brand</th>
+        <th>Email</th>
+        <th>get User</th>
+    </tr>
+    <tr th:each = "company: ${companies}">
+        <td th:text="${company.title}">Title</td>
+        <td th:text="${company.brand}">Brand</td>
+        <td th:text="${company.email}">Email</td>
+        <td><a th:href="@{/companyInfo/__${company.id}__}">get Company</a></td>
+    </tr>
+</table>
+</body>
+</html>
