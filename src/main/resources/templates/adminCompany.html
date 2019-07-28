@@ -104,11 +104,11 @@
                         <a th:href="@{/adminPage}">
                             <i class="fas fa-users"></i>Пользователи</a>
                     </li>
-                    <li>
+                    <li class="active">
                         <a th:href="@{/allCompanies}">
                             <i class="fas fa-building"></i>Компании</a>
                     </li>
-                    <li class="active">
+                    <li>
                         <a th:href="@{/allTours}">
                             <i class="fas fa-plane"></i>Туры</a>
                     </li>
@@ -131,9 +131,6 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="overview-wrap">
-                                <button type="button" class="au-btn au-btn-icon au-btn--blue" data-toggle="modal" data-target="#basicExampleModal" style="line-height: 30px; font-size: 12px">
-                                    <i class="zmdi zmdi-plus"></i> Добавить админа
-                                </button>
                                 <button type="button" class="au-btn au-btn-icon au-btn--blue" data-toggle="modal" data-target="#company" style="line-height: 30px; font-size: 12px">
                                     <i class="zmdi zmdi-plus"></i> Добавить компанию
                                 </button>
@@ -152,13 +149,12 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr th:each="user:${users}">
-                                        <td th:text="${user.firstName}"></td>
-                                        <td th:text="${user.lastName}"></td>
+                                    <tr th:each="user:${companies}">
+                                        <td th:text="${user.title}"></td>
+                                        <td th:text="${user.brand}"></td>
                                         <td th:text="${user.email}"></td>
-                                        <td th:text="${user.contacts}"></td>
-                                        <td class="button"><a th:href="@{/deleteUser/__${user.id}__}">Удалить</a></td>
-                                        <td class="button"><a th:href="@{/updateUser/__${user.id}__}">Обновить</a></td>
+                                        <td class="button"><a th:href="@{/deleteCompany/__${user.id}__}">Удалить</a></td>
+                                        <td class="button"><a th:href="@{/updateCompany/__${user.id}__}">Обновить</a></td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -176,52 +172,6 @@
 
 
 <!-- Modal -->
-<div class="modal fade" id="basicExampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Новый админ</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form class="login100-form validate-form" th:action="@{/regAdmin}" method="post" th:object="${user}" enctype="multipart/form-data">
-                    <input th:value="${error}" id="error" hidden="hidden">
-                    <div class="form-group">
-                        <label class="control-label mb-1">Имя</label>
-                        <input  type="text" class="form-control" required="required" th:field="*{firstName}">
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label mb-1">Фамилия</label>
-                        <input  type="text" class="form-control" required="required" th:field="*{lastName}">
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label mb-1">Контакты</label>
-                        <input  type="text" class="form-control" required="required" th:field="*{contacts}">
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label mb-1">Почта</label>
-                        <label th:if="${#fields.hasErrors('email')}" th:errors="*{email}"   class="validation-message"></label>
-                        <input  type="email" class="form-control" required="required" th:field="*{email}">
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label mb-1">Пароль</label>
-                        <label th:if="${#fields.hasErrors('password')}" th:errors="*{password}"   class="validation-message"></label>
-                        <input  type="password" class="form-control" required="required" th:field="*{password}">
-                    </div>
-
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
-                        <button type="submit" class="btn btn-primary">Сохранить</button>
-                    </div>
-                </form>
-            </div>
-
-        </div>
-    </div>
-</div>
 <div class="modal fade" id="company" tabindex="-1" role="dialog" aria-labelledby="exampleModal"
      aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -266,9 +216,6 @@
 </div>
 <script>
     $(document).ready(function () {
-        if($("#error").val()==1){
-            $('#basicExampleModal').modal('show');
-        }
         if($("#errorCompany").val()==1){
             $('#company').modal('show');
         }

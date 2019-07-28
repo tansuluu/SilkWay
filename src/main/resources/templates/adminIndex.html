@@ -53,8 +53,9 @@
             <div class="header-mobile__bar">
                 <div class="container-fluid">
                     <div class="header-mobile-inner">
-                        <a class="logo" href="index.html">
-                            <img src="images/icon/logo.png" alt="CoolAdmin" />
+                        <a class="logo" href="index.html" th:href="@{/}">
+                            <!--<img src="images/icon/logo.png" alt="CoolAdmin" />-->
+                            <h3>Silk way</h3>
                         </a>
                         <button class="hamburger hamburger--slider" type="button">
                             <span class="hamburger-box">
@@ -69,15 +70,19 @@
                     <ul class="navbar-mobile__list list-unstyled">
                         <li class="active">
                             <a th:href="@{/adminPage}">
-                                <i class="fas fa-chart-bar"></i>Пользователи</a>
+                                <i class="fas fa-users"></i>Пользователи</a>
                         </li>
                         <li>
-                            <a href="table.html">
-                                <i class="fas fa-table"></i>Туры</a>
+                            <a th:href="@{/allCompanies}">
+                                <i class="fas fa-building"></i>Компании</a>
                         </li>
                         <li>
-                            <a href="form.html">
-                                <i class="far fa-check-square"></i>Отели</a>
+                            <a th:href="@{/allTours}">
+                                <i class="fas fa-plane"></i>Туры</a>
+                        </li>
+                        <li>
+                            <a th:href="@{/allHotels}">
+                                <i class="fas fa-plane"></i>Отели</a>
                         </li>
                     </ul>
                 </div>
@@ -88,7 +93,7 @@
         <!-- MENU SIDEBAR-->
         <aside class="menu-sidebar d-none d-lg-block">
             <div class="logo">
-                <a href="#"><h3>Silk Way</h3>
+                <a th:href="@{/}"><h3>Silk Way</h3>
                     <!--<img src="images/icon/logo.png" alt="Cool Admin" />-->
                 </a>
             </div>
@@ -100,15 +105,15 @@
                                 <i class="fas fa-users"></i>Пользователи</a>
                         </li>
                         <li>
-                            <a th:href="@{/adminPage}">
+                            <a th:href="@{/allCompanies}">
                                 <i class="fas fa-building"></i>Компании</a>
                         </li>
                         <li>
-                            <a th:href="@{/adminPage}">
+                            <a th:href="@{/allTours}">
                             <i class="fas fa-plane"></i>Туры</a>
                         </li>
                         <li>
-                            <a th:href="@{/adminPage}">
+                            <a th:href="@{/allHotels}">
                                 <i class="fas fa-plane"></i>Отели</a>
                         </li>
                     </ul>
@@ -128,9 +133,6 @@
                                 <div class="overview-wrap">
                                     <button type="button" class="au-btn au-btn-icon au-btn--blue" data-toggle="modal" data-target="#basicExampleModal" style="line-height: 30px; font-size: 12px">
                                         <i class="zmdi zmdi-plus"></i> Добавить админа
-                                    </button>
-                                    <button type="button" class="au-btn au-btn-icon au-btn--blue" data-toggle="modal" data-target="#company" style="line-height: 30px; font-size: 12px">
-                                        <i class="zmdi zmdi-plus"></i> Добавить компанию
                                     </button>
                                 </div>
                                 <div class="table-responsive table--no-card m-b-30">
@@ -217,55 +219,10 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="company" tabindex="-1" role="dialog" aria-labelledby="exampleModal"
-         aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModal">Новая компания</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form class="login100-form validate-form" th:action="@{/regCompany}" method="post" th:object="${user}" enctype="multipart/form-data">
-                        <input th:value="${errorCompany}" id="errorCompany" hidden="hidden">
-                        <div class="form-group">
-                            <label class="control-label mb-1">Название</label>
-                            <input  type="text" class="form-control" required="required" th:field="*{title}">
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label mb-1">Бренд</label>
-                            <input  type="text" class="form-control" required="required" th:field="*{brand}">
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label mb-1">Почта</label>
-                            <label th:if="${#fields.hasErrors('email')}" th:errors="*{email}"   class="validation-message"></label>
-                            <input  type="email" class="form-control" required="required" th:field="*{email}">
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label mb-1">Пароль</label>
-                            <label th:if="${#fields.hasErrors('password')}" th:errors="*{password}"   class="validation-message"></label>
-                            <input  type="password" class="form-control" required="required" th:field="*{password}">
-                        </div>
-
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
-                            <button type="submit" class="btn btn-primary">Сохранить</button>
-                        </div>
-                    </form>
-                </div>
-
-            </div>
-        </div>
-    </div>
-    <script>
+  <script>
         $(document).ready(function () {
             if($("#error").val()==1){
                 $('#basicExampleModal').modal('show');
-            }
-            if($("#errorCompany").val()==1){
-                $('#company').modal('show');
             }
             $("#example").DataTable({
                 "scrollX":"500px",

@@ -75,11 +75,11 @@ public class RegistrationController {
         }
         if (bindingResult.hasErrors()) {
             model.addAttribute("errorCompany", 1);
-            return "adminIndex";
+            return "adminCompany";
         } else {
             user.setStatus("company");
             userService.saveAdmin(user, "COMPANY");
-            return "redirect:/adminPage";
+            return "redirect:/allCompanies";
         }
     }
 

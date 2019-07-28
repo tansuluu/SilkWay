@@ -23,7 +23,8 @@ public class AdminController {
     @PreAuthorize("hasRole('SUPER_ADMIN')")
     public String admin(Model model){
         model.addAttribute("companies",userService.getAllCompany());
-        return "allCompanies";
+        model.addAttribute("user", new User());
+        return "adminCompany";
     }
 
     @RequestMapping("/adminPage")
