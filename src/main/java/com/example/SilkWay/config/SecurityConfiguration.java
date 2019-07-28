@@ -51,7 +51,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         http.
                 authorizeRequests()
-                .antMatchers("/", "/sources/**", "/jkc", "/fgrd","/hotelPage","/tourPage","/transportPage","/aboutUs").permitAll()
+                .antMatchers("/adminPage","/", "/sources/**", "/jkc", "/fgrd","/hotelPage","/tourPage","/transportPage","/aboutUs").permitAll()
                 .antMatchers("/login", "/image","/hotelInfo/**").permitAll()
                 .antMatchers("/regUser", "/filterTour").permitAll()
                 .antMatchers("/confirm").permitAll()
@@ -82,7 +82,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) throws Exception {
         web
                 .ignoring()
-                .antMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/images/**","/fonts/**, /register/**","/sass/**","/register/**","/register/css/**","/register/fonts/**","/register/images/**","/register/js/**","/register/vendor/**");
+                .antMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/images/**","/fonts/**", "/register/**","/sass/**","/register/**","/register/css/**","/register/fonts/**","/register/images/**","/register/js/**","/register/vendor/**","/folderforadmin/**");
     }
 
 }
