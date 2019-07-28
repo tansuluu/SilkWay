@@ -24,11 +24,8 @@ public class UserController {
     @RequestMapping("/deleteUser/{id}")
     public String deleteUser(@PathVariable("id")int id){
         User user=userService.findUserById(id);
-        if(user.getStatus().equals("admin")){
-            return "redirect:/admin";
-        }
         userService.deleteUser(user);
-        return "redirect:/logout";
+        return "redirect:/adminPage";
     }
 
     @RequestMapping("/updateUser/{id}")
@@ -40,7 +37,7 @@ public class UserController {
     @RequestMapping(value = "/updateUser",method = RequestMethod.POST)
     public String update(User user){
         userService.updateUser(user);
-        return "redirect:/users";
+        return "redirect:/adminPage";
     }
 
     @RequestMapping("/userInfo/{id}")
@@ -54,11 +51,8 @@ public class UserController {
     @RequestMapping("/deleteCompany/{id}")
     public String deleteCompany(@PathVariable("id")int id){
         User user=userService.findUserById(id);
-        if(user.getStatus().equals("admin")){
-            return "redirect:/admin";
-        }
         userService.deleteUser(user);
-        return "redirect:/logout";
+        return "redirect:/allCompanies";
     }
 
     @RequestMapping("/updateCompany/{id}")
@@ -70,7 +64,7 @@ public class UserController {
     @RequestMapping(value = "/updateCompany",method = RequestMethod.POST)
     public String updateCompany(User user){
         userService.updateCompany(user);
-        return "redirect:/companies";
+        return "redirect:/allCompanies";
     }
 
     @RequestMapping("/companyInfo/{id}")

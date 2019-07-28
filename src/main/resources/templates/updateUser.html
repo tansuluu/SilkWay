@@ -8,14 +8,32 @@
 </head>
 
 <body class="move">
-<form method="post" enctype="multipart/form-data" action="/updateUser">
-    First Name:<br>
-    <input type="hidden" name="id" th:value="${id}">
-    <input type="text" th:value="${firstName}" name="firstName"><br>
-    Last Name:<br>
-    <input type="text" th:utext="${lastName}" name="lastName"><br>
-    Contacts:<br>
-    <input type="text" th:utext="${contacts}" name="contacts"><br>
+<form th:action="@{/updateUser}"  th:object="${user}" method="post" class="login100-form validate-form">
+    <input type="hidden" th:field="*{id}" >
+    <label class="col-xs-3 control-label"></label>
+    <div class="col-xs-3 inputGroupContainer ">
+        <label th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" class="validation-message"></label>
+        <div class="input-group">
+            <span class="input-group-addon">First Name</span>
+            <input type="text" th:field="*{firstName}" class="form-control" name="firstName" />
+        </div>
+    </div>
+    <label class="col-xs-3 control-label"></label>
+    <div class="col-xs-3 inputGroupContainer ">
+        <label th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" class="validation-message"></label>
+        <div class="input-group">
+            <span class="input-group-addon">Last Name</span>
+            <input type="text" th:field="*{lastName}" class="form-control" name="lastName" />
+        </div>
+    </div>
+    <label class="col-xs-3 control-label"></label>
+    <div class="col-xs-3 inputGroupContainer ">
+        <label th:if="${#fields.hasErrors('contacts')}" th:errors="*{contacts}" class="validation-message"></label>
+        <div class="input-group">
+            <span class="input-group-addon">Contacts</span>
+            <input type="text" th:field="*{contacts}" class="form-control" name="contacts" />
+        </div>
+    </div>
     <button type="submit" value="Submit">Submit</button>
 </form>
 </body>

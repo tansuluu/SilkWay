@@ -8,12 +8,24 @@
 </head>
 
 <body class="move">
-<form method="post" enctype="multipart/form-data" action="/updateCompany">
-    Title:<br>
-    <input type="hidden" name="id" th:value="${id}">
-    <input type="text" th:value="${title}" name="title"><br>
-    Brand:<br>
-    <input type="text" th:utext="${brand}" name="brand"><br>
+<form th:action="@{/updateCompany}"  th:object="${user}" method="post" class="login100-form validate-form">
+    <input type="hidden" th:field="*{id}" >
+    <label class="col-xs-3 control-label"></label>
+    <div class="col-xs-3 inputGroupContainer ">
+        <label th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="validation-message"></label>
+        <div class="input-group">
+            <span class="input-group-addon">Title</span>
+            <input type="text" th:field="*{title}" class="form-control" name="title" />
+        </div>
+    </div>
+    <label class="col-xs-3 control-label"></label>
+    <div class="col-xs-3 inputGroupContainer ">
+        <label th:if="${#fields.hasErrors('brand')}" th:errors="*{brand}" class="validation-message"></label>
+        <div class="input-group">
+            <span class="input-group-addon">Brand</span>
+            <input type="text" th:field="*{brand}" class="form-control" name="brand" />
+        </div>
+    </div>
     <button type="submit" value="Submit">Submit</button>
 </form>
 </body>
