@@ -53,14 +53,14 @@ public class HotelController {
             model.addAttribute("message", "You successfully uploaded " +
                     file.getOriginalFilename() + "!");
             hotel.setImg_name(file.getOriginalFilename());
-
+            hotelService.saveHotel(hotel);
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
             model.addAttribute("message", "FAIL to upload " +
                     file.getOriginalFilename() + "!");
         }
-        hotelService.saveHotel(hotel);
+
         return new RedirectView(request.getHeader("referer"));
     }
 

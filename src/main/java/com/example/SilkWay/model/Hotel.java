@@ -44,7 +44,4 @@ public class Hotel {
 
     @Column(name = "img_name")
     private String img_name;
-
-    @NotBlank
-    private String email;
 }

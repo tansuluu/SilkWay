@@ -25,7 +25,7 @@ public class StorageService {
         try {
             Files.copy(file.getInputStream(), this.rootLocation.resolve(file.getOriginalFilename()));
         } catch (Exception e) {
-            throw new RuntimeException("FAIL!");
+            throw new RuntimeException("FAIL! Such file already exist");
         }
     }
 

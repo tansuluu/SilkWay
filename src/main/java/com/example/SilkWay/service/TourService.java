@@ -27,15 +27,7 @@ public class TourService {
     @Autowired
     private UserService userService;
 
-    public Tour saveTour(String title, long price, String country, String description, Date dateFrom, Date dateTo, MultipartFile file) {
-        Tour tour = new Tour();
-        tour.setTitle(title);
-        tour.setPrice(price);
-        tour.setCountry(country);
-        tour.setDescription(description);
-        tour.setDateFrom(dateFrom);
-        tour.setDateTo(dateTo);
-        tour.setImg_name(file.getOriginalFilename());
+    public Tour saveTour(Tour tour) {
         return tourRepository.save(tour);
     }
 

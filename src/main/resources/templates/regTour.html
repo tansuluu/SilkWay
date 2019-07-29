@@ -15,42 +15,55 @@
 			<span class="login100-form-title p-b-37" style="padding-left: 60px">
 					Register Tour:
 			</span>
-        <form class="login100-form validate-form" action="/regTour" method="post" enctype="multipart/form-data">
-
-            <div class="wrap-input100 validate-input m-b-20" id="tur3">
-                <input class="input100" type="text" name="title" placeholder="Title">
-                <span class="focus-input100"></span>
-            </div>
-            <div id="tur2">
-                <div class="wrap-input100">
-                    <input class="input100" type="long" name="price" placeholder="Price">
-                    <span class="focus-input100"></span>
+        <form class="login100-form validate-form" th:action="@{/regTour}" method="post" th:object="${tour}" enctype="multipart/form-data">
+            <!--<label th:if="${#fields.hasErrors('title')}" th:errors="*{title}"  class="validation-message"></label>-->
+            <div class="col-xs-3 inputGroupContainer ">
+                <label th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="validation-message"></label>
+                <div class="input-group">
+                    <span class="input-group-addon">Title</span>
+                    <input type="text" th:field="*{title}" class="form-control" name="title" />
                 </div>
             </div>
-            <div id="tur2">
-                <div class="wrap-input100">
-                    <input class="input100" type="text" name="country" placeholder="country">
-                    <span class="focus-input100"></span>
+            <label class="col-xs-3 control-label"></label>
+            <div class="col-xs-3 inputGroupContainer ">
+                <label th:if="${#fields.hasErrors('country')}" th:errors="*{country}" class="validation-message"></label>
+                <div class="input-group">
+                    <span class="input-group-addon">Country</span>
+                    <input type="text" th:field="*{country}" class="form-control" name="country" />
                 </div>
             </div>
-
-            <div id="tur2">
-                <div class="wrap-input100">
-                    <input class="input100" type="text" name="description" placeholder="Description">
-                    <span class="focus-input100"></span>
-                </div>
-            </div>
-
-            <div id="tur2">
-                <div class="wrap-input100">
-                    <input class="input100" type="date" pattern="yyyy-MM-dd" name="dateFrom" placeholder="DateFrom">
-                    <span class="focus-input100"></span>
+            <label class="col-xs-3 control-label"></label>
+            <div class="col-xs-3 inputGroupContainer ">
+                <label th:if="${#fields.hasErrors('description')}" th:errors="*{description}" class="validation-message"></label>
+                <div class="input-group">
+                    <span class="input-group-addon">Description</span>
+                    <input type="text" th:field="*{description}" class="form-control" name="description" />
                 </div>
             </div>
 
-            <div id="tur2">
+            <label class="col-xs-3 control-label"></label>
+            <div class="col-xs-3 inputGroupContainer ">
+                <label th:if="${#fields.hasErrors('price')}" th:errors="*{price}" class="validation-message"></label>
+                <div class="input-group">
+                    <span class="input-group-addon">Price</span>
+                    <input type="long" th:field="*{price}" class="form-control" name="price" />
+                </div>
+            </div>
+
+            <!--<label th:if="${#fields.hasErrors('dateFrom')}" th:errors="*{dateFrom}"  class="validation-message"></label>-->
+            <div class="col-xs-3 inputGroupContainer ">
+                <label th:if="${#fields.hasErrors('dateFrom')}" th:errors="*{dateFrom}" class="validation-message"></label>
                 <div class="wrap-input100">
-                    <input class="input100" type="date" pattern="yyyy-MM-dd" name="dateTo" placeholder="DateTo">
+                    <input class="input100" type="date" pattern="yyyy-MM-dd" th:field="*{dateFrom}" name="dateFrom" placeholder="DateFrom">
+                    <span class="focus-input100"></span>
+                </div>
+            </div>
+
+            <!--<label th:if="${#fields.hasErrors('dateTo')}" th:errors="*{dateTo}"  class="validation-message"></label>-->
+            <div class="col-xs-3 inputGroupContainer ">
+                <label th:if="${#fields.hasErrors('dateTo')}" th:errors="*{dateTo}" class="validation-message"></label>
+                <div class="wrap-input100">
+                    <input class="input100" type="date" pattern="yyyy-MM-dd" th:field="*{dateTo}" name="dateTo" placeholder="DateTo">
                     <span class="focus-input100"></span>
                 </div>
             </div>
