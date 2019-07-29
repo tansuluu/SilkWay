@@ -27,15 +27,7 @@ public class TourService {
     @Autowired
     private UserService userService;
 
-    public Tour saveTour(String title, long price, String country, String description, Date dateFrom, Date dateTo, MultipartFile file) {
-        Tour tour = new Tour();
-        tour.setTitle(title);
-        tour.setPrice(price);
-        tour.setCountry(country);
-        tour.setDescription(description);
-        tour.setDateFrom(dateFrom);
-        tour.setDateTo(dateTo);
-        tour.setImg_name(file.getOriginalFilename());
+    public Tour saveTour(Tour tour) {
         return tourRepository.save(tour);
     }
 
@@ -55,14 +47,10 @@ public class TourService {
     }
 
 
-    public Tour updateTour(Tour tour, MultipartFile file) {
-        Tour newTour = tourRepository.findByTitle(tour.getTitle());
-        newTour.setImg_name(file.getOriginalFilename());
-        newTour.setCreated(tour.getCreated());
-        newTour.setCountry(tour.getCountry());
-        newTour.setDescription(tour.getDescription());
-        newTour.setTitle(tour.getTitle());
-        return tourRepository.save(newTour);
+    public Tour updateTour(Tour tour) {
+        Tour newTour = tourRepository.findById(tour.getId());
+        tour.setImg_name(newTour.getImg_name());
+        return tourRepository.save(tour);
     }
 
     public List<Tour> filterTour(String country, long priceMin, long priceMax, Date dateFrom, Date dateTo, int page, int limit) {
