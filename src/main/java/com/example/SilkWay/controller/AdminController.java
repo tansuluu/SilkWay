@@ -1,7 +1,9 @@
 package com.example.SilkWay.controller;
 
 import com.example.SilkWay.model.Role;
+import com.example.SilkWay.model.Tour;
 import com.example.SilkWay.model.User;
+import com.example.SilkWay.service.TourService;
 import com.example.SilkWay.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -19,6 +21,9 @@ public class AdminController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private TourService tourService;
+
     @RequestMapping("/allCompanies")
     @PreAuthorize("hasRole('SUPER_ADMIN')")
     public String admin(Model model){
@@ -34,6 +39,13 @@ public class AdminController {
         return "adminIndex";
     }
 
+    @RequestMapping("/allTours")
+    @PreAuthorize("hasRole('SUPER_ADMIN')")
+    public String tours(Model model){
+        model.addAttribute("tours",tourService.getAll());
+        model.addAttribute("tour", new Tour());
+        return "adminTour";
+    }
     @PreAuthorize("hasRole('SUPER_ADMIN')")
     @RequestMapping(value="/superAdmin", method = RequestMethod.GET)
     public ModelAndView superAdmin(){

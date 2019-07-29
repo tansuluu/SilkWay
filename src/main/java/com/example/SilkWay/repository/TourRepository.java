@@ -11,8 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository("tourRepository")
-public interface TourRepository extends JpaRepository<Tour, Long>,
-        PagingAndSortingRepository<Tour, Long> {
+public interface TourRepository extends JpaRepository<Tour, Long>,PagingAndSortingRepository<Tour, Long> {
 
     Tour findByTitle(String title);
 

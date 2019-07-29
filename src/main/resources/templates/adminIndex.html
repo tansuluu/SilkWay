@@ -144,6 +144,7 @@
                                         <th>Фамилия</th>
                                         <th>Почта</th>
                                         <th>Контакты</th>
+                                        <th>Статус</th>
                                         <th></th>
                                         <th></th>
                                     </tr>
@@ -154,6 +155,7 @@
                                         <td th:text="${user.lastName}"></td>
                                         <td th:text="${user.email}"></td>
                                         <td th:text="${user.contacts}"></td>
+                                        <td th:text="${user.status}"></td>
                                         <td class="button"><a th:href="@{/deleteUser/__${user.id}__}">Удалить</a></td>
                                         <td class="button"><a th:href="@{/updateUser/__${user.id}__}">Обновить</a></td>
                                     </tr>

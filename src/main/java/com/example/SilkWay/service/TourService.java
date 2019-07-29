@@ -164,4 +164,8 @@ public class TourService {
 
         return "Tour bought successfully";
     }
+
+    public List<Tour> getAll(){
+        return tourRepository.findAll();
+    }
 }
