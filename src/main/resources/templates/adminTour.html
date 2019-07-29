@@ -187,30 +187,35 @@
             </div>
             <div class="modal-body">
                 <form class="login100-form validate-form" th:action="@{/regTour}" method="post" th:object="${tour}" enctype="multipart/form-data">
-                    <input th:value="${error}" id="error" hidden="hidden">
+                    <input th:value="${message}" id="error" hidden="hidden">
                     <div class="form-group">
-                        <label class="control-label mb-1">Имя</label>
-                        <input  type="text" class="form-control" required="required" th:field="*{firstName}">
+                        <label class="control-label mb-1">Название</label>
+                        <input  type="text" class="form-control" required="required" th:field="*{title}">
                     </div>
                     <div class="form-group">
-                        <label class="control-label mb-1">Фамилия</label>
-                        <input  type="text" class="form-control" required="required" th:field="*{lastName}">
+                        <label class="control-label mb-1">Страна</label>
+                        <input  type="text" class="form-control" required="required" th:field="*{country}">
                     </div>
                     <div class="form-group">
-                        <label class="control-label mb-1">Контакты</label>
-                        <input  type="text" class="form-control" required="required" th:field="*{contacts}">
+                        <label class="control-label mb-1">Описание</label>
+                        <textarea  type="text" class="form-control" required="required" th:field="*{description}"></textarea>
                     </div>
                     <div class="form-group">
-                        <label class="control-label mb-1">Почта</label>
-                        <label th:if="${#fields.hasErrors('email')}" th:errors="*{email}"   class="validation-message"></label>
-                        <input  type="email" class="form-control" required="required" th:field="*{email}">
+                        <label class="control-label mb-1">Цена</label>
+                        <input  type="number" class="form-control" required="required" th:field="*{price}">
                     </div>
                     <div class="form-group">
-                        <label class="control-label mb-1">Пароль</label>
-                        <label th:if="${#fields.hasErrors('password')}" th:errors="*{password}"   class="validation-message"></label>
-                        <input  type="password" class="form-control" required="required" th:field="*{password}">
+                        <label class="control-label mb-1">От</label>
+                        <input  type="date" class="form-control" required="required" th:field="*{dateFrom}">
                     </div>
-
+                    <div class="form-group">
+                        <label class="control-label mb-1">До</label>
+                        <input  type="date" class="form-control" required="required" th:field="*{dateTo}">
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label mb-1">Фотография</label>
+                        <input  type="file" class="form-control" required="required" name="file">
+                    </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
                         <button type="submit" class="btn btn-primary">Сохранить</button>

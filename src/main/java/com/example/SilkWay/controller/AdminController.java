@@ -1,8 +1,10 @@
 package com.example.SilkWay.controller;
 
+import com.example.SilkWay.model.Hotel;
 import com.example.SilkWay.model.Role;
 import com.example.SilkWay.model.Tour;
 import com.example.SilkWay.model.User;
+import com.example.SilkWay.service.HotelService;
 import com.example.SilkWay.service.TourService;
 import com.example.SilkWay.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,9 @@ public class AdminController {
 
     @Autowired
     private TourService tourService;
+
+    @Autowired
+    private HotelService hotelService;
 
     @RequestMapping("/allCompanies")
     @PreAuthorize("hasRole('SUPER_ADMIN')")
@@ -46,6 +51,15 @@ public class AdminController {
         model.addAttribute("tour", new Tour());
         return "adminTour";
     }
+
+    @RequestMapping("/allHotels")
+    @PreAuthorize("hasRole('SUPER_ADMIN')")
+    public String hotel(Model model){
+        model.addAttribute("hotels",hotelService.getAll());
+        model.addAttribute("hotel", new Hotel());
+        return "adminHotel";
+    }
+
     @PreAuthorize("hasRole('SUPER_ADMIN')")
     @RequestMapping(value="/superAdmin", method = RequestMethod.GET)
     public ModelAndView superAdmin(){

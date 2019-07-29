@@ -85,4 +85,8 @@ public class HotelService {
         }
         return  getAllHotels(page, limit);
     }
+
+    public List<Hotel> getAll(){
+        return hotelRepository.findAll();
+    }
 }

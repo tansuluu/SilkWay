@@ -60,10 +60,9 @@ public class TourController {
     @RequestMapping(value="/regTour", method = RequestMethod.POST)
     public String saveNewTour(@RequestParam("file") MultipartFile file,
                               Model model, @Valid Tour tour,
-                              BindingResult bindingResult,
-                              HttpServletRequest request) {
+                              BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "addTour";
+            return "adminTour";
         } else {
         try {
             storageService.store(file);
@@ -74,10 +73,10 @@ public class TourController {
         } catch (Exception e) {
             System.out.println(e.getMessage());
             model.addAttribute("message", "FAIL to upload " + file.getOriginalFilename() + "!");
-            return "addTour";
+            return "adminTour";
         }
         }
-        return "redirect:/tourInfo/"+tour.getId();
+        return "redirect:/allTours";
     }
 
     @PreAuthorize("hasRole('SUPER_ADMIN, ADMIN')")
@@ -94,13 +93,13 @@ public class TourController {
         return "redirect:/tourInfo/"+tour.getId();
     }
 
-    @RequestMapping("/findTours")
+    @RequestMapping("/tourPage")
     public String find(Model model,
                        @RequestParam(value = "page", defaultValue = "0") int page,
                        @RequestParam(value = "limit", defaultValue = "15") int limit){
         List<Tour> list=tourService.getAllTours(page, limit);
         model.addAttribute("tours", list);
-        return "allTours";
+        return "tour-place";
     }
 
     @RequestMapping("/tourInfo/{id}")
@@ -141,7 +140,8 @@ public class TourController {
                              Model model){
         List<Tour> list = tourService.filterTour(country, priceMin, priceMax, dateFrom, dateTo, page, limit);
         model.addAttribute("tours", list);
-        return "filterTours";
+        model.addAttribute("text", "Результат поиска");
+        return "tour-place";
     }
 
     @RequestMapping("/findTour")
