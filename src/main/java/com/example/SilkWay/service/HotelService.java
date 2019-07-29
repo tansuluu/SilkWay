@@ -54,17 +54,13 @@ public class HotelService {
         hotelRepository.delete(hotel);
     }
 
-    public Hotel updateHotel(Hotel hotel, MultipartFile file){
-        Hotel newHotel = new Hotel();
-        newHotel.setImg_name(file.getOriginalFilename());
-        newHotel.setCreated(hotel.getCreated());
+    public Hotel updateHotel(Hotel hotel){
+        Hotel newHotel = hotelRepository.findById(hotel.getId());
         newHotel.setStars(hotel.getStars());
-        newHotel.setEmail(hotel.getEmail());
         newHotel.setDescription(hotel.getDescription());
         newHotel.setTitle(hotel.getTitle());
         newHotel.setCategory(hotel.getCategory());
         newHotel.setPrice(hotel.getPrice());
-        hotelRepository.delete(hotel);
         return hotelRepository.save(newHotel);
     }
 

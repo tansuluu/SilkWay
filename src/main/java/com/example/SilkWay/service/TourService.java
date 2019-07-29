@@ -47,10 +47,8 @@ public class TourService {
     }
 
 
-    public Tour updateTour(Tour tour, MultipartFile file) {
-        Tour newTour = tourRepository.findByTitle(tour.getTitle());
-        newTour.setImg_name(file.getOriginalFilename());
-        newTour.setCreated(tour.getCreated());
+    public Tour updateTour(Tour tour) {
+        Tour newTour = tourRepository.findById(tour.getId());
         newTour.setCountry(tour.getCountry());
         newTour.setDescription(tour.getDescription());
         newTour.setTitle(tour.getTitle());

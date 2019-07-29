@@ -45,7 +45,7 @@ public class HotelController {
 
     @PreAuthorize("hasRole('SUPER_ADMIN, ADMIN')")
     @RequestMapping(value="/regHotel", method = RequestMethod.POST)
-    public RedirectView saveNewHotel(@RequestParam("file") MultipartFile file,
+    public String saveNewHotel(@RequestParam("file") MultipartFile file,
                                      Model model, Hotel hotel,
                                      HttpServletRequest request) {
         try {
@@ -59,9 +59,10 @@ public class HotelController {
             System.out.println(e.getMessage());
             model.addAttribute("message", "FAIL to upload " +
                     file.getOriginalFilename() + "!");
+            return "addHotel";
         }
 
-        return new RedirectView(request.getHeader("referer"));
+        return "redirect:/hotelInfo/"+hotel.getId();
     }
 
     @PreAuthorize("hasRole('SUPER_ADMIN, ADMIN')")
@@ -73,10 +74,9 @@ public class HotelController {
 
     @PreAuthorize("hasRole('ROLE_SUPER_ADMIN, ROLE_ADMIN')")
     @RequestMapping(value = "/updateHotel",method = RequestMethod.POST)
-    public String updateHotel(@Valid Hotel hotel, MultipartFile file){
-        storageService.store(file);
-        hotelService.updateHotel(hotel, file);
-        return "redirect:/findHotel="+hotel.getId();
+    public String updateHotel(@Valid Hotel hotel){
+        hotelService.updateHotel(hotel);
+        return "redirect:/hotelInfo/"+hotel.getId();
     }
 
     @RequestMapping("/findHotels")
@@ -99,7 +99,7 @@ public class HotelController {
     @RequestMapping("/deleteHotel/{id}")
     public String deleteHotel( @PathVariable("id")long id){
         hotelService.deleteHotel(hotelService.getHotelById(id));
-        return "redirect:/findHotel";
+        return "redirect:/findHotels";
     }
 
     @ModelAttribute("hotel")

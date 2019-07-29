@@ -58,7 +58,7 @@ public class TourController {
 
     @PreAuthorize("hasRole('SUPER_ADMIN, ADMIN')")
     @RequestMapping(value="/regTour", method = RequestMethod.POST)
-    public RedirectView saveNewTour(@RequestParam("file") MultipartFile file,
+    public String saveNewTour(@RequestParam("file") MultipartFile file,
                                     Model model, @Valid Tour tour,
                                     HttpServletRequest request) {
         try {
@@ -70,8 +70,9 @@ public class TourController {
         } catch (Exception e) {
             System.out.println(e.getMessage());
             model.addAttribute("message", "FAIL to upload " + file.getOriginalFilename() + "!");
+            return "addTour";
         }
-        return new RedirectView(request.getHeader("referer"));
+        return "redirect:/tourInfo/"+tour.getId();
     }
 
     @PreAuthorize("hasRole('SUPER_ADMIN, ADMIN')")
@@ -83,10 +84,9 @@ public class TourController {
 
     @PreAuthorize("hasRole('SUPER_ADMIN, ADMIN')")
     @RequestMapping(value = "/updateTour",method = RequestMethod.POST)
-    public String update(@Valid Tour tour, MultipartFile file){
-        storageService.store(file);
-        tourService.updateTour(tour, file);
-        return "redirect:/tourInfo?id="+tour.getId();
+    public String update(@Valid Tour tour){
+        tourService.updateTour(tour);
+        return "redirect:/tourInfo/"+tour.getId();
     }
 
     @RequestMapping("/findTours")

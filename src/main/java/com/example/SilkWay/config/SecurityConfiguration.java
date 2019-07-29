@@ -63,6 +63,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                     "/updateTour/**",
                     "/regHotel",
                     "/deleteTour/**",
+                    "/tourInfo/**",
                     "/updateHotel/**",
                     "/deleteHotel/**").hasAnyAuthority("ADMIN, SUPER_ADMIN")
                 .antMatchers("/admin/**").hasAuthority("SUPER_ADMIN").anyRequest()

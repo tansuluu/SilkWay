@@ -39,7 +39,7 @@ public class EmailService {
         MimeMessage message = sender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message);
         try {
-            helper.setTo(""+hotelService.getHotelById(hotelId).getEmail());
+            helper.setTo("mederbek.abdyldaev@iaau.edu.kg");
             helper.setText("Number of Adults: "+ numAdult+"\n"+
                     "Number of Child: "+ numChild + "\n"+
                     "Number of Rooms: "+ numOfRoom + "\n"+
