@@ -71,7 +71,7 @@
 				<div class="container-fluid">
 					<div class="row">
 						<div class="col-xs-2">
-							<div id="colorlib-logo"><a href="index.html">SilkAway Travel</a></div>
+							<div id="colorlib-logo"><a href="index.html"> <img src="images/logo.png" width="100%"> </a></div>
 						</div>
 						<div class="col-xs-10 text-right menu-1">
 							<ul>
@@ -114,14 +114,14 @@
 		<aside id="colorlib-hero">
 			<div class="flexslider">
 				<ul class="slides">
-			   	<li style="background-image: url(images/cover-img-3.jpg);">
+			   	<li style="background-image: url(images/tury.jpg);">
 			   		<div class="overlay"></div>
 			   		<div class="container-fluid">
 			   			<div class="row">
 				   			<div class="col-md-6 col-md-offset-3 col-sm-12 col-xs-12 slider-text">
 				   				<div class="slider-text-inner text-center">
 				   					<h2></h2>
-				   					<h1>Найти туры</h1>
+				   					<h1>Туры</h1>
 				   				</div>
 				   			</div>
 				   		</div>
@@ -139,125 +139,24 @@
 							<div class="col-md-12">
 								<div class="wrap-division">
 									<div  class="col-md-12 col-md-offset-0 heading2 animate-box ">
-										<h2>Горящие туры</h2>
+										<h2 th:text="${text}">Горящие туры</h2>
 									</div>
 									<div class="row">
-										<div class="col-md-12 animate-box">
+										<div class="col-md-12 animate-box" th:each = "tour: ${tours}">
 											<div class="room-wrap">
 												<div class="row">
 													<div class="col-md-7 col-sm-6">
-														<div class="room-img" style="background-image: url(images/tour-1.jpg);"></div>
+														<div class="room-img" th:style="'background-image:url(' + @{${tour.getImage()}} + ');'"></div>
 													</div>
 													<div class="col-md-5 col-sm-6">
 														<div class="desc">
-															<span class="day-tour">На 10 дней</span>
-															<h2>Athens, Greece</h2>
-															<p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.</p>
+															<span class="day-tour" th:text="${tour.price +' $'}"></span>
+															<h2 th:text="${tour.title}">Athens, Greece</h2>
+															<p th:text="${tour.description}">Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.</p>
 														</div>
 														<div class="col-md-12 animate-box text-center">
-											<p><a href="tours.html" class="btn btn-primary">Узнать больше!</a></p>
+														<p><a th:href="@{/tourInfo/__${tour.id}__}" class="btn btn-primary">Узнать больше!</a></p>
 										</div>
-													</div>
-												</div>
-											</div>
-										</div>
-
-										<div class="col-md-12 animate-box">
-											<div class="room-wrap">
-												<div class="row">
-													<div class="col-md-7 col-sm-6">
-														<div class="room-img" style="background-image: url(images/tour-2.jpg);"></div>
-													</div>
-													<div class="col-md-5 col-sm-6">
-														<div class="desc">
-															<span class="day-tour">На 7 дней</span>
-															<h2>Thailand</h2>
-															<p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.</p>
-
-															<div class="col-md-12 animate-box text-center">
-											<p><a href="tours.html" class="btn btn-primary">Узнать больше!</a></p>
-										</div>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-
-										<div class="col-md-12 animate-box">
-											<div class="room-wrap">
-												<div class="row">
-													<div class="col-md-7 col-sm-6">
-														<div class="room-img" style="background-image: url(images/tour-3.jpg);"></div>
-													</div>
-													<div class="col-md-5 col-sm-6">
-														<div class="desc">
-															<span class="day-tour">На месяц</span>
-															<h2>Boracay, Philippines</h2>
-															<p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.</p>
-															<div class="col-md-12 animate-box text-center">
-											<p><a href="tours.html" class="btn btn-primary">Узнать больше !</a></p>
-										</div>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-
-										<div class="col-md-12 animate-box">
-											<div class="room-wrap">
-												<div class="row">
-													<div class="col-md-7 col-sm-6">
-														<div class="room-img" style="background-image: url(images/tour-4.jpg);"></div>
-													</div>
-													<div class="col-md-5 col-sm-6">
-														<div class="desc">
-															<span class="day-tour">На 3 дня</span>
-															<h2>Tokyo, Japan</h2>
-															<p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.</p>
-															<div class="col-md-12 animate-box text-center">
-											<p><a href="tours.html" class="btn btn-primary">Узнать больше!</a></p>
-										</div>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-
-										<div class="col-md-12 animate-box">
-											<div class="room-wrap">
-												<div class="row">
-													<div class="col-md-7 col-sm-6">
-														<div class="room-img" style="background-image: url(images/tour-5.jpg);"></div>
-													</div>
-													<div class="col-md-5 col-sm-6">
-														<div class="desc">
-															<span class="day-tour">На 5 дней</span>
-															<h2>Paris, Italy</h2>
-															<p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.</p>
-															<div class="col-md-12 animate-box text-center">
-											<p><a href="tours.html" class="btn btn-primary">Узнать больше!</a></p>
-										</div>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-
-										<div class="col-md-12 animate-box">
-											<div class="room-wrap">
-												<div class="row">
-													<div class="col-md-7 col-sm-6">
-														<div class="room-img" style="background-image: url(images/tour-6.jpg);"></div>
-													</div>
-													<div class="col-md-5 col-sm-6">
-														<div class="desc">
-															<span class="day-tour">На 4 дня</span>
-															<h2>Greece</h2>
-															<p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.</p>
-															<div class="col-md-12 animate-box text-center">
-											<p><a href="tours.html" class="btn btn-primary">Узнать больше!</a></p>
-										</div>
-														</div>
 													</div>
 												</div>
 											</div>
@@ -348,93 +247,73 @@
   <a href="" class="btn btn-default btn-rounded" data-toggle="modal" data-target="#darkModalForm">Добавить тур</a>
 </div>
 				                 
-				                
-				                </div>
+	</div>
 						<div class="sidebar-wrap">
 							<div class="side search-wrap animate-box">
-								<h3 class="sidebar-heading-tour" style="color: white;">Найти горящие туры</h3>
-								<form method="post" class="colorlib-form">
+								<h3 class="sidebar-heading-tour" style="color: white;">Найти туры</h3>
+								<form class="colorlib-form" action="/filterTour" method="get">
 				              	<div class="row">
 				                <div class="col-md-12">
 				                  <div class="form-group">
-				                    <label for="date">Дата тура:</label>
+				                    <label>От</label>
 				                    <div class="form-field">
 				                      <i class="icon icon-calendar2"></i>
-				                      <input type="text"  class="form-control date" placeholder="Дата брони">
+				                      <input type="date" pattern="yyyy-MM-dd" name="dateFrom" class="form-control " placeholder="Дата брони">
 				                    </div>
 				                  </div>
 				                </div>
 				                <div class="col-md-12">
 				                  <div class="form-group">
-				                    <label for="date">Check-out:</label>
-				                    <div class="form-field">
-				                      <i class="icon icon-calendar2"></i>
-				                      <input type="text"  class="form-control date" placeholder="Check-out date">
-				                    </div>
+				                    <label>До</label>
+									  <div class="form-field">
+										  <i class="icon icon-calendar2"></i>
+										  <input type="date" pattern="yyyy-MM-dd" name="dateTo"  class="form-control" placeholder="Дата брони">
+									  </div>
 				                  </div>
 				                </div>
 				                <div class="col-md-12">
 				                  <div class="form-group">
-				                    <label for="guests">Guest</label>
+				                    <label >Страна</label>
 				                    <div class="form-field">
-				                      <i class="icon icon-arrow-down3"></i>
-				                      <select name="people"  class="form-control">
-				                        <option value="#">1</option>
-				                        <option value="#">2</option>
-				                        <option value="#">3</option>
-				                        <option value="#">4</option>
-				                        <option value="#">5+</option>
-				                      </select>
-				                    </div>
-				                  </div>
-				                </div>
+										<input type="text" name="country" class="form-control" placeholder="Страна">
 
-				                <div class="side animate-box">
-								<div class="row">
+									</div>
+				                  </div>
+				                </div>
 									<div class="col-md-12">
 										<h3 class="sidebar-heading2">Цены:</h3>
-										<form method="post" class="colorlib-form-2">
 						              	<div class="row" style=" margin-left: -20% !important;">
 						                <div class="col-md-6">
 						                  <div class="form-group">
-						                    <label for="guests">От:</label>
+						                    <label>От:</label>
 						                    <div class="form-field">
-						                      <i class="icon icon-arrow-down3"></i>
-						                      <select name="people"  class="form-control">
-						                        <option value="#">1</option>
-						                        <option value="#">200</option>
-						                        <option value="#">300</option>
-						                        <option value="#">400</option>
-						                        <option value="#">1000</option>
-						                      </select>
-						                    </div>
+												<input type="number" value=0  name="priceMin" class="form-control" placeholder="">
+											</div>
 						                  </div>
 						                </div>
 						                <div class="col-md-6">
 						                  <div class="form-group">
-						                    <label for="guests">До:</label>
+						                    <label>До:</label>
 						                    <div class="form-field">
-						                      <i class="icon icon-arrow-down3"></i>
-						                      <select name="people"  class="form-control">
-						                        <option value="#">2000</option>
-						                        <option value="#">4000</option>
-						                        <option value="#">6000</option>
-						                        <option value="#">8000</option>
-						                        <option value="#">10000</option>
-						                      </select>
+												<div class="form-field">
+													<input type="number" name="priceMax" value=0 class="form-control" placeholder="">
+												</div>
 						                    </div>
 						                  </div>
 						                </div>
 						              </div>
+										<div class="col-md-12">
+											<input type="submit" name="submit" id="submit" value="Поиск" class="btn btn-primary btn-block">
+										</div>
+									</div>
+								</div>
+
 						            </form>
 					            </div>
 								</div>
 							</div>
-				                <div class="col-md-12" style="margin-top: -20%; ">
-				                  <input type="submit" name="submit" id="submit" value="Поиск" class="btn btn-primary btn-block">
-				                </div>
+
 				              </div>
-				            </form>
 							</div>
 							
 							<!--<div class="side animate-box">
@@ -602,7 +481,10 @@
 	
 		
 	</div>
-
+		<footer id="colorlib-footer" role="contentinfo">
+			<div class="container ">
+			</div>
+		</footer>
 	<div class="gototop js-top">
 		<a href="#" class="js-gotop"><i class="icon-arrow-up2"></i></a>
 	</div>

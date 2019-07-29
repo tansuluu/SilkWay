@@ -1,5 +1,7 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -22,7 +24,7 @@
         <td><a th:href="@{/deleteTour/__${tour.id}__}">Delete</a></td>
         <td><a th:href="@{/updateTour/__${tour.id}__}">Update</a></td>
         <td><a th:href="@{/buyTour/__${tour.id}__}">Buy a Tour</a></td>
-        <img th:src="@{'/image/'+${tour.img_name}}" style="width: 100px; height: 100px;"/>
+        <img th:src="@{${tour.getImage()}}" style="width: 100px; height: 100px;"/>
     </tr>
 </table>
 </body>

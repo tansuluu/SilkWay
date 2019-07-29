@@ -1,5 +1,6 @@
 package com.example.SilkWay.controller;
 
+import com.example.SilkWay.service.TourService;
 import com.example.SilkWay.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,11 +14,10 @@ public class MainController {
 
     @Autowired
     UserService userService;
+    @Autowired
+    TourService tourService;
 
-    @RequestMapping("/tourPage")
-    public String showUsers(Model model){
-        return "tour-place";
-    }
+
     @RequestMapping("/hotelPage")
     public String hotel(Model model){
         return "hotelsPage";
@@ -26,6 +26,7 @@ public class MainController {
     public String transportPage(Model model){
         return "transport";
     }
+
     @RequestMapping("/aboutUs")
     public String aboutUs(Model model){
         return "about";
