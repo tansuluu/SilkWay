@@ -56,12 +56,8 @@ public class HotelService {
 
     public Hotel updateHotel(Hotel hotel){
         Hotel newHotel = hotelRepository.findById(hotel.getId());
-        newHotel.setStars(hotel.getStars());
-        newHotel.setDescription(hotel.getDescription());
-        newHotel.setTitle(hotel.getTitle());
-        newHotel.setCategory(hotel.getCategory());
-        newHotel.setPrice(hotel.getPrice());
-        return hotelRepository.save(newHotel);
+        hotel.setImg_name(newHotel.getImg_name());
+        return hotelRepository.save(hotel);
     }
 
     public List<Hotel> filterHotels(String title, String category, long stars, int page, int limit){

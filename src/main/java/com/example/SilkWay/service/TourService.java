@@ -49,10 +49,8 @@ public class TourService {
 
     public Tour updateTour(Tour tour) {
         Tour newTour = tourRepository.findById(tour.getId());
-        newTour.setCountry(tour.getCountry());
-        newTour.setDescription(tour.getDescription());
-        newTour.setTitle(tour.getTitle());
-        return tourRepository.save(newTour);
+        tour.setImg_name(newTour.getImg_name());
+        return tourRepository.save(tour);
     }
 
     public List<Tour> filterTour(String country, long priceMin, long priceMax, Date dateFrom, Date dateTo, int page, int limit) {

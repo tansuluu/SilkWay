@@ -59,8 +59,12 @@ public class TourController {
     @PreAuthorize("hasRole('SUPER_ADMIN, ADMIN')")
     @RequestMapping(value="/regTour", method = RequestMethod.POST)
     public String saveNewTour(@RequestParam("file") MultipartFile file,
-                                    Model model, @Valid Tour tour,
-                                    HttpServletRequest request) {
+                              Model model, @Valid Tour tour,
+                              BindingResult bindingResult,
+                              HttpServletRequest request) {
+        if (bindingResult.hasErrors()) {
+            return "addTour";
+        } else {
         try {
             storageService.store(file);
             model.addAttribute("message", "You successfully uploaded " +
@@ -71,6 +75,7 @@ public class TourController {
             System.out.println(e.getMessage());
             model.addAttribute("message", "FAIL to upload " + file.getOriginalFilename() + "!");
             return "addTour";
+        }
         }
         return "redirect:/tourInfo/"+tour.getId();
     }
