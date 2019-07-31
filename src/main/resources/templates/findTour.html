@@ -15,10 +15,11 @@
 			<span class="login100-form-title p-b-37" style="padding-left: 60px">
 					Find Tour:
 			</span>
-        <form class="login100-form validate-form" action="/filterTour" method="get">
+        <form class="login100-form validate-form" th:action="@{/filterTour}" method="get">
 
             <div >
                 <div class="wrap-input100">
+                    <span class="input-group-addon">Country</span>
                     <input class="input100" type="text" name="country" placeholder="Country">
                     <span class="focus-input100"></span>
                 </div>
@@ -26,6 +27,7 @@
 
             <div >
                 <div class="wrap-input100">
+                    <span class="input-group-addon">Price Min</span>
                     <input class="input100" type="number" name="priceMin" placeholder="PriceMin" value=0>
                     <span class="focus-input100"></span>
                 </div>
@@ -33,6 +35,7 @@
 
             <div id="tur2">
                 <div class="wrap-input100">
+                    <span class="input-group-addon">Price Max</span>
                     <input class="input100" type="number" name="priceMax" placeholder="PriceMax" value=0>
                     <span class="focus-input100"></span>
                 </div>
@@ -40,6 +43,7 @@
 
             <div >
                 <div class="wrap-input100">
+                    <span class="input-group-addon">Date From</span>
                     <input class="input100" type="date" pattern="yyyy-MM-dd" name="dateFrom" placeholder="DateFrom">
                     <span class="focus-input100"></span>
                 </div>
@@ -47,6 +51,7 @@
 
             <div >
                 <div class="wrap-input100">
+                    <span class="input-group-addon">Date To</span>
                     <input class="input100" type="date" pattern="yyyy-MM-dd" name="dateTo" placeholder="DateTo">
                     <span class="focus-input100"></span>
                 </div>

@@ -1,5 +1,8 @@
 package com.example.SilkWay.service;
 
+import com.example.SilkWay.model.BookHotel;
+import com.example.SilkWay.model.BuyTour;
+import com.example.SilkWay.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -19,11 +22,15 @@ public class EmailService {
 
     private JavaMailSender sender;
 
+    private TourService tourService;
+
     @Autowired
     public EmailService(JavaMailSender mailSender,
-                        HotelService hotelService) {
+                        HotelService hotelService,
+                        TourService tourService) {
         this.sender = mailSender;
         this.hotelService = hotelService;
+        this.tourService = tourService;
     }
 
     @Async
@@ -32,25 +39,48 @@ public class EmailService {
     }
 
     @Async
-    public String sendMail(int numAdult, int numChild, int numOfRoom,
-                          long hotelId, Date dateFrom, Date dateTo,
-                          HttpServletRequest request) {
+    public String sendMailHotel(BookHotel bookHotel, User user) {
 
         MimeMessage message = sender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message);
         try {
             helper.setTo("mederbek.abdyldaev@iaau.edu.kg");
-            helper.setText("Number of Adults: "+ numAdult+"\n"+
-                    "Number of Child: "+ numChild + "\n"+
-                    "Number of Rooms: "+ numOfRoom + "\n"+
-                    "Check In: "+ dateFrom + "\n"+
-                    "Check Out: "+ dateTo);
-            helper.setSubject("Mail From: "+ request.getUserPrincipal().getName());
+            helper.setText("Which Hotel: "+ bookHotel.getHotelName() + "\n"+
+                    "Number of Adults: "+ bookHotel.getNumOfAdults()+"\n"+
+                    "Number of Child: "+ bookHotel.getNumOfChildren() + "\n"+
+                    "Number of Rooms: "+ bookHotel.getNumOfRooms() + "\n"+
+                    "Check In: "+ bookHotel.getCheckIn() + "\n"+
+                    "Check Out: "+ bookHotel.getCheckOut() + "\n"+
+                    "Email of User: " + user.getEmail() + "\n"+
+                    "Contact of this User: " + user.getContacts());
+            helper.setSubject("Mail From: "+ user.getFirstName()+
+                    " "+user.getLastName());
         } catch (MessagingException e) {
             e.printStackTrace();
             return "Error while sending mail ..";
         }
         sender.send(message);
-        return "redirect:/hotelInfo/"+hotelId;
+        return "redirect:/hotelInfo/"+hotelService.getHotelByTitle(bookHotel.getHotelName()).getId();
+    }
+
+    @Async
+    public String sendMailTour(BuyTour buyTour, User user) {
+
+        MimeMessage message = sender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message);
+        try {
+            helper.setTo("mederbek.abdyldaev@iaau.edu.kg");
+            helper.setText("Which Tour: "+ buyTour.getTourName() + "\n"+
+                    "Number of Tours: "+ buyTour.getNumOfTour()+"\n"+
+                    "Email of User: " + user.getEmail() + "\n"+
+                    "Contact of this User: " + user.getContacts());
+            helper.setSubject("Mail From: "+ user.getFirstName()+
+                    " "+user.getLastName());
+        } catch (MessagingException e) {
+            e.printStackTrace();
+            return "Error while sending mail ..";
+        }
+        sender.send(message);
+        return "redirect:/tourInfo/"+tourService.getTourByTitle(buyTour.getTourName()).getId();
     }
 }
