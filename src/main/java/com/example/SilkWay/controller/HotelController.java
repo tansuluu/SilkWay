@@ -105,7 +105,7 @@ public class HotelController {
     @RequestMapping("/deleteHotel/{id}")
     public String deleteHotel(@PathVariable("id") long id) {
         hotelService.deleteHotel(hotelService.getHotelById(id));
-        return "redirect:/findHotels";
+        return "redirect:/allHotels";
     }
 
     @ModelAttribute("hotel")

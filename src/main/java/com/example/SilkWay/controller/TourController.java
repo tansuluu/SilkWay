@@ -113,7 +113,7 @@ public class TourController {
     @RequestMapping("/deleteTour/{id}")
     public String showApplications( @PathVariable("id")long id){
         tourService.deleteTour(tourService.getTourById(id));
-        return "redirect:/findTours";
+        return "redirect:/allTours";
     }
 
     @RequestMapping("/buyTour/{id}")

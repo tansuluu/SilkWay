@@ -46,9 +46,7 @@ public class UserService {
         return userRepository.findById(id);
     }
 
-    public User
-
-    saveUser(User user,String role) {
+    public User saveUser(User user,String role) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         user.setActive(0);
         Role userRole = roleRepository.findByRole(role);
@@ -75,7 +73,7 @@ public class UserService {
         registrationEmail.setText("Hello "+ user.getFirstName()+"! \n" +
                 "Welcome to OpenTravel site, We so happy to see you as a "+ user.getStatus()+" in our big tourism family!"+
                 "\n Please confirm your gmail on opentravel site to finish registration,click the link below:\n\n"
-                + appUrl + ":8099/confirm?token=" + user.getToken()+"\n\n" +
+                + appUrl + ":8090/confirm?token=" + user.getToken()+"\n\n" +
                 "best regards,\n" +
                 "OpenTravel team")
         ;
