@@ -23,7 +23,13 @@ public class BuyTour {
 
     private String tourName;
 
-    private long userId;
+    private String userName;
 
-    private int numOfTour;
+    private String companyTitle;
+
+    private String userEmail;
+
+    private String contacts;
+
+    private String userStatus;
 }

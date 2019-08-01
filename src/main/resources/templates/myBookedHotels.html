@@ -9,19 +9,9 @@
 <table border="1">
     <tr>
         <th>Name Of Hotel</th>
-        <th>Num Adults</th>
-        <th>Num Children</th>
-        <th>Num Rooms</th>
-        <th>Date In</th>
-        <th>Date Out</th>
     </tr>
     <tr th:each = "bookHotel: ${bookHotels}">
         <td th:text="${bookHotel.hotelName}">Name of hotel</td>
-        <td th:text="${bookHotel.numOfAdults}">Adults</td>
-        <td th:text="${bookHotel.numOfChildren}">Children</td>
-        <td th:text="${bookHotel.numOfRooms}">Rooms</td>
-        <td th:text="${bookHotel.checkIn}">Date In</td>
-        <td th:text="${bookHotel.checkOut}">Date Out</td>
     </tr>
 </table>
 </body>

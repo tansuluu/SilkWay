@@ -24,18 +24,28 @@ public class BookHotelService {
     @Autowired
     private EmailService emailService;
 
-    public BookHotel bookHotel(long hotelId, BookHotel bookHotel){
+    public BookHotel bookHotel(long hotelId, BookHotel bookHotel) {
         bookHotel.setHotelName(hotelService.getHotelById(hotelId).getTitle());
+        bookHotel.setUserStatus("user");
         bookHotelRepository.save(bookHotel);
         emailService.sendMailHotel(bookHotel);
         return bookHotel;
     }
 
-    public BookHotel bookHotelUser(long hotelId, HttpServletRequest request){
+    public BookHotel bookHotelUser(long hotelId, HttpServletRequest request) {
         BookHotel bookHotel = new BookHotel();
         User user = userService.findUserByEmail(request.getUserPrincipal().getName());
-        bookHotel.setUserName(user.getFirstName()+" "+user.getLastName());
+        if (user.getStatus().equals("company")) {
+
+            bookHotel.setCompanyTitle(user.getTitle());
+
+        } else {
+
+            bookHotel.setUserName(user.getFirstName() + " " + user.getLastName());
+
+        }
         bookHotel.setUserEmail(user.getEmail());
+        bookHotel.setUserStatus(user.getStatus());
         bookHotel.setHotelName(hotelService.getHotelById(hotelId).getTitle());
         bookHotel.setContacts(user.getContacts());
         bookHotelRepository.save(bookHotel);
@@ -43,7 +53,7 @@ public class BookHotelService {
         return bookHotel;
     }
 
-    public List<BookHotel> getBookedHotel(String userEmail){
+    public List<BookHotel> getBookedHotel(String userEmail) {
         return bookHotelRepository.findByUserEmail(userEmail);
     }
 }

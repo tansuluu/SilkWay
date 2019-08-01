@@ -45,10 +45,17 @@ public class EmailService {
         MimeMessageHelper helper = new MimeMessageHelper(message);
         try {
             helper.setTo("mederbek.abdyldaev@iaau.edu.kg");
-            helper.setText("Which Hotel: "+ bookHotel.getHotelName() + "\n"+
-                    "Email of User: " + bookHotel.getUserEmail() + "\n"+
-                    "Contact of this User: " + bookHotel.getContacts());
-            helper.setSubject("Mail From: "+ bookHotel.getUserName());
+            if(bookHotel.getUserStatus().equals("company")){
+                helper.setText("Which Hotel To Book: "+ bookHotel.getHotelName() + "\n"+
+                                "Email of Company: " + bookHotel.getUserEmail());
+                helper.setSubject("Mail From: " + bookHotel.getCompanyTitle());
+            }else {
+                helper.setText("Which Hotel To Book: " + bookHotel.getHotelName() + "\n" +
+                        "User status: " + bookHotel.getUserStatus() + "\n" +
+                        "Email of User: " + bookHotel.getUserEmail() + "\n" +
+                        "Contact of this User: " + bookHotel.getContacts());
+                helper.setSubject("Mail From: " + bookHotel.getUserName());
+            }
         } catch (MessagingException e) {
             e.printStackTrace();
             return "Error while sending mail ..";
@@ -58,18 +65,23 @@ public class EmailService {
     }
 
     @Async
-    public String sendMailTour(BuyTour buyTour, User user) {
+    public String sendMailTour(BuyTour buyTour) {
 
         MimeMessage message = sender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message);
         try {
             helper.setTo("mederbek.abdyldaev@iaau.edu.kg");
-            helper.setText("Which Tour: "+ buyTour.getTourName() + "\n"+
-                    "Number of Tours: "+ buyTour.getNumOfTour()+"\n"+
-                    "Email of User: " + user.getEmail() + "\n"+
-                    "Contact of this User: " + user.getContacts());
-            helper.setSubject("Mail From: "+ user.getFirstName()+
-                    " "+user.getLastName());
+            if(buyTour.getUserStatus().equals("company")){
+                helper.setText("Which Tour To Buy: "+ buyTour.getTourName() + "\n"+
+                        "Email of Company: " + buyTour.getUserEmail());
+                helper.setSubject("Mail From: " + buyTour.getCompanyTitle());
+            }else {
+                helper.setText("Which Tour To Buy: " + buyTour.getTourName() + "\n" +
+                        "User status: " + buyTour.getUserStatus() + "\n" +
+                        "Email of User: " + buyTour.getUserEmail() + "\n" +
+                        "Contact of this User: " + buyTour.getContacts());
+                helper.setSubject("Mail From: " + buyTour.getUserName());
+            }
         } catch (MessagingException e) {
             e.printStackTrace();
             return "Error while sending mail ..";

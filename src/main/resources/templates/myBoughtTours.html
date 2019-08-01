@@ -8,12 +8,10 @@
 <h2>My Bought Tours</h2>
 <table border="1">
     <tr>
-        <th>Name Of Tour</th>
-        <th>Num People</th>
+        <th>Tour Name</th>
     </tr>
     <tr th:each = "buyTour: ${buyTours}">
-        <td th:text="${buyTour.tourName}">Name of hotel</td>
-        <td th:text="${buyTour.numOfTour}">Adults</td>
+        <td th:text="${buyTour.tourName}">Name of Tour</td>
     </tr>
 </table>
 </body>
