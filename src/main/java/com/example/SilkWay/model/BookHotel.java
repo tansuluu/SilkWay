@@ -22,17 +22,9 @@ public class BookHotel {
 
     private String hotelName;
 
-    private Long userId;
+    private String userName;
 
-    private int numOfAdults;
+    private String userEmail;
 
-    private int numOfChildren;
-
-    private int numOfRooms;
-
-    @DateTimeFormat(pattern="yyyy-MM-dd")
-    private Date checkIn;
-
-    @DateTimeFormat(pattern="yyyy-MM-dd")
-    private Date checkOut;
+    private String contacts;
 }

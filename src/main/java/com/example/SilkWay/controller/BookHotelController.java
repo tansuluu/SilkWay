@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -32,28 +33,31 @@ public class BookHotelController {
     private UserService userService;
 
     @RequestMapping("/bookHotel/{id}")
-    public String bookHotelId(Model model, @PathVariable("id")long id){
-        model.addAttribute("hotel", hotelService.getHotelById(id));
-        return "bookHotel";
+    public String bookHotelId(Model model, @PathVariable("id")long id, HttpServletRequest request, Principal user){
+        if(user == null){
+            model.addAttribute("hotel", hotelService.getHotelById(id));
+            return "bookHotel";
+        }else {
+            bookHotelService.bookHotelUser(id, request);
+            return "redirect:/findHotels";
+        }
     }
 
     @RequestMapping(value = "/bookingHotel", method = RequestMethod.POST)
-    public String bookHotel(HttpServletRequest request,
-                            @Valid BookHotel bookHotel,
+    public String bookHotel(@Valid BookHotel bookHotel,
                             BindingResult bindingResult,
                             @RequestParam(name = "hotelId") long hotelId){
         if (bindingResult.hasErrors()) {
             return "errorBookingHotel";
         } else {
-            bookHotelService.bookHotel(hotelId, bookHotel, request);
+            bookHotelService.bookHotel(hotelId, bookHotel);
             return "redirect:/findHotels";
         }
     }
 
     @RequestMapping("/bookedHotels")
     public String getBookedHotels(HttpServletRequest request, Model model){
-        int id = userService.findUserByEmail(request.getUserPrincipal().getName()).getId();
-        List<BookHotel> bookedHotels = bookHotelService.getBookedHotel(id);
+        List<BookHotel> bookedHotels = bookHotelService.getBookedHotel(request.getUserPrincipal().getName());
         model.addAttribute("bookHotels", bookedHotels);
         return "myBookedHotels";
     }

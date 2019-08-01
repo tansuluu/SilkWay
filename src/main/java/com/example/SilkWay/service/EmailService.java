@@ -39,22 +39,16 @@ public class EmailService {
     }
 
     @Async
-    public String sendMailHotel(BookHotel bookHotel, User user) {
+    public String sendMailHotel(BookHotel bookHotel) {
 
         MimeMessage message = sender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message);
         try {
             helper.setTo("mederbek.abdyldaev@iaau.edu.kg");
             helper.setText("Which Hotel: "+ bookHotel.getHotelName() + "\n"+
-                    "Number of Adults: "+ bookHotel.getNumOfAdults()+"\n"+
-                    "Number of Child: "+ bookHotel.getNumOfChildren() + "\n"+
-                    "Number of Rooms: "+ bookHotel.getNumOfRooms() + "\n"+
-                    "Check In: "+ bookHotel.getCheckIn() + "\n"+
-                    "Check Out: "+ bookHotel.getCheckOut() + "\n"+
-                    "Email of User: " + user.getEmail() + "\n"+
-                    "Contact of this User: " + user.getContacts());
-            helper.setSubject("Mail From: "+ user.getFirstName()+
-                    " "+user.getLastName());
+                    "Email of User: " + bookHotel.getUserEmail() + "\n"+
+                    "Contact of this User: " + bookHotel.getContacts());
+            helper.setSubject("Mail From: "+ bookHotel.getUserName());
         } catch (MessagingException e) {
             e.printStackTrace();
             return "Error while sending mail ..";
