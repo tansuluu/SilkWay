@@ -13,46 +13,38 @@
 <div class="container-login100">
     <div class="wrap-login100 p-l-55 p-r-55 p-t-80 p-b-30">
 			<span class="login100-form-title p-b-37" style="padding-left: 60px">
-					Find Tour:
+					booking:
 			</span>
-        <form class="login100-form validate-form" th:action="@{/filterTour}" method="get">
+        <h1 th:text="${hotel.title}">Title</h1>
+        <form class="login100-form validate-form" th:action="@{/bookingHotel}" method="post">
 
-            <div >
+            <div id="tur2">
                 <div class="wrap-input100">
-                    <span class="input-group-addon">Country</span>
-                    <input class="input100" type="text" name="country" placeholder="Country">
-                    <span class="focus-input100"></span>
-                </div>
-            </div>
-
-            <div >
-                <div class="wrap-input100">
-                    <span class="input-group-addon">Price Min</span>
-                    <input class="input100" type="number" name="priceMin" placeholder="PriceMin" value=0>
+                    <span class="input-group-addon">Full Name</span>
+                    <input class="input100" type="text" name="userName">
                     <span class="focus-input100"></span>
                 </div>
             </div>
 
             <div id="tur2">
                 <div class="wrap-input100">
-                    <span class="input-group-addon">Price Max</span>
-                    <input class="input100" type="number" name="priceMax" placeholder="PriceMax" value=0>
+                    <span class="input-group-addon">Email</span>
+                    <input class="input100" type="text" name="userEmail">
                     <span class="focus-input100"></span>
                 </div>
             </div>
 
-            <div >
+            <div id="tur2">
                 <div class="wrap-input100">
-                    <span class="input-group-addon">Date From</span>
-                    <input class="input100" type="date" pattern="yyyy-MM-dd" name="dateFrom" placeholder="DateFrom">
+                    <span class="input-group-addon">Contacts</span>
+                    <input class="input100" type="text" name="contacts">
                     <span class="focus-input100"></span>
                 </div>
             </div>
 
-            <div >
+            <div id="tur2">
                 <div class="wrap-input100">
-                    <span class="input-group-addon">Date To</span>
-                    <input class="input100" type="date" pattern="yyyy-MM-dd" name="dateTo" placeholder="DateTo">
+                    <input type="hidden" name="hotelId" th:value="${hotel.id}">
                     <span class="focus-input100"></span>
                 </div>
             </div>

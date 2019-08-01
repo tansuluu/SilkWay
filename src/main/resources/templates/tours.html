@@ -13,19 +13,25 @@
         <th>title</th>
         <th>description</th>
         <th>country</th>
+        <th>price</th>
         <th>Delete</th>
         <th>Update</th>
-        <th>img</th>
+        <th>Buy</th>
     </tr>
     <tr>
         <td th:text="${tour.title}">Title</td>
         <td th:text="${tour.description}">Description</td>
         <td th:text="${tour.country}">Country</td>
+        <td th:text="${tour.price}">Price</td>
         <td><a th:href="@{/deleteTour/__${tour.id}__}">Delete</a></td>
         <td><a th:href="@{/updateTour/__${tour.id}__}">Update</a></td>
-        <td><a th:href="@{/buyTour/__${tour.id}__}">Buy a Tour</a></td>
         <img th:src="@{${tour.getImage()}}" style="width: 100px; height: 100px;"/>
+        <td><a th:href="@{/buyTour/__${tour.id}__}">Buy Tour</a> </td>
     </tr>
 </table>
+<div class="container">
+<div sec:authorize="hasRole('ROLE_COMPANY')">
+    <h4>As a company, you will get 10% of discount</h4>
+</div></div>
 </body>
 </html>

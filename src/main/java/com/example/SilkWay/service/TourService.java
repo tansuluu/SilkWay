@@ -24,15 +24,16 @@ public class TourService {
     @Autowired
     private TourRepository tourRepository;
 
-    @Autowired
-    private UserService userService;
-
     public Tour saveTour(Tour tour) {
         return tourRepository.save(tour);
     }
 
     public Tour getTourById(long id) {
         return tourRepository.findById(id);
+    }
+
+    public Tour getTourByTitle(String title) {
+        return tourRepository.findByTitle(title);
     }
 
     public List<Tour> getAllTours(int page, int limit) {
@@ -135,22 +136,6 @@ public class TourService {
             return finalLastSearch;
         }
         return finalSearch;
-    }
-
-    public String buyTour(Tour tour, HttpServletRequest request){
-        User user = userService.findUserByEmail(request.getUserPrincipal().getName());
-        List<Tour> tours = new ArrayList<>();
-        if (user.getTours().equals(null)){
-            tours.add(tour);
-            user.setTours(tours);
-        }
-        else {
-            tours = user.getTours();
-            tours.add(tour);
-            user.setTours(tours);
-        }
-
-        return "Tour bought successfully";
     }
 
     public List<Tour> getAll(){

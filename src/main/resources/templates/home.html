@@ -12,7 +12,29 @@
     Welcome <span sec:authentication="principal.username">User</span>
 </p>
 
-<a href="/myTours">My Tours</a>
+<div class="form-group">
+    <span>All tours<a href="/" th:href="@{/findTours}">See all tours</a></span>
+</div>
+
+<div class="form-group">
+    <span>Search tours<a href="/" th:href="@{/findTour}">Search all tours</a></span>
+</div>
+
+<div class="form-group">
+    <span>All hotels<a href="/" th:href="@{/findHotels}">See all Hotels</a></span>
+</div>
+
+<div class="form-group">
+    <span>Search hotels<a href="/" th:href="@{/findHotel}">Search all hotels</a></span>
+</div>
+
+<div class="form-group">
+    <span>See Your Bught Tours <a href="/" th:href="@{/boughtTours}">See all your bought Tours</a></span>
+</div>
+
+<div class="form-group">
+    <span>See Your booked Hotels <a href="/" th:href="@{/bookedHotels}">See all your booked hotels</a></span>
+</div>
 
 <br/>
 <form th:action="@{/logout}" method="post">

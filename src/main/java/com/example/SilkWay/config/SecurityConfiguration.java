@@ -53,8 +53,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 authorizeRequests()
                 .antMatchers("/adminPage","/", "/sources/**", "/jkc", "/fgrd","/hotelPage","/tourPage","/transportPage","/aboutUs").permitAll()
                 .antMatchers("/login", "/image","/hotelInfo/**").permitAll()
-                .antMatchers("/regUser", "/filterTour").permitAll()
-                .antMatchers("/confirm").permitAll()
+                .antMatchers("/regUser", "/filterTour", "/tourInfo/**", "/bookHotel/**","/bookingHotel/**", "/findHotels").permitAll()
+                .antMatchers("/confirm", "/buyTour/**", "/buyingTour/**").permitAll()
                 .antMatchers("/superAdmin", "/regAdmin").hasAuthority("SUPER_ADMIN")
             .antMatchers("/homeAdmin",
                     "/regTour",
@@ -63,7 +63,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                     "/updateTour/**",
                     "/regHotel",
                     "/deleteTour/**",
-                    "/tourInfo/**",
                     "/updateHotel/**",
                     "/deleteHotel/**").hasAnyAuthority("ADMIN, SUPER_ADMIN")
                 .antMatchers("/admin/**").hasAuthority("SUPER_ADMIN").anyRequest()

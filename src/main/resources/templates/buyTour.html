@@ -15,46 +15,36 @@
 			<span class="login100-form-title p-b-37" style="padding-left: 60px">
 					booking:
 			</span>
-        <form class="login100-form validate-form" action="/sendMail" method="post">
+        <h1 th:text="${tour.title}">Title</h1>
+        <form class="login100-form validate-form" th:action="@{/buyingTour}" method="post">
 
             <div id="tur2">
                 <div class="wrap-input100">
-                    <input class="input100" type="int" name="numAdult" placeholder="Num Of Adults">
+                    <span class="input-group-addon">Full Name</span>
+                    <input class="input100" type="text" name="userName">
                     <span class="focus-input100"></span>
                 </div>
             </div>
 
             <div id="tur2">
                 <div class="wrap-input100">
-                    <input class="input100" type="int" name="numChild" placeholder="Num of Children" value=0>
+                    <span class="input-group-addon">Email</span>
+                    <input class="input100" type="text" name="userEmail">
                     <span class="focus-input100"></span>
                 </div>
             </div>
 
             <div id="tur2">
                 <div class="wrap-input100">
-                    <input class="input100" type="int" name="numOfRoom" placeholder="Num of Rooms" value=0>
+                    <span class="input-group-addon">Contacts</span>
+                    <input class="input100" type="text" name="contacts">
                     <span class="focus-input100"></span>
                 </div>
             </div>
 
             <div id="tur2">
                 <div class="wrap-input100">
-                    <input class="input100" type="date" pattern="yyyy-MM-dd" name="checkIn" placeholder="DateFrom">
-                    <span class="focus-input100"></span>
-                </div>
-            </div>
-
-            <div id="tur2">
-                <div class="wrap-input100">
-                    <input class="input100" type="date" pattern="yyyy-MM-dd" name="checkOut" placeholder="DateTo">
-                    <span class="focus-input100"></span>
-                </div>
-            </div>
-
-            <div id="tur2">
-                <div class="wrap-input100">
-                    <input type="hidden" name="id" th:value="${hotel.id}">
+                    <input type="hidden" name="tourId" th:value="${tour.id}">
                     <span class="focus-input100"></span>
                 </div>
             </div>

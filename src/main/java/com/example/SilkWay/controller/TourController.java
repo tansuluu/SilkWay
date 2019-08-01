@@ -113,20 +113,7 @@ public class TourController {
     @RequestMapping("/deleteTour/{id}")
     public String showApplications( @PathVariable("id")long id){
         tourService.deleteTour(tourService.getTourById(id));
-        return "redirect:/findTours";
-    }
-
-    @RequestMapping("/buyTour/{id}")
-    public String buyTour( @PathVariable("id")long id, HttpServletRequest request){
-        tourService.buyTour(tourService.getTourById(id), request);
-        return "redirect:/myTours";
-    }
-
-    @RequestMapping("/myTours")
-    public String myTours(HttpServletRequest request, Model model){
-        List<Tour> list = userService.findUserByEmail(request.getUserPrincipal().getName()).getTours();
-        model.addAttribute("tours", list);
-        return "myTours";
+        return "redirect:/allTours";
     }
 
     @RequestMapping(value = "/filterTour", method = RequestMethod.GET)
@@ -142,6 +129,15 @@ public class TourController {
         model.addAttribute("tours", list);
         model.addAttribute("text", "Результат поиска");
         return "tour-place";
+    }
+
+    @RequestMapping("/findTours")
+    public String findTours(Model model,
+                            @RequestParam(value = "page", defaultValue = "0") int page,
+                            @RequestParam(value = "limit", defaultValue = "15") int limit) {
+        List<Tour> list = tourService.getAllTours(page, limit);
+        model.addAttribute("tours", list);
+        return "allTours";
     }
 
     @RequestMapping("/findTour")

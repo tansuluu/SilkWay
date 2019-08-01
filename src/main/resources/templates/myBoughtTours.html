@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2>My Bought Tours</h2>
+<table border="1">
+    <tr>
+        <th>Tour Name</th>
+    </tr>
+    <tr th:each = "buyTour: ${buyTours}">
+        <td th:text="${buyTour.tourName}">Name of Tour</td>
+    </tr>
+</table>
+</body>
+</html>
