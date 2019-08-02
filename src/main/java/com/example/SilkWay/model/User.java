@@ -74,5 +74,7 @@ public class User {
     private String img_name;
 
     private String emailId;
+
+    private String deletedStatus; //if user is deleted - yes, else - no
 }
 

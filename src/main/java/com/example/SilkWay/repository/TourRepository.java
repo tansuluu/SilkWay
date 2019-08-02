@@ -19,4 +19,7 @@ public interface TourRepository extends JpaRepository<Tour, Long>,PagingAndSorti
 
     List<Tour> getAllByCountry(String country);
 
+    @Override
+    Page<Tour> findAll(Pageable pageable);
+
 }

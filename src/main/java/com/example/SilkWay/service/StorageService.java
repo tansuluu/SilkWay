@@ -25,7 +25,7 @@ public class StorageService {
         try {
             Files.copy(file.getInputStream(), this.rootLocation.resolve(file.getOriginalFilename()));
         } catch (Exception e) {
-            throw new RuntimeException("FAIL! Such file already exist");
+            log.error("FAIL! Such file already exist", e);
         }
     }
 
@@ -36,11 +36,13 @@ public class StorageService {
             if(resource.exists() || resource.isReadable()) {
                 return resource;
             }else{
-                throw new RuntimeException("FAIL!");
+                log.error("FAIL! could not find file");
+                return resource;
             }
         } catch (MalformedURLException e) {
-            throw new RuntimeException("FAIL!");
+            log.error("Error while loading file", e);
         }
+        return null;
     }
 
     public void deleteAll() {
@@ -51,7 +53,7 @@ public class StorageService {
         try {
             Files.createDirectory(rootLocation);
         } catch (IOException e) {
-            throw new RuntimeException("Could not initialize storage!");
+            log.error("Could not initialize storage!", e);
         }
     }
 }

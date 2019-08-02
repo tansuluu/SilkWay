@@ -1,30 +1,29 @@
 package com.example.SilkWay.controller;
 
 import com.example.SilkWay.model.Hotel;
-import com.example.SilkWay.model.User;
 import com.example.SilkWay.service.HotelService;
 import com.example.SilkWay.service.StorageService;
-import com.example.SilkWay.service.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
-import java.security.Principal;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @Controller
 @Transactional
+@Slf4j
 public class HotelController {
 
     private StorageService storageService;
@@ -64,6 +63,7 @@ public class HotelController {
                 System.out.println(e.getMessage());
                 model.addAttribute("message", "FAIL to upload " +
                         file.getOriginalFilename() + "!");
+                log.error("FAIL to upload " + file.getOriginalFilename() + "!");
                 return "addHotel";
             }
         }
@@ -87,10 +87,15 @@ public class HotelController {
 
     @RequestMapping("/findHotels")
     public String findHotel(Model model,
-                            @RequestParam(value = "page", defaultValue = "0") int page,
-                            @RequestParam(value = "limit", defaultValue = "15") int limit) {
-        List<Hotel> list = hotelService.getAllHotels(page, limit);
-        model.addAttribute("hotels", list);
+                            @RequestParam(value = "page",defaultValue = "1") int page) {
+        PageRequest pageRequest=PageRequest.of(page-1,5);
+        Page<Hotel> adminPage=hotelService.getAll(pageRequest);
+        int total=adminPage.getTotalPages();
+        if(total>0){
+            List<Integer> pageNumbers = IntStream.rangeClosed(1,total).boxed().collect(Collectors.toList());
+            model.addAttribute("pageNumbers", pageNumbers);
+        }
+        model.addAttribute("hotels", adminPage.getContent());
         return "allHotels";
     }
 
@@ -113,14 +118,12 @@ public class HotelController {
         return new Hotel();
     }
 
-    @RequestMapping(value = "/filterHotel", method = RequestMethod.GET)
+    @RequestMapping(value = "/filterHotel", method = RequestMethod.POST)
     public String filterTour(@RequestParam(name = "title") String title,
                              @RequestParam(name = "category") String category,
                              @RequestParam(name = "stars") long stars,
-                             @RequestParam(value = "page", defaultValue = "0") int page,
-                             @RequestParam(value = "limit", defaultValue = "15") int limit,
                              Model model) {
-        List<Hotel> hotels = hotelService.filterHotels(title, category, stars, page, limit);
+        List<Hotel> hotels = hotelService.filterHotels(title, category, stars);
         model.addAttribute("hotels", hotels);
         return "filterHotels";
     }

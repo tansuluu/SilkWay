@@ -98,6 +98,8 @@ public class UserService {
     }
 
     public User save(User user){
+
+        user.setDeletedStatus("no");
         return userRepository.save(user);
     }
 
@@ -117,7 +119,8 @@ public class UserService {
     }
 
     public void deleteUser(User user){
-        userRepository.delete(user);
+        user.setDeletedStatus("yes");
+        userRepository.save(user);
     }
 
     public User getUserById(int id) {

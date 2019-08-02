@@ -23,10 +23,8 @@ public class HotelService {
         return hotelRepository.save(hotel);
     }
 
-    public List<Hotel> getAllHotels(int page, int limit){
-        Pageable pageableRequest = PageRequest.of(page, limit);
-        Page<Hotel> allTours = hotelRepository.findAll(pageableRequest);
-        return allTours.getContent();
+    public Page<Hotel> getAll(Pageable pageable){
+        return hotelRepository.findAll(pageable);
     }
 
     public List<Hotel> getAllHotelsByTitle(String title){
@@ -60,7 +58,7 @@ public class HotelService {
         return hotelRepository.save(hotel);
     }
 
-    public List<Hotel> filterHotels(String title, String category, long stars, int page, int limit){
+    public List<Hotel> filterHotels(String title, String category, long stars){
 
         List<Hotel> hotels;
 
@@ -83,7 +81,7 @@ public class HotelService {
             }
             return hotels;
         }
-        return  getAllHotels(page, limit);
+        return  getAll();
     }
 
     public List<Hotel> getAll(){

@@ -36,11 +36,8 @@ public class TourService {
         return tourRepository.findByTitle(title);
     }
 
-    public List<Tour> getAllTours(int page, int limit) {
-
-        Pageable pageableRequest = PageRequest.of(page, limit);
-        Page<Tour> allTours = tourRepository.findAll(pageableRequest);
-        return allTours.getContent();
+    public Page<Tour> getAllTours(Pageable pageable) {
+        return tourRepository.findAll(pageable);
     }
 
     public void deleteTour(Tour tour) {
@@ -80,7 +77,7 @@ public class TourService {
             finalLastSearch = searchArray;
         }
         else if (country.isEmpty() & (priceMax != 0L & priceMin!=0L)) {
-            searchArray = getAllTours(page, limit);
+            searchArray = getAll();
             for (Tour tour : searchArray) {
                 if (tour.getPrice() < priceMax & tour.getPrice()>priceMin) {
                     finalLastSearch.add(tour);
@@ -88,7 +85,7 @@ public class TourService {
             }
         }
         else if (country.isEmpty() & (priceMax != 0L & priceMin==0L)) {
-            searchArray = getAllTours(page, limit);
+            searchArray = getAll();
             for (Tour tour : searchArray) {
                 if (tour.getPrice() < priceMax) {
                     finalLastSearch.add(tour);
@@ -96,7 +93,7 @@ public class TourService {
             }
         }
         else if (country.isEmpty() & (priceMax == 0L & priceMin!=0L)) {
-            searchArray = getAllTours(page, limit);
+            searchArray = getAll();
             for (Tour tour : searchArray) {
                 if (tour.getPrice()>priceMin) {
                     finalLastSearch.add(tour);
@@ -104,7 +101,7 @@ public class TourService {
             }
         }
         else {
-            finalLastSearch = getAllTours(page, limit);
+            finalLastSearch = getAll();
         }
 
         if (dateFrom != null & dateTo != null) {

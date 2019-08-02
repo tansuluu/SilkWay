@@ -1,6 +1,7 @@
 package com.example.SilkWay.controller;
 
 import com.example.SilkWay.service.StorageService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
@@ -16,6 +17,7 @@ import java.nio.file.Files;
 
 @Controller
 @Transactional
+@Slf4j
 public class ContentController {
 
     @Autowired
@@ -25,11 +27,11 @@ public class ContentController {
     @ResponseBody
     public ResponseEntity<Resource> getImage(@PathVariable String filename) {
         Resource file = storageService.loadFile(filename);
-        String mimeType = "";
+        String mimeType;
         try {
             mimeType = Files.probeContentType(file.getFile().toPath());
         } catch (IOException e) {
-            e.printStackTrace();
+            log.error("Error while loading file ", e);
         }
         return ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION, "filename=\"" + file.getFilename() + "\"")

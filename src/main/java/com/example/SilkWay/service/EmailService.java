@@ -3,6 +3,7 @@ package com.example.SilkWay.service;
 import com.example.SilkWay.model.BookHotel;
 import com.example.SilkWay.model.BuyTour;
 import com.example.SilkWay.model.User;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -15,6 +16,7 @@ import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 
+@Slf4j
 @Service("emailService")
 public class EmailService {
 
@@ -58,6 +60,7 @@ public class EmailService {
             }
         } catch (MessagingException e) {
             e.printStackTrace();
+            log.error("Error while sending mail");
             return "Error while sending mail ..";
         }
         sender.send(message);
@@ -84,6 +87,7 @@ public class EmailService {
             }
         } catch (MessagingException e) {
             e.printStackTrace();
+            log.error("Error while sending mail");
             return "Error while sending mail ..";
         }
         sender.send(message);

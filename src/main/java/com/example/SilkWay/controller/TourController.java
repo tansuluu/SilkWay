@@ -5,7 +5,10 @@ import com.example.SilkWay.model.User;
 import com.example.SilkWay.service.StorageService;
 import com.example.SilkWay.service.TourService;
 import com.example.SilkWay.service.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
@@ -27,9 +30,12 @@ import javax.validation.Valid;
 import java.security.Principal;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @Controller
 @Transactional
+@Slf4j
 public class TourController {
 
     private StorageService storageService;
@@ -73,6 +79,7 @@ public class TourController {
         } catch (Exception e) {
             System.out.println(e.getMessage());
             model.addAttribute("message", "FAIL to upload " + file.getOriginalFilename() + "!");
+            log.error("FAIL to upload " + file.getOriginalFilename() + "!");
             return "adminTour";
         }
         }
@@ -95,10 +102,15 @@ public class TourController {
 
     @RequestMapping("/tourPage")
     public String find(Model model,
-                       @RequestParam(value = "page", defaultValue = "0") int page,
-                       @RequestParam(value = "limit", defaultValue = "15") int limit){
-        List<Tour> list=tourService.getAllTours(page, limit);
-        model.addAttribute("tours", list);
+                       @RequestParam(value = "page", defaultValue = "1") int page){
+        PageRequest pageRequest=PageRequest.of(page-1,5);
+        Page<Tour> adminPage=tourService.getAllTours(pageRequest);
+        int total=adminPage.getTotalPages();
+        if(total>0){
+            List<Integer> pageNumbers = IntStream.rangeClosed(1,total).boxed().collect(Collectors.toList());
+            model.addAttribute("pageNumbers", pageNumbers);
+        }
+        model.addAttribute("tours", adminPage.getContent());
         return "tour-place";
     }
 
@@ -133,10 +145,15 @@ public class TourController {
 
     @RequestMapping("/findTours")
     public String findTours(Model model,
-                            @RequestParam(value = "page", defaultValue = "0") int page,
-                            @RequestParam(value = "limit", defaultValue = "15") int limit) {
-        List<Tour> list = tourService.getAllTours(page, limit);
-        model.addAttribute("tours", list);
+                            @RequestParam(value = "page",defaultValue = "1") int page) {
+        PageRequest pageRequest=PageRequest.of(page-1,5);
+        Page<Tour> adminPage=tourService.getAllTours(pageRequest);
+        int total=adminPage.getTotalPages();
+        if(total>0){
+            List<Integer> pageNumbers = IntStream.rangeClosed(1,total).boxed().collect(Collectors.toList());
+            model.addAttribute("pageNumbers", pageNumbers);
+        }
+        model.addAttribute("tours", adminPage.getContent());
         return "allTours";
     }
 
