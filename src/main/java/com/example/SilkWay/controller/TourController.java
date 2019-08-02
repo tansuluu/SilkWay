@@ -151,9 +151,27 @@ public class TourController {
         return "allTours";
     }
 
+    @RequestMapping("/hotTours")
+    public String hotTours(Model model) {
+        List<Tour> tourList = tourService.getAllToursByHotTour("yes");
+        model.addAttribute("tours", tourList);
+        return "allHotTours";
+    }
+
     @RequestMapping("/findTour")
     public String findTour(){
         return "findTour";
     }
 
+    @RequestMapping("/hotYesToNo/{id}")
+    public  String changeYesToNo(@PathVariable("id")long id){
+        tourService.changeHotYesToNo(id);
+        return "redirect:/hotTours";
+    }
+
+    @RequestMapping("/hotNoToYes/{id}")
+    public  String changeNoToYes(@PathVariable("id")long id){
+        tourService.changeHotNoToYes(id);
+        return "redirect:/hotTours";
+    }
 }

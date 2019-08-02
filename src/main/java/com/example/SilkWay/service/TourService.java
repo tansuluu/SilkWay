@@ -133,4 +133,22 @@ public class TourService {
     public List<Tour> getAll(){
         return tourRepository.findAll();
     }
+
+    public List<Tour> getAllToursByHotTour(String text){
+        return tourRepository.getAllByHotTourYesNo(text);
+    }
+
+    public void changeHotYesToNo(long tourId){
+        Tour tour = tourRepository.findById(tourId);
+        if(tour.getHotTourYesNo().equals("yes")){
+            tour.setHotTourYesNo("no");
+        }
+    }
+
+    public void changeHotNoToYes(long tourId){
+        Tour tour = tourRepository.findById(tourId);
+        if(tour.getHotTourYesNo().equals("no")){
+            tour.setHotTourYesNo("yes");
+        }
+    }
 }

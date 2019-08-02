@@ -57,4 +57,17 @@ public class BookHotelController {
         model.addAttribute("bookHotels", bookedHotels);
         return "myBookedHotels";
     }
+
+    @RequestMapping("/allBookHotels")
+    public String getAllBookHotels(Model model){
+        List<BookHotel> bookHotels = bookHotelService.getAll();
+        model.addAttribute("bookHotels", bookHotels);
+        return "allBookHotels";
+    }
+
+    @RequestMapping("/answerBookHotel/{id}")
+    public String changeAnswer(@PathVariable("id") long id){
+        bookHotelService.changeAnswered(id);
+        return "redirect:/allBookHotels";
+    }
 }

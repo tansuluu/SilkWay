@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2>All Bought Tours</h2>
+<table border="1">
+    <tr>
+        <th>Tour Name</th>
+        <th>From whom(User)?</th>
+        <th>From Which Company?</th>
+        <th>Answered status</th>
+        <th>If not answer?</th>
+    </tr>
+    <tr th:each = "buyTour: ${buyTours}">
+        <td th:text="${buyTour.tourName}">Name of Tour</td>
+        <td th:text="${buyTour.userName}">Name of user</td>
+        <td th:text="${buyTour.companyTitle}">Name of Company</td>
+        <td th:text="${buyTour.answeredYesNo}">Status</td>
+        <td><a th:href="@{/answerBoughtTour/__${buyTour.id}__}">Answered?</a></td>
+    </tr>
+</table>
+</body>
+</html>

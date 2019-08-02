@@ -10,4 +10,6 @@ import java.util.List;
 public interface BuyTourRepository extends JpaRepository<BuyTour, Long> {
 
     List<BuyTour> findByUserEmail(String userEmail);
+
+    BuyTour findById(long id);
 }

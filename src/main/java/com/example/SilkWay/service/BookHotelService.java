@@ -27,6 +27,7 @@ public class BookHotelService {
     public BookHotel bookHotel(long hotelId, BookHotel bookHotel) {
         bookHotel.setHotelName(hotelService.getHotelById(hotelId).getTitle());
         bookHotel.setUserStatus("user");
+        bookHotel.setAnsweredYesNo("no");
         bookHotelRepository.save(bookHotel);
         emailService.sendMailHotel(bookHotel);
         return bookHotel;
@@ -46,6 +47,7 @@ public class BookHotelService {
         }
         bookHotel.setUserEmail(user.getEmail());
         bookHotel.setUserStatus(user.getStatus());
+        bookHotel.setAnsweredYesNo("no");
         bookHotel.setHotelName(hotelService.getHotelById(hotelId).getTitle());
         bookHotel.setContacts(user.getContacts());
         bookHotelRepository.save(bookHotel);
@@ -56,4 +58,17 @@ public class BookHotelService {
     public List<BookHotel> getBookedHotel(String userEmail) {
         return bookHotelRepository.findByUserEmail(userEmail);
     }
+
+    public void changeAnswered(long bookHotelId){
+        BookHotel bookHotel = bookHotelRepository.findById(bookHotelId);
+        if(bookHotel.getAnsweredYesNo().equals("no")){
+            bookHotel.setAnsweredYesNo("yes");
+        }
+        bookHotelRepository.save(bookHotel);
+    }
+
+    public List<BookHotel> getAll(){
+        return bookHotelRepository.findAll();
+    }
+
 }
