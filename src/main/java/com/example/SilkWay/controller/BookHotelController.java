@@ -3,7 +3,6 @@ package com.example.SilkWay.controller;
 import com.example.SilkWay.model.BookHotel;
 import com.example.SilkWay.service.BookHotelService;
 import com.example.SilkWay.service.HotelService;
-import com.example.SilkWay.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,9 +27,6 @@ public class BookHotelController {
 
     @Autowired
     private HotelService hotelService;
-
-    @Autowired
-    private UserService userService;
 
     @RequestMapping("/bookHotel/{id}")
     public String bookHotelId(Model model, @PathVariable("id")long id, HttpServletRequest request, Principal user){

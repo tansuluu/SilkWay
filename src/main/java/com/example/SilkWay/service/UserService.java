@@ -4,7 +4,6 @@ import com.example.SilkWay.model.Role;
 import com.example.SilkWay.model.User;
 import com.example.SilkWay.repository.RoleRepository;
 import com.example.SilkWay.repository.UserRepository;
-import jdk.internal.dynalink.linker.LinkerServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.mail.SimpleMailMessage;
@@ -12,7 +11,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.UUID;
 
 
 @Service("userService")

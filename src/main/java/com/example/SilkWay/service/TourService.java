@@ -1,18 +1,13 @@
 package com.example.SilkWay.service;
 
 import com.example.SilkWay.model.Tour;
-import com.example.SilkWay.model.User;
 import com.example.SilkWay.repository.TourRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.xml.ws.spi.http.HttpContext;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
