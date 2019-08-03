@@ -14,8 +14,10 @@
         <th>description</th>
         <th>country</th>
         <th>price</th>
+        <th>Hot Tour or Not</th>
         <th>Delete</th>
         <th>Update</th>
+        <th>Buy</th>
         <th>Buy</th>
     </tr>
     <tr>
@@ -23,10 +25,12 @@
         <td th:text="${tour.description}">Description</td>
         <td th:text="${tour.country}">Country</td>
         <td th:text="${tour.price}">Price</td>
+        <td th:text="${tour.hotTourYesNo}">Hot Tour</td>
         <td><a th:href="@{/deleteTour/__${tour.id}__}">Delete</a></td>
         <td><a th:href="@{/updateTour/__${tour.id}__}">Update</a></td>
         <img th:src="@{${tour.getImage()}}" style="width: 100px; height: 100px;"/>
         <td><a th:href="@{/buyTour/__${tour.id}__}">Buy Tour</a> </td>
+        <td><a th:href="@{/hotNoToYes/__${tour.id}__}">add to hot tours if it is not</a> </td>
     </tr>
 </table>
 <div class="container">

@@ -62,4 +62,17 @@ public class BuyTourController {
         model.addAttribute("buyTours", boughtTours);
         return "myBoughtTours";
     }
+
+    @RequestMapping("/allBoughtTours")
+    public String getAllBookHotels(Model model){
+        List<BuyTour> buyTours = buyTourService.getAll();
+        model.addAttribute("buyTours", buyTours);
+        return "allBoughtTours";
+    }
+
+    @RequestMapping("/answerBoughtTour/{id}")
+    public String changeAnswer(@PathVariable("id") long id){
+        buyTourService.changeAnswered(id);
+        return "redirect:/allBoughtTours";
+    }
 }

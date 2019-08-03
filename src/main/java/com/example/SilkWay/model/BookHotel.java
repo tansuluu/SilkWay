@@ -32,4 +32,6 @@ public class BookHotel {
     private String contacts;
 
     private String userStatus;
+
+    private String answeredYesNo;
 }

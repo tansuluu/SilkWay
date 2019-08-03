@@ -1,18 +1,13 @@
 package com.example.SilkWay.service;
 
 import com.example.SilkWay.model.Tour;
-import com.example.SilkWay.model.User;
 import com.example.SilkWay.repository.TourRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.xml.ws.spi.http.HttpContext;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -36,11 +31,8 @@ public class TourService {
         return tourRepository.findByTitle(title);
     }
 
-    public List<Tour> getAllTours(int page, int limit) {
-
-        Pageable pageableRequest = PageRequest.of(page, limit);
-        Page<Tour> allTours = tourRepository.findAll(pageableRequest);
-        return allTours.getContent();
+    public Page<Tour> getAllTours(Pageable pageable) {
+        return tourRepository.findAll(pageable);
     }
 
     public void deleteTour(Tour tour) {
@@ -80,7 +72,7 @@ public class TourService {
             finalLastSearch = searchArray;
         }
         else if (country.isEmpty() & (priceMax != 0L & priceMin!=0L)) {
-            searchArray = getAllTours(page, limit);
+            searchArray = getAll();
             for (Tour tour : searchArray) {
                 if (tour.getPrice() < priceMax & tour.getPrice()>priceMin) {
                     finalLastSearch.add(tour);
@@ -88,7 +80,7 @@ public class TourService {
             }
         }
         else if (country.isEmpty() & (priceMax != 0L & priceMin==0L)) {
-            searchArray = getAllTours(page, limit);
+            searchArray = getAll();
             for (Tour tour : searchArray) {
                 if (tour.getPrice() < priceMax) {
                     finalLastSearch.add(tour);
@@ -96,7 +88,7 @@ public class TourService {
             }
         }
         else if (country.isEmpty() & (priceMax == 0L & priceMin!=0L)) {
-            searchArray = getAllTours(page, limit);
+            searchArray = getAll();
             for (Tour tour : searchArray) {
                 if (tour.getPrice()>priceMin) {
                     finalLastSearch.add(tour);
@@ -104,7 +96,7 @@ public class TourService {
             }
         }
         else {
-            finalLastSearch = getAllTours(page, limit);
+            finalLastSearch = getAll();
         }
 
         if (dateFrom != null & dateTo != null) {
@@ -140,5 +132,23 @@ public class TourService {
 
     public List<Tour> getAll(){
         return tourRepository.findAll();
+    }
+
+    public List<Tour> getAllToursByHotTour(String text){
+        return tourRepository.getAllByHotTourYesNo(text);
+    }
+
+    public void changeHotYesToNo(long tourId){
+        Tour tour = tourRepository.findById(tourId);
+        if(tour.getHotTourYesNo().equals("yes")){
+            tour.setHotTourYesNo("no");
+        }
+    }
+
+    public void changeHotNoToYes(long tourId){
+        Tour tour = tourRepository.findById(tourId);
+        if(tour.getHotTourYesNo().equals("no")){
+            tour.setHotTourYesNo("yes");
+        }
     }
 }

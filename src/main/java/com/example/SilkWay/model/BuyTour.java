@@ -32,4 +32,6 @@ public class BuyTour {
     private String contacts;
 
     private String userStatus;
+
+    private String answeredYesNo;
 }

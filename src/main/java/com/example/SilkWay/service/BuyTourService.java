@@ -27,6 +27,7 @@ public class BuyTourService {
     public BuyTour buyTour(long tourId, BuyTour buyTour){
         buyTour.setTourName(tourService.getTourById(tourId).getTitle());
         buyTour.setUserStatus("user");
+        buyTour.setAnsweredYesNo("no");
         buyTourRepository.save(buyTour);
         emailService.sendMailTour(buyTour);
         return buyTour;
@@ -51,6 +52,7 @@ public class BuyTourService {
         buyTour.setUserEmail(user.getEmail());
         buyTour.setUserStatus(user.getStatus());
         buyTour.setContacts(user.getContacts());
+        buyTour.setAnsweredYesNo("no");
         buyTourRepository.save(buyTour);
         emailService.sendMailTour(buyTour);
         return buyTour;
@@ -59,4 +61,17 @@ public class BuyTourService {
     public List<BuyTour> getBoughtTours(String userEmail){
         return buyTourRepository.findByUserEmail(userEmail);
     }
+
+    public void changeAnswered(long bookHotelId){
+        BuyTour buyTour = buyTourRepository.findById(bookHotelId);
+        if(buyTour.getAnsweredYesNo().equals("no")){
+            buyTour.setAnsweredYesNo("yes");
+        }
+        buyTourRepository.save(buyTour);
+    }
+
+    public List<BuyTour> getAll(){
+        return buyTourRepository.findAll();
+    }
+
 }

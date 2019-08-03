@@ -68,6 +68,15 @@
                 </div>
             </div>
 
+            <label class="col-xs-3 control-label"></label>
+            <div class="col-xs-3 inputGroupContainer ">
+                <label th:if="${#fields.hasErrors('hotTourYesNo')}" th:errors="*{hotTourYesNo}" class="validation-message"></label>
+                <div class="input-group">
+                    <span class="input-group-addon">This is hot Tour?(Yes or No)</span>
+                    <input type="text" th:field="*{hotTourYesNo}" class="form-control" name="hotTourYesNo" value="no"/>
+                </div>
+            </div>
+
             <table>
                 <tr><td>File to upload:</td><td><input type="file" name="file" /></td></tr>
             </table>

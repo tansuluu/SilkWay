@@ -53,6 +53,8 @@ public class Tour {
     @Column(name = "img_name")
     private String img_name;
 
+    private String hotTourYesNo;
+
     public String getImage(){
         return "/image/"+img_name;
     }
