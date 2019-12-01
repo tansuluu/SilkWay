@@ -54,7 +54,7 @@
 						</button>
 					</div>
                     <div align="center" th:if="${error!=null}">
-                        <p th:text="${error}">Почта или пароль неверны</p>
+                        <p style="color: red" th:text="${error}">Почта или пароль неверны</p>
                     </div>
                     <div align="center" >
 						<span>Новый пользователь? <a href="/" th:href="@{/regUser}">Регистрация</a></span>

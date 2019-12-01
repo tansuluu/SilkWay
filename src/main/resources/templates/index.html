@@ -107,10 +107,10 @@
 								<li><a  th:href="@{/transportPage}"> Транспорт</a></li>
 								<li><a th:href="@{/aboutUs}">О нас</a></li>
 
-							<button th:if="${#request.userPrincipal !=null}" style="background-color: rgba(0, 0, 0, 0.1); color: white;  padding: 5px 10px;"> <span class="fas fa-user"></span><a  th:href="@{/logout}">Выйти</a></button>
-								<button th:if="${#request.userPrincipal == null}"  style="background-color: rgba(0, 0, 0, 0.1); color: white;  padding: 5px 10px;"> <span class="fas fa-user"></span><a th:href="@{/regUser}">Регистрация</a>  </button>
-								<button th:if="${#request.userPrincipal == null}" style="background-color: rgba(0, 0, 0, 0.1); color: white; padding: 5px 10px;"> <span class="fas fa-sign-in-alt"></span><a  th:href="@{/login}">Войти</a></button>
-								<button th:if="${#request.userPrincipal !=null}" style="background-color: rgba(0, 0, 0, 0.1); color: white; padding: 5px 10px;"> <span class="fas fa-sign-in-alt"></span><a  th:href="@{/userPage(username=${#request.userPrincipal.name})}"  th:text="${#request.userPrincipal.name}"></a></button>
+							<button th:if="${#request.userPrincipal !=null}" style="background-color: rgba(0, 0, 0, 0.1); color: white;  padding: 5px 10px;"> <span class="fas fa-user"></span><a class="padding-left-nav" th:href="@{/logout}">Выйти</a></button>
+								<button th:if="${#request.userPrincipal == null}"  style="background-color: rgba(0, 0, 0, 0.1); color: white;  padding: 5px 10px;"> <span class="fas fa-user"></span><a class="padding-left-nav" th:href="@{/regUser}"> Регистрация</a>  </button>
+								<button th:if="${#request.userPrincipal == null}" style="background-color: rgba(0, 0, 0, 0.1); color: white; padding: 5px 10px;"> <span class="fas fa-sign-in-alt"></span><a class="padding-left-nav" th:href="@{/login}">Войти</a></button>
+								<button th:if="${#request.userPrincipal !=null}" style="background-color: rgba(0, 0, 0, 0.1); color: white; padding: 5px 10px;"> <span class="fas fa-sign-in-alt"></span><a  th:href="@{/userPage(username=${#request.userPrincipal.name})}" class="padding-left-nav" th:text="${#request.userPrincipal.name}"></a></button>
 							</ul>
 						</div>
 					</div>

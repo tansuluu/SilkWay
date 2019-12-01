@@ -36,7 +36,7 @@ public class LoginController {
 
         ModelAndView model = new ModelAndView();
         if (error != null) {
-            model.addObject("error", "Почта или параоль неверны");
+            model.addObject("error", "Почта или пароль неверны");
         }
 
         if (logout != null) {

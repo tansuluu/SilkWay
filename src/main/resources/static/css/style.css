@@ -1943,3 +1943,7 @@ input[type="text"] {
 
 .js .animate-box {
   opacity: 0; }
+
+.padding-left-nav{
+  padding-left: 5px;
+}

@@ -71,7 +71,6 @@ public class AdminController {
         for (Role role:user.getRoles()) {
             System.out.println(role.getRole());
             if(role.getRole().equals("SUPER_ADMIN")){
-                //System.out.println("geldi");
                 modelAndView.setViewName("superAdmin");
                 return modelAndView;
             }
